@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	<resultMap id="userResultMap" type="com.wade.framework.admin.entity.UserEntity" >
+		<result property="userId" column="USER_ID"></result>
+		<result property="orgId" column="ORG_ID"></result>
+		<result property="lgName" column="LG_NAME"></result>
+		<result property="userName" column="USER_NAME"></result>
+		<result property="available" column="AVAILABLE"></result>
+	</resultMap>
+	<insert id="insertUser">
+		INSERT INTO ts_user 
+			( 
+			ORG_ID, 
+			LG_NAME, 
+			USER_NAME, 
+			AVAILABLE 
+			)
+			VALUES
+			(#{orgId},#{lgName},#{userName},#{available}) 
+	</insert>
+	<update id="updateUser">
+		update ts_user set  
+				ORG_ID=#{orgId}, 
+				LG_NAME=#{lgName}, 
+				USER_NAME=#{userName}, 
+				AVAILABLE=#{available} 
+		 where USER_ID=#{userId}
+	</update>
+	<select id="queryUsers" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
+		SELECT user_id,org_id,lg_name,user_name,AVAILABLE FROM ts_user
+	</select>
+	<select id="selectUserById"  parameterType="com.wade.framework.admin.entity.UserEntity">
+		select * from ts_user where user_id=#{userId}
+	</select>
+	<delete id="deleteUser"  parameterType="com.wade.framework.admin.entity.UserEntity">
+		delete from ts_user where user_id=#{userId}
+	</delete>
+</mapper>
