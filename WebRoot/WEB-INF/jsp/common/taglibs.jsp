@@ -1,1 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="/c" prefix="c"%> 
+
+
+<%
+	String resRoot=request.getContextPath()+"/resources/";
+	request.setAttribute("resRoot", resRoot);
+%>

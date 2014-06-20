@@ -9,6 +9,7 @@ import com.wade.framework.admin.dao.user.IUserDao;
 import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.PageInfo;
+import com.wade.framework.base.PaginationResult;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -18,7 +19,8 @@ public class UserServiceImpl implements IUserService {
     
     @Override
     public int insert(UserEntity user) {
-        return userDao.insert("user.insertUser", user);
+        int id=userDao.insert("user.insertUser", user);
+        return id;
     }
 
     @Override
@@ -42,8 +44,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public List<UserEntity> queryListByPage(Object param, PageInfo pageinfo) {
-        return userDao.queryListByPage("user.queryUsers", param, pageinfo);
+    public PaginationResult<UserEntity> queryListByPage(UserEntity param, PageInfo pageinfo) {
+       return userDao.queryListByPage("user.queryUsersByPage", param, pageinfo);
     }
     
 }

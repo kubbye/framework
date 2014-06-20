@@ -4,7 +4,11 @@
 	<properties>
 		<property name="dialect" value="mysql"/>
 	</properties>
+	<plugins>
+		<plugin interceptor="com.wade.framework.base.interceptor.PaginationInterceptor"></plugin>
+	</plugins>
 	<mappers>
+		<mapper resource="conf/sqlMap/sqlMap_base.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_user.xml" />
 	</mappers>
 </configuration>

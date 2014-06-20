@@ -3,10 +3,30 @@ package com.wade.framework.admin.entity;
 import com.wade.framework.base.entity.BaseEntity;
 
 public class UserEntity extends BaseEntity {
+    
+    /**
+     * <p>Field userId: 用户id</p>
+     */
     private Long userId;
+    
+    /**
+     * <p>Field orgId: 组织id</p>
+     */
     private Long orgId;
+    
+    /**
+     * <p>Field lgName: 登录名称</p>
+     */
     private String lgName;
+    
+    /**
+     * <p>Field userName: 用户名称</p>
+     */
     private String userName;
+    
+    /**
+     * <p>Field available: 状态</p>
+     */
     private String available;
     
     

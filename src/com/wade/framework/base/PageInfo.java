@@ -15,25 +15,31 @@ public class PageInfo {
      */
     private int page;
     /**
-     * <p>Field pageSize: 每页记录数</p>
+     * <p>Field pagesize: 每页记录数</p>
      */
-    private int pageSize;
+    private int rows;
     /**
      * <p>Field total: 总记录数</p>
      */
     private long total;
     
     public int getPage() {
+        if(page==0){
+            page = 1;
+        }
         return page;
     }
     public void setPage(int page) {
         this.page = page;
     }
-    public int getPageSize() {
-        return pageSize;
+    public int getRows() {
+        if(rows==0){
+            rows = 10;
+        }
+        return rows;
     }
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
+    public void setRows(int rows) {
+        this.rows = rows;
     }
     public long getTotal() {
         return total;

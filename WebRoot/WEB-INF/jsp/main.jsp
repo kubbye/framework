@@ -15,9 +15,13 @@
 	<a href="#" id="openmenu" class="easyui-linkbutton" data-options="iconCls:'icon-add'">改变title</a>
 	</div>
 	
-	<div data-options="region:'south',border:false" style="height:30px;background:#A9FACD;padding:10px;">south region</div>
-	<div id="center" data-options="region:'center',title:'Center'" style="overflow:hidden">
-		<iframe id="centerIfrmae" frameborder="0" style="border:0;width:100%;height:100%" scrolling="auto"></iframe>
+	<div data-options="region:'south',border:false" style="height:30px;background:#A9FACD;padding:10px;">copyright</div>
+	<div id="center" data-options="region:'center'" style="overflow:hidden">
+		<div id="tt" class="easyui-tabs" fit="true" border="false" plain="true">
+			<div title="Welcome"  data-options="closable:true">welcome</div>
+			<div title="Welcome" >welcome2</div>
+		</div>
+		
 	</div>
 	<script>
 	$(function(){
@@ -27,8 +31,7 @@
 	});
 
 	function changeTitle(id){
-		$("#centerIfrmae").attr("src","/framework/admin/user/list.htm");
-		$("#center").panel({title:'用户管理'});
+		openTab('用户管理');
 	}
 	</script>
 </body>
