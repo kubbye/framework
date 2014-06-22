@@ -1,1 +1,44 @@
-package ${packageName};
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@include file="/WEB-INF/jsp/common/taglibs.jsp"%>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+<jsp:include page="/WEB-INF/jsp/common/style.jsp"></jsp:include>
+</head>
+<body>
+	
+	<div class="easyui-panel" title="&nbsp;" style="width:500px">
+		<div style="padding:10px 60px 20px 60px">
+	    <form id="${key}Form" method="post">
+	    	<input type="hidden" id="${primaryKey}" name="${primaryKey}">
+	    	<table cellpadding="5">
+	    		<#list fieldList as field>
+				  <#if field.priKey?c ='false'>
+				  	<tr>
+		    			<td>${field.comment}:</td>
+		    			<td><input class="textbox" type="text" id="${field.name}" name="${field.name}" readonly="readonly"></input></td>
+		    		</tr>
+				  </#if>
+				</#list>
+	    	</table>
+	    </form>
+	    <div style="text-align:center;padding:5px">
+	    	<a href="javascript:void(0)" id="submitForm" class="easyui-linkbutton" onclick="closeWindow();">返回</a>
+	    </div>
+	    </div>
+	</div>
+	
+	<script>
+		$(document).ready(function(){
+			<c:if test="${propertyPrefix}!empty ${primaryKey}${propertyPostfix}">
+				var ${primaryKey}='${propertyPrefix}${primaryKey}${propertyPostfix}';
+				$.formLoad('${key}Form',contextPath+'/${key}/get${UpperKey}ById.json?${primaryKey}='+${primaryKey},function(data){
+					
+				});
+			</c:if>
+		});
+	</script>
+</body>
+</html>

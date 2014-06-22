@@ -1,1 +1,51 @@
 package ${packageName};
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import ${daoInterFace};
+import ${EntityClass};
+import ${serviceInterFace};
+import com.wade.framework.base.PageInfo;
+import com.wade.framework.base.PaginationResult;
+
+@Service("${key}Service")
+public class ${UpperKey}ServiceImpl implements I${UpperKey}Service {
+
+    @Autowired
+    I${UpperKey}Dao ${key}Dao;
+    
+    @Override
+    public int insert(${UpperKey}Entity ${key}) {
+        int id=${key}Dao.insert("${key}.insert${UpperKey}", ${key});
+        return id;
+    }
+
+    @Override
+    public int update(${UpperKey}Entity ${key}) {
+        return ${key}Dao.update("${key}.update${UpperKey}", ${key});
+    }
+
+    @Override
+    public int delete(${UpperKey}Entity ${key}) {
+        return ${key}Dao.delete("${key}.delete${UpperKey}", ${key});
+    }
+
+    @Override
+    public ${UpperKey}Entity queryObjectById(${UpperKey}Entity ${key}) {
+        return ${key}Dao.queryObjectById("${key}.query${UpperKey}ById", ${key});
+    }
+
+    @Override
+    public List<${UpperKey}Entity> queryList(Object param) {
+        return ${key}Dao.queryList("${key}.query${UpperKey}", param);
+    }
+
+    @Override
+    public PaginationResult<${UpperKey}Entity> queryListByPage(${UpperKey}Entity param, PageInfo pageinfo) {
+       return ${key}Dao.queryListByPage("${key}.query${UpperKey}sByPage", param, pageinfo);
+    }
+    
+}

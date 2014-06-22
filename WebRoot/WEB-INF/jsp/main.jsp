@@ -11,8 +11,9 @@
 <body class="easyui-layout" scroll="no">
 	<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
 	<div data-options="region:'west',split:true,title:'功能菜单'" style="width:150px;padding:10px;">
-	菜单<br>
-	<a href="#" id="openmenu" class="easyui-linkbutton" data-options="iconCls:'icon-add'">改变title</a>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('用户管理');">用户</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('菜单管理');">菜单</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('角色管理');">角色</a><br>
 	</div>
 	
 	<div data-options="region:'south',border:false" style="height:30px;background:#A9FACD;padding:10px;">copyright</div>
@@ -24,14 +25,15 @@
 		
 	</div>
 	<script>
-	$(function(){
-		$("#openmenu").on("click",function(data){
-			changeTitle(data);
-		});
-	});
-
-	function changeTitle(id){
-		openTab('用户管理');
+	function changeTitle(name){
+		var _url=contextPath+'/admin/user/list.htm';
+		if('菜单管理'==name){
+			_url=contextPath+'/menu/list.htm';
+		}
+		if('角色管理'==name){
+			_url=contextPath+'/role/list.htm';
+		}
+		openTab(name,_url);
 	}
 	</script>
 </body>

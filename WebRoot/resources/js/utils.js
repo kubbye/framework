@@ -59,8 +59,8 @@ function openWindow(_url,_title,icons){
 		resizable:false,
 		collapsible:false,
 		draggable:false,
-		inline:true,
-		iconCls:'icon-save'
+		iconCls:'icon-save',
+		inline:true
 	});
 	$('#innerWindow').window('refresh', _url);
 }

@@ -1,1 +1,33 @@
 package ${packageName};
+
+import java.util.Date;
+import com.wade.framework.base.entity.BaseEntity;
+
+/**
+ * <p>ClassName: ${UpperKey}Entity</p>
+ * <p>Description: ${ZhKey}实体类</p>
+ * <p>Author: ${author}</p>
+ * <p>Date: ${createDate}</p>
+ */
+public class ${UpperKey}Entity extends BaseEntity {
+    
+    <#list fieldList as field>
+    /**
+     * <p>Field ${field.name}: ${field.comment}</p>
+     */
+    private ${field.type} ${field.name};
+    
+    </#list>
+    
+    <#list fieldList as field>
+    public ${field.type} get${field.upperName}() {
+        return ${field.name};
+    }
+    
+    public void set${field.upperName}(${field.type} ${field.name}) {
+        this.${field.name} = ${field.name};
+    }
+    
+    </#list>
+    
+}

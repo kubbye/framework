@@ -1,1 +1,118 @@
 package ${packageName};
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import ${EntityClass};
+import ${serviceInterFace};
+import com.wade.framework.base.AjaxSuccessInfo;
+import com.wade.framework.base.PageInfo;
+import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.controller.BaseController;
+
+/**
+ * <p>ClassName: ${UpperKey}Controller</p>
+ * <p>Description: ${ZhKey}Controller</p>
+ * <p>Author: ${author}</p>
+ * <p>Date: ${createDate}</p>
+ */
+@Controller
+@RequestMapping("/${key}")
+public class ${UpperKey}Controller extends BaseController {
+    /**
+     * <p>Field ${key}Service: ${ZhKey}Service注入</p>
+     */
+    @Autowired
+    I${UpperKey}Service ${key}Service;
+    
+    /**
+     * <p>Description: 跳转${ZhKey}新增页面</p>
+     * @return
+     */
+    @RequestMapping("/toAdd${UpperKey}")
+    public String toAdd${UpperKey}(){
+        return "${key}/${key}Add";
+    }
+    /**
+     * <p>Description: 跳转${ZhKey}列表页面</p>
+     * @param ${key}  ${ZhKey}对象
+     * @return
+     */
+    @RequestMapping("/list")
+    public String list(${UpperKey}Entity ${key}){
+        return "${key}/${key}List";
+    }
+    
+    /**
+     * <p>Description: 分页查询${ZhKey}记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @param response response
+     * @param pageInfo 分页对象
+     */
+    @RequestMapping("/getListData")
+    public void getListData(${UpperKey}Entity ${key},HttpServletResponse response,PageInfo pageInfo){
+        PaginationResult<${UpperKey}Entity> result=${key}Service.queryListByPage(${key}, pageInfo);
+        super.ajaxJson(response, result);
+    }
+    /**
+     * <p>Description: 保存${ZhKey}记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @param response
+     */
+    @RequestMapping("/save${UpperKey}")
+    public void save${UpperKey}(${UpperKey}Entity ${key},HttpServletResponse response){
+        ${key}Service.insert(${key});
+        super.ajaxJson(response, AjaxSuccessInfo.success());
+    }
+    /**
+     * <p>Description: 跳转${ZhKey}编辑页面</p>
+     * @param ${key} ${ZhKey}对象
+     * @param model
+     * @return
+     */
+    @RequestMapping("toEdit${UpperKey}")
+    public String toEdit${UpperKey}(${UpperKey}Entity ${key}, Model model){
+        model.addAttribute("${primaryKey}",${key}.get${UpperPrimaryKey}());
+        return "${key}/${key}Edit";
+    }
+    @RequestMapping("/edit${UpperKey}")
+    public void edit${UpperKey}(${UpperKey}Entity ${key}, HttpServletResponse response){
+        ${key}Service.update(${key});
+        super.ajaxJson(response, AjaxSuccessInfo.success());
+    }
+    /**
+     * <p>Description: 得到单个${ZhKey}记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @param response
+     */
+    @RequestMapping("/get${UpperKey}ById")
+    public void get${UpperKey}ById(${UpperKey}Entity ${key}, HttpServletResponse response){
+        super.ajaxJson(response, ${key}Service.queryObjectById(${key}));
+    }
+    /**
+     * <p>Description: 删除${ZhKey}记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @param response
+     */
+    @RequestMapping("delete${UpperKey}")
+    public void delete${UpperKey}(${UpperKey}Entity ${key}, HttpServletResponse response){
+        ${key}Service.delete(${key});
+        super.ajaxJson(response, AjaxSuccessInfo.success());
+    }
+    
+    /**
+     * <p>Description: 查看${ZhKey}明细</p>
+     * @param ${key} ${ZhKey}对象
+     * @param model
+     * @return
+     */
+    @RequestMapping("view${UpperKey}Detail")
+    public String view${UpperKey}Detail(${UpperKey}Entity ${key}, Model model){
+        model.addAttribute("${primaryKey}",${key}.get${UpperPrimaryKey}());
+        return "${key}/${key}Detail";
+    }
+}

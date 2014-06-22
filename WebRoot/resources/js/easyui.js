@@ -9,15 +9,14 @@
     }
     
     /*打开新的tab*/
-    function openTab(plugin){
-		closeAllTab(plugin);
+    function openTab(plugin,_url){
+		//closeAllTab(plugin);
 		var index=$('#tt').tabs('tabs').length;
-		var _closable=false;
+		var _closable=true;
 		if ($('#tt').tabs('exists',plugin)){
 			$('#tt').tabs('select', plugin);
 		} else {
 			var iframeid="centerIfrmae"+index;
-	        var _url=contextPath+'/admin/user/list.htm';
 	        var content='<iframe id="'+iframeid+'" src="'+_url+'" frameborder="0" style="border:0;width:100%;height:100%" scrolling="auto"></iframe>';
 	        $('#tt').tabs('add',{
 	            title: plugin,

@@ -1,1 +1,24 @@
 package ${packageName};
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import ${daoInterFace};
+import com.wade.framework.base.dao.BaseDaoImpl;
+
+/**
+ * <p>ClassName: ${UpperKey}DaoImpl</p>
+ * <p>Description: ${ZhKey}dao实现类</p>
+ * <p>Author: ${author}</p>
+ * <p>Date: ${createDate}</p>
+ */
+@Repository("${key}Dao")
+public class ${UpperKey}DaoImpl extends BaseDaoImpl implements I${UpperKey}Dao {
+
+    /**
+     * <p>Field sqlSession: 注入sqlSession</p>
+     */
+    @Autowired
+    private SqlSessionTemplate sqlSession;
+
+}
