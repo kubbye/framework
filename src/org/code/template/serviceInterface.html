@@ -1,0 +1,58 @@
+package ${packageName};
+
+import java.util.List;
+
+import ${EntityClass};
+import com.wade.framework.base.PageInfo;
+import com.wade.framework.base.PaginationResult;
+
+/**
+ * <p>ClassName: I${UpperKey}Service</p>
+ * <p>Description: ${ZhKey}Service接口</p>
+ * <p>Author: ${author}</p>
+ * <p>Date: ${createDate}</p>
+ */
+public interface I${UpperKey}Service {
+    /**
+     * <p>Description: 插入${ZhKey}</p>
+     * @param ${key} ${ZhKey}对象
+     * @return
+     */
+    int insert(${UpperKey}Entity ${key});
+    
+    /**
+     * <p>Description: 更新${ZhKey}</p>
+     * @param ${key} ${ZhKey}对象
+     * @return
+     */
+    int update(${UpperKey}Entity ${key});
+    
+    /**
+     * <p>Description: 删除${ZhKey}</p>
+     * @param ${key} ${ZhKey}对象
+     * @return
+     */
+    int delete(${UpperKey}Entity ${key});
+    
+    /**
+     * <p>Description: 根据${ZhKey}id查询${ZhKey}记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @return ${ZhKey}对象
+     */
+    ${UpperKey}Entity queryObjectById(${UpperKey}Entity ${key});
+    
+    /**
+     * <p>Description: 查询${ZhKey}记录列表</p>
+     * @param param ${ZhKey}对象
+     * @return ${ZhKey}记录列表
+     */
+    List<${UpperKey}Entity> queryList(Object param);
+    
+    /**
+     * <p>Description: 分页查询${ZhKey}记录列表</p>
+     * @param param ${ZhKey}对象
+     * @param pageinfo 分页对象
+     * @return 分页记录
+     */
+    PaginationResult<${UpperKey}Entity> queryListByPage(${UpperKey}Entity param, PageInfo pageinfo);
+}

@@ -1,0 +1,113 @@
+var dataTable;
+	$(function(){
+		$("#${key}_query").on("click",function(){
+			${key}Search();
+		});
+		$("#${key}_add").on("click",function(){
+			${key}Add();		
+		});
+		$("#${key}_edit").on("click",function(){
+			${key}Eidt();
+		});
+		$("#${key}_detail").on("click",function(){
+			${key}Detail();
+		});
+		$("#${key}_delete").on("click",function(){
+			${key}Delete();
+		});
+	});
+	$(document).ready(function(){
+		init${UpperKey}Datagrid(contextPath+'/${key}/getListData.json');
+	});
+	/*查询${ZhKey}*/
+	function ${key}Search(){
+		var queryParams = $('#${key}_table').datagrid('options').queryParams;  
+        /* 此处添加自己的查询条件，类似
+        queryParams.lgName = $("#search_lgName").val();  
+        */
+        //重新加载datagrid的数据  
+        $("#${key}_table").datagrid('reload');  
+	}
+	
+	/*点击${ZhKey}新增按钮*/
+	function ${key}Add(){
+		openWindow(contextPath+"/${key}/toAdd${UpperKey}.htm",'${ZhKey}新增');
+	}
+	/*点击${ZhKey}编辑按钮*/
+	function ${key}Eidt(){
+		var sel=is${UpperKey}Selected();
+		if(sel){
+			openWindow(contextPath+"/${key}/toEdit${UpperKey}.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}编辑');
+		}
+	}
+	/*点击${ZhKey}明细按钮*/
+	function ${key}Detail(){
+		var sel=is${UpperKey}Selected();
+		if(sel){
+			openWindow(contextPath+"/${key}/view${UpperKey}Detail.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}明细');
+		}
+	}
+	/*点击${ZhKey}删除按钮*/
+	function ${key}Delete(){
+		var sel=is${UpperKey}Selected();
+		if(sel){
+		    $.messager.confirm('删除${ZhKey}', '您确认要删除该${ZhKey}吗?', function(r){
+                if (r){
+                	$.ajax({
+        				url:contextPath+"/${key}/delete${UpperKey}.json?${primaryKey}="+sel.${primaryKey},
+        				dataType:"json",
+        				success:function(data){
+        					//清除所有选择
+        					$('#${key}_table').datagrid('clearSelections');
+        					$.INFO(data.message,closeWindow);
+        				},
+        				error:function(data){
+        					$.ERROR(ajaxError+JSON.stringify(data));
+        				}
+        			});
+                }
+            });
+		}
+	}
+	/*是否有${ZhKey}记录被选中*/
+	function is${UpperKey}Selected(){
+		var sel=$.selected("${key}_table");
+		if(null == sel){
+			$.ALERT('请选择${ZhKey}记录');
+			return false;
+		}
+		return sel;
+	}
+	/*初始化${ZhKey}datagrid*/
+	function init${UpperKey}Datagrid(_url){
+		dataTable=$("#${key}_table").datagrid({
+			fit:true,
+			title:'${ZhKey}信息',
+			url:_url,
+			iconCls:'icon-ok',
+			nowrap: false,
+			autoRowHeight: false,
+			resizable:true,
+			striped: true,
+			collapsible:true,
+			remoteSort: true,
+			singleSelect:true,
+			idField:'${primaryKey}',				
+			collapsible:false,
+			pagination:true,pageSize:10,
+			rownumbers:true,
+			columns:[[
+				<#list fieldList as field>
+				  <#if field.priKey?c ='false'>
+				  	{field:'${field.name}',title:'${field.comment}'}<#if field_has_next>,</#if>
+				  </#if>
+				</#list>
+			]],
+			toolbar:'#toolbar_${key}',
+			onBeforeLoad:function(data){
+			},
+			onLoadError:function(data){
+				alert(JSON.stringify(data));
+			}
+		});
+	}

@@ -1,0 +1,34 @@
+
+/*新增${ZhKey}*/
+function submitForm_add(){
+	if($("#${key}Form").form("validate")){
+		$.ajax({
+			url:contextPath+"/${key}/save${UpperKey}.htm",
+			dataType:"json",
+			data:$("#${key}Form").serialize(),
+			success:function(data){
+				$.INFO(data.message,closeWindow);
+			},
+			error:function(data){
+				$.ERROR(ajaxError+JSON.stringify(data));
+			}
+		});
+	}
+}
+
+/*修改${ZhKey}*/
+function submitForm_edit(){
+	if($("#${key}Form").form("validate")){
+		$.ajax({
+			url:contextPath+"/${key}/edit${UpperKey}.htm",
+			dataType:"json",
+			data:$("#${key}Form").serialize(),
+			success:function(data){
+				$.INFO(data.message,closeWindow);
+			},
+			error:function(data){
+				$.ERROR(ajaxError+JSON.stringify(data));
+			}
+		});
+	}
+}
