@@ -13,7 +13,7 @@
 	    <form id="${key}Form" method="post">
 	    	<input type="hidden" id="${primaryKey}" name="${primaryKey}">
 	    	<table cellpadding="5">
-	    		<#list fieldList as field>
+	    		<#list noCommonFieldList as field>
 				  <#if field.priKey?c ='false'>
 	    		<tr>
 	    			<td>${field.comment}:</td>

@@ -1,6 +1,8 @@
 package com.wade.framework.admin.controller.user;
 
 
+import java.util.Date;
+
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,6 +68,8 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/saveUser")
     public void saveUser(UserEntity user,HttpServletResponse response){
+        user.setCreateUser(getSessionUser().getUserId());
+        user.setCreateTime(new Date());
         userService.insert(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -82,6 +86,8 @@ public class UserController extends BaseController {
     }
     @RequestMapping("/editUser")
     public void editUser(UserEntity user, HttpServletResponse response){
+        user.setUpdateUser(getSessionUser().getUserId());
+        user.setUpdateTime(new Date());
         userService.update(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -101,6 +107,8 @@ public class UserController extends BaseController {
      */
     @RequestMapping("deleteUser")
     public void deleteUser(UserEntity user, HttpServletResponse response){
+        user.setUpdateUser(getSessionUser().getUserId());
+        user.setUpdateTime(new Date());
         userService.delete(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }

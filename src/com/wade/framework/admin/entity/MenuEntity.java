@@ -7,19 +7,19 @@ import com.wade.framework.base.entity.BaseEntity;
  * <p>ClassName: MenuEntity</p>
  * <p>Description: 菜单实体类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-20</p>
+ * <p>Date: 2014-06-25</p>
  */
 public class MenuEntity extends BaseEntity {
     
     /**
-     * <p>Field menuId: </p>
+     * <p>Field id: 菜单ID</p>
      */
-    private Long menuId;
+    private Long id;
     
     /**
-     * <p>Field upMenuId: </p>
+     * <p>Field parentId: 上级菜单ID</p>
      */
-    private Long upMenuId;
+    private Long parentId;
     
     /**
      * <p>Field iconCls: 图标样式</p>
@@ -32,90 +32,60 @@ public class MenuEntity extends BaseEntity {
     private String picUrl;
     
     /**
-     * <p>Field menuPath: </p>
+     * <p>Field menuPath: 菜单路径</p>
      */
     private String menuPath;
     
     /**
-     * <p>Field level: 菜单层级</p>
+     * <p>Field mlevel: 菜单层级</p>
      */
-    private Integer level;
+    private Integer mlevel;
     
     /**
-     * <p>Field name: </p>
+     * <p>Field mname: 菜单名称</p>
      */
-    private String name;
+    private String mname;
     
     /**
-     * <p>Field url: </p>
+     * <p>Field url: 菜单路径</p>
      */
     private String url;
     
     /**
-     * <p>Field deCode: </p>
+     * <p>Field deCode: 菜单编码</p>
      */
     private String deCode;
     
     /**
-     * <p>Field menuSort: </p>
+     * <p>Field menuSort: 菜单排序字段：越小越靠前</p>
      */
-    private Long menuSort;
+    private Integer menuSort;
     
     /**
-     * <p>Field sysMenu: </p>
+     * <p>Field sysMenu: 是否系统菜单：N，否；Y，是</p>
      */
     private String sysMenu;
     
     /**
-     * <p>Field openType: IFRAME,PANEL</p>
+     * <p>Field avaliable: Y 可用，N 不可用</p>
      */
-    private String openType;
-    
-    /**
-     * <p>Field available: Y 可用，N 不可用</p>
-     */
-    private String available;
-    
-    /**
-     * <p>Field delFlag: Y 已删除，N 未删除</p>
-     */
-    private String delFlag;
-    
-    /**
-     * <p>Field createUser: </p>
-     */
-    private String createUser;
-    
-    /**
-     * <p>Field updateUser: </p>
-     */
-    private String updateUser;
-    
-    /**
-     * <p>Field createTime: </p>
-     */
-    private Date createTime;
-    
-    /**
-     * <p>Field updateTime: </p>
-     */
-    private Date updateTime;
+    private String avaliable;
     
     
-    public Long getMenuId() {
-        return menuId;
+    public Long getId() {
+        return id;
     }
     
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setId(Long id) {
+        this.id = id;
     }
     
-    public Long getUpMenuId() {
-        return upMenuId;
+    public Long getParentId() {
+        return parentId;
     }
     
-    public void setUpMenuId(Long upMenuId) {
-        this.upMenuId = upMenuId;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
     
     public String getIconCls() {
@@ -142,20 +112,20 @@ public class MenuEntity extends BaseEntity {
         this.menuPath = menuPath;
     }
     
-    public Integer getLevel() {
-        return level;
+    public Integer getMlevel() {
+        return mlevel;
     }
     
-    public void setLevel(Integer level) {
-        this.level = level;
+    public void setMlevel(Integer mlevel) {
+        this.mlevel = mlevel;
     }
     
-    public String getName() {
-        return name;
+    public String getMname() {
+        return mname;
     }
     
-    public void setName(String name) {
-        this.name = name;
+    public void setMname(String mname) {
+        this.mname = mname;
     }
     
     public String getUrl() {
@@ -174,11 +144,11 @@ public class MenuEntity extends BaseEntity {
         this.deCode = deCode;
     }
     
-    public Long getMenuSort() {
+    public Integer getMenuSort() {
         return menuSort;
     }
     
-    public void setMenuSort(Long menuSort) {
+    public void setMenuSort(Integer menuSort) {
         this.menuSort = menuSort;
     }
     
@@ -190,60 +160,12 @@ public class MenuEntity extends BaseEntity {
         this.sysMenu = sysMenu;
     }
     
-    public String getOpenType() {
-        return openType;
+    public String getAvaliable() {
+        return avaliable;
     }
     
-    public void setOpenType(String openType) {
-        this.openType = openType;
-    }
-    
-    public String getAvailable() {
-        return available;
-    }
-    
-    public void setAvailable(String available) {
-        this.available = available;
-    }
-    
-    public String getDelFlag() {
-        return delFlag;
-    }
-    
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-    
-    public String getCreateUser() {
-        return createUser;
-    }
-    
-    public void setCreateUser(String createUser) {
-        this.createUser = createUser;
-    }
-    
-    public String getUpdateUser() {
-        return updateUser;
-    }
-    
-    public void setUpdateUser(String updateUser) {
-        this.updateUser = updateUser;
-    }
-    
-    public Date getCreateTime() {
-        return createTime;
-    }
-    
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-    
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-    
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setAvaliable(String avaliable) {
+        this.avaliable = avaliable;
     }
     
     

@@ -17,7 +17,7 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		initMenuDatagrid(contextPath+'/menu/getListData.json');
+		initMenuDatagrid(contextPath+'/admin/menu/getListData.json');
 	});
 	/*查询菜单*/
 	function menuSearch(){
@@ -31,20 +31,20 @@ var dataTable;
 	
 	/*点击菜单新增按钮*/
 	function menuAdd(){
-		openWindow(contextPath+"/menu/toAddMenu.htm",'菜单新增');
+		openWindow(contextPath+"/admin/menu/toAddMenu.htm",'菜单新增');
 	}
 	/*点击菜单编辑按钮*/
 	function menuEidt(){
 		var sel=isMenuSelected();
 		if(sel){
-			openWindow(contextPath+"/menu/toEditMenu.htm?menuId="+sel.menuId,'菜单编辑');
+			openWindow(contextPath+"/admin/menu/toEditMenu.htm?id="+sel.id,'菜单编辑');
 		}
 	}
 	/*点击菜单明细按钮*/
 	function menuDetail(){
 		var sel=isMenuSelected();
 		if(sel){
-			openWindow(contextPath+"/menu/viewMenuDetail.htm?menuId="+sel.menuId,'菜单明细');
+			openWindow(contextPath+"/admin/menu/viewMenuDetail.htm?id="+sel.id,'菜单明细');
 		}
 	}
 	/*点击菜单删除按钮*/
@@ -54,7 +54,7 @@ var dataTable;
 		    $.messager.confirm('删除菜单', '您确认要删除该菜单吗?', function(r){
                 if (r){
                 	$.ajax({
-        				url:contextPath+"/menu/deleteMenu.json?menuId="+sel.menuId,
+        				url:contextPath+"/admin/menu/deleteMenu.json?id="+sel.id,
         				dataType:"json",
         				success:function(data){
         					//清除所有选择
@@ -92,28 +92,27 @@ var dataTable;
 			collapsible:true,
 			remoteSort: true,
 			singleSelect:true,
-			idField:'menuId',				
+			idField:'id',				
 			collapsible:false,
 			pagination:true,pageSize:10,
 			rownumbers:true,
 			columns:[[
-				  	{field:'upMenuId',title:'upMenuId'},
+				  	{field:'parentId',title:'上级菜单ID'},
 				  	{field:'iconCls',title:'图标样式'},
 				  	{field:'picUrl',title:'桌面图标'},
-				  	{field:'menuPath',title:'menuPath'},
-				  	{field:'level',title:'菜单层级'},
-				  	{field:'name',title:'name'},
-				  	{field:'url',title:'url'},
-				  	{field:'deCode',title:'deCode'},
-				  	{field:'menuSort',title:'menuSort'},
-				  	{field:'sysMenu',title:'sysMenu'},
-				  	{field:'openType',title:'IFRAME,PANEL'},
-				  	{field:'available',title:'Y 可用，N 不可用'},
-				  	{field:'delFlag',title:'Y 已删除，N 未删除'},
-				  	{field:'createUser',title:'createUser'},
-				  	{field:'updateUser',title:'updateUser'},
-				  	{field:'createTime',title:'createTime'},
-				  	{field:'updateTime',title:'updateTime'}
+				  	{field:'menuPath',title:'菜单路径'},
+				  	{field:'mlevel',title:'菜单层级'},
+				  	{field:'mname',title:'菜单名称'},
+				  	{field:'url',title:'菜单路径'},
+				  	{field:'deCode',title:'菜单编码'},
+				  	{field:'menuSort',title:'菜单排序字段：越小越靠前'},
+				  	{field:'sysMenu',title:'是否系统菜单：N，否；Y，是'},
+				  	{field:'avaliable',title:'Y 可用，N 不可用'},
+				  	{field:'createUser',title:'创建人'},
+				  	{field:'updateUser',title:'更新人'},
+				  	{field:'createTime',title:'创建时间'},
+				  	{field:'updateTime',title:'更新时间'},
+				  	{field:'deleteMark',title:'删除标记：0，未删除；1，已删除'}
 			]],
 			toolbar:'#toolbar_menu',
 			onBeforeLoad:function(data){

@@ -11,7 +11,7 @@ import com.wade.framework.base.entity.BaseEntity;
  */
 public class ${UpperKey}Entity extends BaseEntity {
     
-    <#list fieldList as field>
+    <#list noCommonFieldList as field>
     /**
      * <p>Field ${field.name}: ${field.comment}</p>
      */
@@ -19,7 +19,7 @@ public class ${UpperKey}Entity extends BaseEntity {
     
     </#list>
     
-    <#list fieldList as field>
+    <#list noCommonFieldList as field>
     public ${field.type} get${field.upperName}() {
         return ${field.name};
     }

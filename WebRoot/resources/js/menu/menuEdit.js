@@ -3,7 +3,7 @@
 function submitForm_add(){
 	if($("#menuForm").form("validate")){
 		$.ajax({
-			url:contextPath+"/menu/saveMenu.htm",
+			url:contextPath+"//admin/menu/saveMenu.htm",
 			dataType:"json",
 			data:$("#menuForm").serialize(),
 			success:function(data){
@@ -20,7 +20,7 @@ function submitForm_add(){
 function submitForm_edit(){
 	if($("#menuForm").form("validate")){
 		$.ajax({
-			url:contextPath+"/menu/editMenu.htm",
+			url:contextPath+"/admin/menu/editMenu.htm",
 			dataType:"json",
 			data:$("#menuForm").serialize(),
 			success:function(data){

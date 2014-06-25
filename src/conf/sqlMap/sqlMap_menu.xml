@@ -2,139 +2,130 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="menu">
 	<!-- 菜单resultMap -->
-	<resultMap id="menuResultMap" type="com.wade.framework.entity.MenuEntity" >
-		<result property="menuId" column="MENU_ID"></result>
-		<result property="upMenuId" column="UP_MENU_ID"></result>
+	<resultMap id="menuResultMap" type="com.wade.framework.admin.entity.MenuEntity" >
+		<result property="id" column="ID"></result>
+		<result property="parentId" column="PARENT_ID"></result>
 		<result property="iconCls" column="ICON_CLS"></result>
 		<result property="picUrl" column="PIC_URL"></result>
 		<result property="menuPath" column="MENU_PATH"></result>
-		<result property="level" column="LEVEL"></result>
-		<result property="name" column="NAME"></result>
+		<result property="mlevel" column="MLEVEL"></result>
+		<result property="mname" column="MNAME"></result>
 		<result property="url" column="URL"></result>
 		<result property="deCode" column="DE_CODE"></result>
 		<result property="menuSort" column="MENU_SORT"></result>
 		<result property="sysMenu" column="SYS_MENU"></result>
-		<result property="openType" column="OPEN_TYPE"></result>
-		<result property="available" column="AVAILABLE"></result>
-		<result property="delFlag" column="DEL_FLAG"></result>
-		<result property="createUser" column="CREATE_USER"></result>
-		<result property="updateUser" column="UPDATE_USER"></result>
+		<result property="avaliable" column="AVALIABLE"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
 		<result property="createTime" column="CREATE_TIME"></result>
 		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入菜单记录 -->
 	<insert id="insertMenu">
 		INSERT INTO ts_menu 
 			( 
-			  	UP_MENU_ID,
+			  	PARENT_ID,
 			  	ICON_CLS,
 			  	PIC_URL,
 			  	MENU_PATH,
-			  	LEVEL,
-			  	NAME,
+			  	MLEVEL,
+			  	MNAME,
 			  	URL,
 			  	DE_CODE,
 			  	MENU_SORT,
 			  	SYS_MENU,
-			  	OPEN_TYPE,
-			  	AVAILABLE,
-			  	DEL_FLAG,
-			  	CREATE_USER,
-			  	UPDATE_USER,
+			  	AVALIABLE,
+			  	CREATE_BY,
+			  	UPDATE_BY,
 			  	CREATE_TIME,
-			  	UPDATE_TIME
+			  	UPDATE_TIME,
+			  	DELETE_MARK
 			)
 			VALUES
 			(
-			  	#{upMenuId},
+			  	#{parentId},
 			  	#{iconCls},
 			  	#{picUrl},
 			  	#{menuPath},
-			  	#{level},
-			  	#{name},
+			  	#{mlevel},
+			  	#{mname},
 			  	#{url},
 			  	#{deCode},
 			  	#{menuSort},
 			  	#{sysMenu},
-			  	#{openType},
-			  	#{available},
-			  	#{delFlag},
+			  	#{avaliable},
 			  	#{createUser},
 			  	#{updateUser},
 			  	#{createTime},
-			  	#{updateTime}
+			  	#{updateTime},
+			  	#{deleteMark}
 			) 
 	</insert>
 	<!-- 更新菜单记录 -->
 	<update id="updateMenu">
 		update ts_menu set  
-			UP_MENU_ID=#{upMenuId},
+			PARENT_ID=#{parentId},
 			ICON_CLS=#{iconCls},
 			PIC_URL=#{picUrl},
 			MENU_PATH=#{menuPath},
-			LEVEL=#{level},
-			NAME=#{name},
+			MLEVEL=#{mlevel},
+			MNAME=#{mname},
 			URL=#{url},
 			DE_CODE=#{deCode},
 			MENU_SORT=#{menuSort},
 			SYS_MENU=#{sysMenu},
-			OPEN_TYPE=#{openType},
-			AVAILABLE=#{available},
-			DEL_FLAG=#{delFlag},
-			CREATE_USER=#{createUser},
-			UPDATE_USER=#{updateUser},
-			CREATE_TIME=#{createTime},
-			UPDATE_TIME=#{updateTime}
-		 where MENU_ID=#{menuId}
+			AVALIABLE=#{avaliable},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
 	</update>
 	<!-- 分页查询记录 -->
-	<select id="queryMenusByPage" parameterType="com.wade.framework.entity.MenuEntity" resultMap="menuResultMap">
+	<select id="queryMenusByPage" parameterType="com.wade.framework.admin.entity.MenuEntity" resultMap="menuResultMap">
 		SELECT 
-			MENU_ID,
-			UP_MENU_ID,
+			ID,
+			PARENT_ID,
 			ICON_CLS,
 			PIC_URL,
 			MENU_PATH,
-			LEVEL,
-			NAME,
+			MLEVEL,
+			MNAME,
 			URL,
 			DE_CODE,
 			MENU_SORT,
 			SYS_MENU,
-			OPEN_TYPE,
-			AVAILABLE,
-			DEL_FLAG,
-			CREATE_USER,
-			UPDATE_USER,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
 			CREATE_TIME,
-			UPDATE_TIME
-		 FROM ts_menu
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_menu where delete_mark=0
 	</select>
 	<!-- 根据主键查询菜单记录 -->
 	<select id="queryMenuById"  resultMap="menuResultMap">
 		select 
-			MENU_ID,
-			UP_MENU_ID,
+			ID,
+			PARENT_ID,
 			ICON_CLS,
 			PIC_URL,
 			MENU_PATH,
-			LEVEL,
-			NAME,
+			MLEVEL,
+			MNAME,
 			URL,
 			DE_CODE,
 			MENU_SORT,
 			SYS_MENU,
-			OPEN_TYPE,
-			AVAILABLE,
-			DEL_FLAG,
-			CREATE_USER,
-			UPDATE_USER,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
 			CREATE_TIME,
-			UPDATE_TIME
-		from ts_menu where MENU_ID=#{menuId}
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_menu where ID=#{id}
 	</select>
 	<!-- 删除菜单记录 -->
-	<delete id="deleteMenu"  parameterType="com.wade.framework.entity.MenuEntity">
-		delete from ts_menu where MENU_ID=#{menuId}
+	<delete id="deleteMenu"  parameterType="com.wade.framework.admin.entity.MenuEntity">
+		update ts_menu set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
 	</delete>
 </mapper>

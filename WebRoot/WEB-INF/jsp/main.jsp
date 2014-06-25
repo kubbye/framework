@@ -28,10 +28,10 @@
 	function changeTitle(name){
 		var _url=contextPath+'/admin/user/list.htm';
 		if('菜单管理'==name){
-			_url=contextPath+'/menu/list.htm';
+			_url=contextPath+'/admin/menu/list.htm';
 		}
 		if('角色管理'==name){
-			_url=contextPath+'/role/list.htm';
+			_url=contextPath+'/admin/role/list.htm';
 		}
 		openTab(name,_url);
 	}

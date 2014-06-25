@@ -3,7 +3,7 @@
 function submitForm_add(){
 	if($("#roleForm").form("validate")){
 		$.ajax({
-			url:contextPath+"/role/saveRole.htm",
+			url:contextPath+"//admin/role/saveRole.htm",
 			dataType:"json",
 			data:$("#roleForm").serialize(),
 			success:function(data){
@@ -20,7 +20,7 @@ function submitForm_add(){
 function submitForm_edit(){
 	if($("#roleForm").form("validate")){
 		$.ajax({
-			url:contextPath+"/role/editRole.htm",
+			url:contextPath+"/admin/role/editRole.htm",
 			dataType:"json",
 			data:$("#roleForm").serialize(),
 			success:function(data){

@@ -17,7 +17,7 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		init${UpperKey}Datagrid(contextPath+'/${key}/getListData.json');
+		init${UpperKey}Datagrid(contextPath+'${urlPrefix}/getListData.json');
 	});
 	/*查询${ZhKey}*/
 	function ${key}Search(){
@@ -31,20 +31,20 @@ var dataTable;
 	
 	/*点击${ZhKey}新增按钮*/
 	function ${key}Add(){
-		openWindow(contextPath+"/${key}/toAdd${UpperKey}.htm",'${ZhKey}新增');
+		openWindow(contextPath+"${urlPrefix}/toAdd${UpperKey}.htm",'${ZhKey}新增');
 	}
 	/*点击${ZhKey}编辑按钮*/
 	function ${key}Eidt(){
 		var sel=is${UpperKey}Selected();
 		if(sel){
-			openWindow(contextPath+"/${key}/toEdit${UpperKey}.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}编辑');
+			openWindow(contextPath+"${urlPrefix}/toEdit${UpperKey}.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}编辑');
 		}
 	}
 	/*点击${ZhKey}明细按钮*/
 	function ${key}Detail(){
 		var sel=is${UpperKey}Selected();
 		if(sel){
-			openWindow(contextPath+"/${key}/view${UpperKey}Detail.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}明细');
+			openWindow(contextPath+"${urlPrefix}/view${UpperKey}Detail.htm?${primaryKey}="+sel.${primaryKey},'${ZhKey}明细');
 		}
 	}
 	/*点击${ZhKey}删除按钮*/
@@ -54,7 +54,7 @@ var dataTable;
 		    $.messager.confirm('删除${ZhKey}', '您确认要删除该${ZhKey}吗?', function(r){
                 if (r){
                 	$.ajax({
-        				url:contextPath+"/${key}/delete${UpperKey}.json?${primaryKey}="+sel.${primaryKey},
+        				url:contextPath+"${urlPrefix}/delete${UpperKey}.json?${primaryKey}="+sel.${primaryKey},
         				dataType:"json",
         				success:function(data){
         					//清除所有选择

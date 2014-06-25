@@ -3,6 +3,7 @@ package org.code.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.WeakHashMap;
@@ -21,9 +22,11 @@ public class CodeUtil {
     private static String zhKey;
     private static String author;
     private static String createDate; 
+    private static String urlPrefix;
     
     private static Field primaryKey;
     private static List<Field> fieldList;
+    private static List<Field> noCommonFieldList;
     
     public static void main(String[] args) throws Exception {
         init();
@@ -169,6 +172,16 @@ public class CodeUtil {
         FileWriter sw = new FileWriter(new File(path));
         WeakHashMap<String, Object> data = new WeakHashMap<String, Object>();
         data.put("packageName", controllerPackagePath); //包名   
+        String prefix = PropertyUtil.getValue("code.prefix.controller");
+        if (null != prefix && !"".equals(prefix)) {
+            data.put("pagePrefix", prefix + "/" + key);
+            prefix = "/" + prefix + "/" + key;
+        } else {
+            data.put("pagePrefix", key);
+            prefix = "/" + key;
+        }
+        urlPrefix = prefix;
+        data.put("urlPrefix", prefix);
         data.put("key", key);
         data.put("UpperKey", upperKey);
         data.put("ZhKey", zhKey);
@@ -201,11 +214,11 @@ public class CodeUtil {
         data.put("author", author);
         data.put("createDate", createDate);
         data.put("EntityClass", entityPackagePath + "." + upperKey + "Entity");
-        data.put("fieldList", fieldList);
         data.put("primaryKey", primaryKey.getName());
         data.put("primaryColumn", primaryKey.getColumnName());
         data.put("tableName", PropertyUtil.getValue("table.name"));
-        
+        data.put("fieldList", fieldList);
+        data.put("noCommonFieldList", noCommonFieldList);
         data.put("propertyPrefix", "#{");
         data.put("propertyPostfix", "}");
         template.process(data, sw);
@@ -229,7 +242,9 @@ public class CodeUtil {
         data.put("createDate", createDate);
         
         List<Field> list = MysqlUtil.getInstance().getTableField();
+        noCommonFieldList = removeCommonFields(list);
         data.put("fieldList", list);
+        data.put("noCommonFieldList", noCommonFieldList);
 
         primaryKey = MysqlUtil.getInstance().getPrimaryKey(list);
         fieldList = list;
@@ -245,6 +260,7 @@ public class CodeUtil {
         String path = pageRoot + File.separator + key + "List.jsp";
         FileWriter sw = new FileWriter(new File(path));
         WeakHashMap<String, Object> data = new WeakHashMap<String, Object>();
+        data.put("urlPrefix", urlPrefix);
         data.put("key", key);
         data.put("UpperKey", upperKey);
         data.put("ZhKey", zhKey);
@@ -252,6 +268,7 @@ public class CodeUtil {
         data.put("createDate", createDate);
         data.put("primaryKey", primaryKey.getName());
         data.put("fieldList", fieldList);
+        data.put("noCommonFieldList", noCommonFieldList);
         
         data.put("propertyPrefix", "${");
         data.put("propertyPostfix", "}");
@@ -289,6 +306,7 @@ public class CodeUtil {
         String path = jsRoot + File.separator + key + "Edit.js";
         FileWriter sw = new FileWriter(new File(path));
         WeakHashMap<String, Object> data = new WeakHashMap<String, Object>();
+        data.put("urlPrefix", urlPrefix);
         data.put("key", key);
         data.put("UpperKey", upperKey);
         data.put("ZhKey", zhKey);
@@ -303,6 +321,7 @@ public class CodeUtil {
         String listPath = jsRoot + File.separator + key + "List.js";
         FileWriter listWriter = new FileWriter(new File(listPath));
         WeakHashMap<String, Object> listData = new WeakHashMap<String, Object>();
+        listData.put("urlPrefix", urlPrefix);
         listData.put("key", key);
         listData.put("UpperKey", upperKey);
         listData.put("ZhKey", zhKey);
@@ -331,6 +350,19 @@ public class CodeUtil {
         
         return path;
     }
+    private static List<Field> removeCommonFields(List<Field> list){
+        List<Field> resList = new ArrayList<Field>();
+        for(Field f : list){
+            if(!f.getName().equalsIgnoreCase("updateUser")
+                    && !f.getName().equalsIgnoreCase("createUser")
+                    && !f.getName().equalsIgnoreCase("createTime")
+                    && !f.getName().equalsIgnoreCase("updateTime")
+                    && !f.getName().equalsIgnoreCase("deleteMark")){
+                resList.add(f);
+            }
+        }
+        return resList;
+    }
     /**
      * <p>Description: sqlMap文件根路径</p>
      * @return
@@ -348,9 +380,9 @@ public class CodeUtil {
     private static String getJsFileRoot(){
         String path=System.getProperty("user.dir");
         path += File.separator + PropertyUtil.getValue("code.resources.root") + File.separator + "resources"+File.separator+"js";
-        System.out.println(path);
         return path;
     }
+    
     /**
      * <p>Description: 页面文件根路径</p>
      * @return
@@ -358,7 +390,10 @@ public class CodeUtil {
     private static String getPageFileRoot(){
         String path=System.getProperty("user.dir");
         path += File.separator + PropertyUtil.getValue("code.resources.root") + File.separator + "WEB-INF"+File.separator+"jsp";
-        System.out.println(path);
+        String prefix = PropertyUtil.getValue("code.prefix.controller");
+        if (null != prefix && !"".equals(prefix)) {
+            path += File.separator + prefix;
+        } 
         return path;
     }
 }

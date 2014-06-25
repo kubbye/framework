@@ -32,12 +32,17 @@ public class MysqlUtil {
         return list;
     }
     
+    /**
+     * <p>Description: </p>
+     * @return
+     */
     private List<Field> getFieldList(){
         String driveName = PropertyUtil.getValue("mysql.driverClassName");
         String url = PropertyUtil.getValue("mysql.url");
         String userName = PropertyUtil.getValue("mysql.username");
         String pwd = PropertyUtil.getValue("mysql.password");
         String tableName= PropertyUtil.getValue("table.name");
+        String schema= PropertyUtil.getValue("schema.name");
         Connection conn = null;
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -45,15 +50,17 @@ public class MysqlUtil {
         try {
             Class.forName(driveName);
             conn=DriverManager.getConnection(url,userName,pwd);
-            pst=conn.prepareStatement("SELECT column_name,data_type,column_comment,is_nullable,column_key FROM information_schema.columns WHERE table_name=? ORDER BY ordinal_position");
+            pst = conn
+                    .prepareStatement("SELECT column_name,data_type,column_comment,is_nullable,column_key FROM information_schema.columns WHERE table_name=?  AND TABLE_SCHEMA=? ORDER BY ordinal_position");
             pst.setString(1, tableName);
+            pst.setString(2, schema);
             rs = pst.executeQuery();
             Field field = null;
             while(rs.next()){
                 field = new Field();
                 field.setName(StringUtil.columnName(rs.getString("column_name").toLowerCase()));
                 field.setColumnName(rs.getString("column_name").toUpperCase());
-                field.setType(StringUtil.mysqlDatatype(rs.getString("data_type").toLowerCase()));
+                field.setType(getDatatype(rs.getString("data_type").toLowerCase()));
                 field.setUpperName(StringUtil.upperFirst(field.getName()));
                 field.setComment(rs.getString("column_comment"));
                 if(rs.getString("is_nullable").toUpperCase().equals("NO")){
@@ -92,6 +99,30 @@ public class MysqlUtil {
             }
         }
         return pk;
+    }
+    
+    /**
+     * <p>Description: 得到java数据类型</p>
+     * @param jdbctype
+     * @return
+     */
+    public static String getDatatype(String jdbctype){
+        String datatype="";
+        if("varchar".equalsIgnoreCase(jdbctype) || "char".equalsIgnoreCase(jdbctype) || "text".equalsIgnoreCase(jdbctype)){
+            datatype = "String";
+        }
+        if("int".equalsIgnoreCase(jdbctype) || "tinyint".equalsIgnoreCase(jdbctype)){
+            datatype = "Integer";
+        }
+        
+        if("bigint".equalsIgnoreCase(jdbctype)){
+            datatype = "Long";
+        }
+        if("datetime".equalsIgnoreCase(jdbctype) || "timestamp".equalsIgnoreCase(jdbctype)){
+            datatype = "Date";
+        }
+        
+        return datatype;
     }
     public static void main(String[] args) {
         MysqlUtil.getInstance().getFieldList();

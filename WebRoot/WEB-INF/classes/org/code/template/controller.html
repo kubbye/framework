@@ -1,7 +1,8 @@
 package ${packageName};
 
-import javax.servlet.http.HttpServletResponse;
+import java.util.Date;
 
+import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,7 @@ import com.wade.framework.base.controller.BaseController;
  * <p>Date: ${createDate}</p>
  */
 @Controller
-@RequestMapping("/${key}")
+@RequestMapping("${urlPrefix}")
 public class ${UpperKey}Controller extends BaseController {
     /**
      * <p>Field ${key}Service: ${ZhKey}Service注入</p>
@@ -35,7 +36,7 @@ public class ${UpperKey}Controller extends BaseController {
      */
     @RequestMapping("/toAdd${UpperKey}")
     public String toAdd${UpperKey}(){
-        return "${key}/${key}Add";
+        return "${pagePrefix}/${key}Add";
     }
     /**
      * <p>Description: 跳转${ZhKey}列表页面</p>
@@ -44,7 +45,7 @@ public class ${UpperKey}Controller extends BaseController {
      */
     @RequestMapping("/list")
     public String list(${UpperKey}Entity ${key}){
-        return "${key}/${key}List";
+        return "${pagePrefix}/${key}List";
     }
     
     /**
@@ -65,6 +66,8 @@ public class ${UpperKey}Controller extends BaseController {
      */
     @RequestMapping("/save${UpperKey}")
     public void save${UpperKey}(${UpperKey}Entity ${key},HttpServletResponse response){
+    	${key}.setCreateUser(getSessionUser().getUserId());
+        ${key}.setCreateTime(new Date());
         ${key}Service.insert(${key});
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -77,10 +80,12 @@ public class ${UpperKey}Controller extends BaseController {
     @RequestMapping("toEdit${UpperKey}")
     public String toEdit${UpperKey}(${UpperKey}Entity ${key}, Model model){
         model.addAttribute("${primaryKey}",${key}.get${UpperPrimaryKey}());
-        return "${key}/${key}Edit";
+        return "${pagePrefix}/${key}Edit";
     }
     @RequestMapping("/edit${UpperKey}")
     public void edit${UpperKey}(${UpperKey}Entity ${key}, HttpServletResponse response){
+    	${key}.setUpdateUser(getSessionUser().getUserId());
+        ${key}.setUpdateTime(new Date());
         ${key}Service.update(${key});
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -100,6 +105,8 @@ public class ${UpperKey}Controller extends BaseController {
      */
     @RequestMapping("delete${UpperKey}")
     public void delete${UpperKey}(${UpperKey}Entity ${key}, HttpServletResponse response){
+    	${key}.setUpdateUser(getSessionUser().getUserId());
+        ${key}.setUpdateTime(new Date());
         ${key}Service.delete(${key});
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -113,6 +120,6 @@ public class ${UpperKey}Controller extends BaseController {
     @RequestMapping("view${UpperKey}Detail")
     public String view${UpperKey}Detail(${UpperKey}Entity ${key}, Model model){
         model.addAttribute("${primaryKey}",${key}.get${UpperPrimaryKey}());
-        return "${key}/${key}Detail";
+        return "${pagePrefix}/${key}Detail";
     }
 }

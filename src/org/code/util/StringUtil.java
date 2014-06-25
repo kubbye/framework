@@ -37,37 +37,41 @@ public class StringUtil {
      * @param s 列名称
      * @return
      */
-    public static String columnName(String s){
-        if(null==s){
+    public static String columnName(String column){
+        if(null==column){
             return null;
         }
-        if(s.trim().length()==0){
-            return s;
+        if(column.trim().length()==0){
+            return column;
         }
-        String [] arr = s.split("_");
-        String res="";
-        for(String str : arr){
-            res = res + upperFirst(str);
+        String res=commonColumn(column);
+        if("".equals(res)){
+            String [] arr = column.split("_");
+            for(String str : arr){
+                res = res + upperFirst(str);
+            }
         }
         return lowerFirst(res);
     }
     
-    public static String mysqlDatatype(String jdbctype){
-        String datatype="";
-        if("varchar".equals(jdbctype) || "char".equals(jdbctype) || "text".equals(jdbctype)){
-            datatype = "String";
+    public static String commonColumn(String column){
+        String name="";
+        if("CREATE_BY".equalsIgnoreCase(column)){
+            name="createUser";
         }
-        if("int".equals(jdbctype) || "tinyint".equals(jdbctype)){
-            datatype = "Integer";
+        if("UPDATE_BY".equalsIgnoreCase(column)){
+            name="updateUser";
         }
-        
-        if("bigint".equals(jdbctype)){
-            datatype = "Long";
+        if("CREATE_TIME".equalsIgnoreCase(column)){
+            name="createTime";
         }
-        if("datetime".equals(jdbctype) || "timestamp".equals(jdbctype)){
-            datatype = "Date";
+        if("UPDATE_TIME".equalsIgnoreCase(column)){
+            name="updateTime";
         }
-        
-        return datatype;
+        if("DELETE_MARK".equalsIgnoreCase(column)){
+            name="deleteMark";
+        }
+        return name;
     }
+    
 }

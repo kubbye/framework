@@ -129,12 +129,12 @@ public class UserEntity extends BaseEntity {
     /**
      * <p>Field createUser: </p>
      */
-    private String createUser;
+    private Long createUser;
     
     /**
      * <p>Field updateUser: </p>
      */
-    private String updateUser;
+    private Long updateUser;
     
     /**
      * <p>Field createTime: </p>
@@ -331,19 +331,19 @@ public class UserEntity extends BaseEntity {
         this.mark = mark;
     }
     
-    public String getCreateUser() {
+    public Long getCreateUser() {
         return createUser;
     }
     
-    public void setCreateUser(String createUser) {
+    public void setCreateUser(Long createUser) {
         this.createUser = createUser;
     }
     
-    public String getUpdateUser() {
+    public Long getUpdateUser() {
         return updateUser;
     }
     
-    public void setUpdateUser(String updateUser) {
+    public void setUpdateUser(Long updateUser) {
         this.updateUser = updateUser;
     }
     

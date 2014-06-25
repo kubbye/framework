@@ -17,7 +17,7 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		initRoleDatagrid(contextPath+'/role/getListData.json');
+		initRoleDatagrid(contextPath+'/admin/role/getListData.json');
 	});
 	/*查询角色*/
 	function roleSearch(){
@@ -31,20 +31,20 @@ var dataTable;
 	
 	/*点击角色新增按钮*/
 	function roleAdd(){
-		openWindow(contextPath+"/role/toAddRole.htm",'角色新增');
+		openWindow(contextPath+"/admin/role/toAddRole.htm",'角色新增');
 	}
 	/*点击角色编辑按钮*/
 	function roleEidt(){
 		var sel=isRoleSelected();
 		if(sel){
-			openWindow(contextPath+"/role/toEditRole.htm?roleId="+sel.roleId,'角色编辑');
+			openWindow(contextPath+"/admin/role/toEditRole.htm?roleId="+sel.roleId,'角色编辑');
 		}
 	}
 	/*点击角色明细按钮*/
 	function roleDetail(){
 		var sel=isRoleSelected();
 		if(sel){
-			openWindow(contextPath+"/role/viewRoleDetail.htm?roleId="+sel.roleId,'角色明细');
+			openWindow(contextPath+"/admin/role/viewRoleDetail.htm?roleId="+sel.roleId,'角色明细');
 		}
 	}
 	/*点击角色删除按钮*/
@@ -54,7 +54,7 @@ var dataTable;
 		    $.messager.confirm('删除角色', '您确认要删除该角色吗?', function(r){
                 if (r){
                 	$.ajax({
-        				url:contextPath+"/role/deleteRole.json?roleId="+sel.roleId,
+        				url:contextPath+"/admin/role/deleteRole.json?roleId="+sel.roleId,
         				dataType:"json",
         				success:function(data){
         					//清除所有选择
@@ -97,17 +97,17 @@ var dataTable;
 			pagination:true,pageSize:10,
 			rownumbers:true,
 			columns:[[
-				  	{field:'roleName',title:'roleName'},
+				  	{field:'roleName',title:'角色名称'},
 				  	{field:'roleType',title:'类型：R 角色，P 部门岗位'},
 				  	{field:'roleScope',title:'公共角色：D 默认角色,C 通用角色,P 部门私有角色，S 系统级角色'},
-				  	{field:'orgId',title:'类型 为 P 部门自定义时有效'},
-				  	{field:'orgSimpleName',title:'orgSimpleName'},
-				  	{field:'available',title:'Y 可用，N 不可用'},
-				  	{field:'memo',title:'memo'},
-				  	{field:'createUser',title:'createUser'},
-				  	{field:'updateUser',title:'updateUser'},
-				  	{field:'createTime',title:'createTime'},
-				  	{field:'updateTime',title:'updateTime'}
+				  	{field:'orgId',title:'机构ID'},
+				  	{field:'memo',title:'备注'},
+				  	{field:'avaliable',title:'Y 可用，N 不可用'},
+				  	{field:'createUser',title:'创建人'},
+				  	{field:'updateUser',title:'更新人'},
+				  	{field:'createTime',title:'创建时间'},
+				  	{field:'updateTime',title:'更新时间'},
+				  	{field:'deleteMark',title:'删除标记：0，未删除；1，已删除'}
 			]],
 			toolbar:'#toolbar_role',
 			onBeforeLoad:function(data){

@@ -19,6 +19,7 @@ public class ${UpperKey}ServiceImpl implements I${UpperKey}Service {
     
     @Override
     public int insert(${UpperKey}Entity ${key}) {
+    	${key}.setDeleteMark("0");
         int id=${key}Dao.insert("${key}.insert${UpperKey}", ${key});
         return id;
     }
