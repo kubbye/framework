@@ -329,6 +329,7 @@ public class CodeUtil {
         listData.put("createDate", createDate);
         listData.put("primaryKey", primaryKey.getName());
         listData.put("fieldList", fieldList);
+        listData.put("width", 1000/fieldList.size());
 
         implTemplate.process(listData, listWriter);
     }

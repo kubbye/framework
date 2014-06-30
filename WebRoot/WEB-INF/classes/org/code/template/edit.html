@@ -17,7 +17,7 @@
 	    		<#list noCommonFieldList as field>
 				  <#if field.priKey?c ='false'>
 	    		<tr>
-	    			<td>${field.comment}:</td>
+	    			<td  align="right">${field.comment}:</td>
 	    			<#if field.nullable?c='true'>
 	    			<td><input class="textbox" type="text" id="${field.name}" name="${field.name}"></input></td>
 	    			</#if>

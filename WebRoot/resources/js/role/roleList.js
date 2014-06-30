@@ -17,7 +17,7 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		initRoleDatagrid(contextPath+'/admin/role/getListData.json');
+		initRoleDatagrid(contextPath+'/admin/role/getListData.json?orgId='+$("#search_orgId").val());
 	});
 	/*查询角色*/
 	function roleSearch(){
@@ -25,6 +25,7 @@ var dataTable;
         /* 此处添加自己的查询条件，类似
         queryParams.lgName = $("#search_lgName").val();  
         */
+		queryParams.orgId=$("#search_orgId").val();
         //重新加载datagrid的数据  
         $("#role_table").datagrid('reload');  
 	}
@@ -85,7 +86,7 @@ var dataTable;
 			title:'角色信息',
 			url:_url,
 			iconCls:'icon-ok',
-			nowrap: false,
+			nowrap: true,
 			autoRowHeight: false,
 			resizable:true,
 			striped: true,
@@ -97,17 +98,11 @@ var dataTable;
 			pagination:true,pageSize:10,
 			rownumbers:true,
 			columns:[[
-				  	{field:'roleName',title:'角色名称'},
-				  	{field:'roleType',title:'类型：R 角色，P 部门岗位'},
-				  	{field:'roleScope',title:'公共角色：D 默认角色,C 通用角色,P 部门私有角色，S 系统级角色'},
-				  	{field:'orgId',title:'机构ID'},
-				  	{field:'memo',title:'备注'},
-				  	{field:'avaliable',title:'Y 可用，N 不可用'},
-				  	{field:'createUser',title:'创建人'},
-				  	{field:'updateUser',title:'更新人'},
-				  	{field:'createTime',title:'创建时间'},
-				  	{field:'updateTime',title:'更新时间'},
-				  	{field:'deleteMark',title:'删除标记：0，未删除；1，已删除'}
+				  	{field:'roleName',title:'角色名称',align:'center',resizable:false,width:'100'},
+				  	{field:'memo',title:'备注',align:'center',resizable:false,width:'100'},
+				  	{field:'avaliable',title:'状态',align:'center',resizable:false,width:'100',formatter:function(data){return 'Y'==data?'有效':'无效'}},
+				  	{field:'createTime',title:'创建时间',align:'center',resizable:false,width:'100'},
+				  	{field:'updateTime',title:'更新时间',align:'center',resizable:false,width:'100'},
 			]],
 			toolbar:'#toolbar_role',
 			onBeforeLoad:function(data){

@@ -3,7 +3,7 @@
 function submitForm_add(){
 	if($("#roleForm").form("validate")){
 		$.ajax({
-			url:contextPath+"//admin/role/saveRole.htm",
+			url:contextPath+"/admin/role/saveRole.htm",
 			dataType:"json",
 			data:$("#roleForm").serialize(),
 			success:function(data){

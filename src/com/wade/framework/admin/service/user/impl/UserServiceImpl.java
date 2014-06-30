@@ -19,6 +19,7 @@ public class UserServiceImpl implements IUserService {
     
     @Override
     public int insert(UserEntity user) {
+    	user.setDeleteMark("0");
         int id=userDao.insert("user.insertUser", user);
         return id;
     }

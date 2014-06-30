@@ -7,7 +7,7 @@ import com.wade.framework.base.entity.BaseEntity;
  * <p>ClassName: MenuEntity</p>
  * <p>Description: 菜单实体类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-25</p>
+ * <p>Date: 2014-06-26</p>
  */
 public class MenuEntity extends BaseEntity {
     

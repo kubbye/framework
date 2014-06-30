@@ -13,30 +13,25 @@
 		<div style="padding:10px 60px 20px 60px">
 	    <form id="roleForm" method="post">
 	    	<input type="hidden" id="roleId" name="roleId">
+	    	<input class="textbox" type="hidden" id="orgId" name="orgId" readonly="readonly"></input>
 	    	<table cellpadding="5">
 				  	<tr>
 		    			<td>角色名称:</td>
 		    			<td><input class="textbox" type="text" id="roleName" name="roleName" readonly="readonly"></input></td>
 		    		</tr>
 				  	<tr>
-		    			<td>类型：R 角色，P 部门岗位:</td>
-		    			<td><input class="textbox" type="text" id="roleType" name="roleType" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
-		    			<td>公共角色：D 默认角色,C 通用角色,P 部门私有角色，S 系统级角色:</td>
-		    			<td><input class="textbox" type="text" id="roleScope" name="roleScope" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
-		    			<td>机构ID:</td>
-		    			<td><input class="textbox" type="text" id="orgId" name="orgId" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
 		    			<td>备注:</td>
-		    			<td><input class="textbox" type="text" id="memo" name="memo" readonly="readonly"></input></td>
+		    			<td><textarea id="memo" name="memo" rows="3" cols="18">
+	    			</textarea></td>
 		    		</tr>
 				  	<tr>
-		    			<td>Y 可用，N 不可用:</td>
-		    			<td><input class="textbox" type="text" id="avaliable" name="avaliable" readonly="readonly"></input></td>
+		    			<td>状态:</td>
+		    			<td>
+		    			<select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" disabled>
+		    				<option value="Y">有效</option>
+		    				<option  value="N">无效</option>
+		    			</select>
+		    			</td>
 		    		</tr>
 	    	</table>
 	    </form>

@@ -17,29 +17,38 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		initUserDatagrid(contextPath+'/admin/user/getListData.json');
+		initUserDatagrid(contextPath+'/admin/user/getListData.json?orgId='+$("#search_orgId").val());
 	});
+	/*查询用户*/
 	function userSearch(){
 		var queryParams = $('#user_table').datagrid('options').queryParams;  
-        queryParams.lgName = $("#search_lgName").val();  
+        /* 此处添加自己的查询条件，类似
+        */
+		queryParams.orgId = $("#search_orgId").val();  
+		alert(queryParams.orgId);
         //重新加载datagrid的数据  
         $("#user_table").datagrid('reload');  
 	}
+	
+	/*点击用户新增按钮*/
 	function userAdd(){
 		openWindow(contextPath+"/admin/user/toAddUser.htm",'用户新增');
 	}
+	/*点击用户编辑按钮*/
 	function userEidt(){
 		var sel=isUserSelected();
 		if(sel){
 			openWindow(contextPath+"/admin/user/toEditUser.htm?userId="+sel.userId,'用户编辑');
 		}
 	}
+	/*点击用户明细按钮*/
 	function userDetail(){
 		var sel=isUserSelected();
 		if(sel){
 			openWindow(contextPath+"/admin/user/viewUserDetail.htm?userId="+sel.userId,'用户明细');
 		}
 	}
+	/*点击用户删除按钮*/
 	function userDelete(){
 		var sel=isUserSelected();
 		if(sel){
@@ -61,6 +70,7 @@ var dataTable;
             });
 		}
 	}
+	/*是否有用户记录被选中*/
 	function isUserSelected(){
 		var sel=$.selected("user_table");
 		if(null == sel){
@@ -69,14 +79,14 @@ var dataTable;
 		}
 		return sel;
 	}
-
+	/*初始化用户datagrid*/
 	function initUserDatagrid(_url){
 		dataTable=$("#user_table").datagrid({
 			fit:true,
 			title:'用户信息',
 			url:_url,
 			iconCls:'icon-ok',
-			nowrap: false,
+			nowrap: true,
 			autoRowHeight: false,
 			resizable:true,
 			striped: true,
@@ -88,10 +98,17 @@ var dataTable;
 			pagination:true,pageSize:10,
 			rownumbers:true,
 			columns:[[
-				{field:'orgId',title:'机构'},
-				{field:'lgName',title:'登录名称'},
-				{field:'userName',title:'用户名称'},
-				{field:'available',title:'启用/禁用'}
+				  	{field:'lgName',title:'登录名称',resizable:false,width:'90',align:'center'},
+				  	/*
+				  	{field:'loginId',title:'用户登录号',resizable:false},
+				  	{field:'userName',title:'用户昵称',resizable:false},
+				  	{field:'userType',title:'用户类型',resizable:false,width:'90'},
+				  	*/
+				  	{field:'sex',title:'性别',resizable:false,width:'90',formatter:function(data){return '1'==data?'男':'女'}},
+				  	{field:'defaultRoleName',title:'默认角色名称',resizable:false,width:'90'},
+				  	{field:'avaliable',title:'状态',resizable:false,width:'90',formatter:function(data){return 'Y'==data?'有效':'无效'}},
+				  	{field:'createTime',title:'创建时间',resizable:'false',width:'90'},
+				  	{field:'updateTime',title:'更新时间',resizable:'false',width:'90'},
 			]],
 			toolbar:'#toolbar_user',
 			onBeforeLoad:function(data){

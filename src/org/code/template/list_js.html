@@ -85,7 +85,7 @@ var dataTable;
 			title:'${ZhKey}信息',
 			url:_url,
 			iconCls:'icon-ok',
-			nowrap: false,
+			nowrap: true,
 			autoRowHeight: false,
 			resizable:true,
 			striped: true,
@@ -99,7 +99,7 @@ var dataTable;
 			columns:[[
 				<#list fieldList as field>
 				  <#if field.priKey?c ='false'>
-				  	{field:'${field.name}',title:'${field.comment}'}<#if field_has_next>,</#if>
+				  	{field:'${field.name}',title:'${field.comment}',align:'center',resizable:false,width:'${width}'}<#if field_has_next>,</#if>
 				  </#if>
 				</#list>
 			]],

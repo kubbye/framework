@@ -10,7 +10,7 @@ import com.wade.framework.base.dao.BaseDaoImpl;
  * <p>ClassName: UserDaoImpl</p>
  * <p>Description: 用户dao实现类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-6-16</p>
+ * <p>Date: 2014-06-26</p>
  */
 @Repository("userDao")
 public class UserDaoImpl extends BaseDaoImpl implements IUserDao {

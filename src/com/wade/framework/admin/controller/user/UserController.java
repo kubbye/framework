@@ -1,10 +1,9 @@
 package com.wade.framework.admin.controller.user;
 
-
 import java.util.Date;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +18,9 @@ import com.wade.framework.base.controller.BaseController;
 
 /**
  * <p>ClassName: UserController</p>
- * <p>Description: 用户controller</p>
+ * <p>Description: 用户Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-6-16</p>
+ * <p>Date: 2014-06-26</p>
  */
 @Controller
 @RequestMapping("/admin/user")
@@ -46,7 +45,8 @@ public class UserController extends BaseController {
      * @return
      */
     @RequestMapping("/list")
-    public String list(UserEntity user){
+    public String list(UserEntity user,Model model){
+        model.addAttribute("orgId", user.getOrgId());
         return "admin/user/userList";
     }
     
@@ -68,8 +68,12 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/saveUser")
     public void saveUser(UserEntity user,HttpServletResponse response){
-        user.setCreateUser(getSessionUser().getUserId());
-        user.setCreateTime(new Date());
+    	user.setCreateUser(getSessionUser().getUserId());
+    	Date date = new Date();
+        user.setCreateTime(date);
+        //设置默认的loginid
+        String loginId=String.valueOf(date.getTime())+new Random().nextInt(9);
+        user.setLoginId(loginId);
         userService.insert(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
     }
@@ -84,9 +88,14 @@ public class UserController extends BaseController {
         model.addAttribute("userId",user.getUserId());
         return "admin/user/userEdit";
     }
+    /**
+     * <p>Description: 保存用户修改记录</p>
+     * @param user 用户对象
+     * @param response
+     */
     @RequestMapping("/editUser")
     public void editUser(UserEntity user, HttpServletResponse response){
-        user.setUpdateUser(getSessionUser().getUserId());
+    	user.setUpdateUser(getSessionUser().getUserId());
         user.setUpdateTime(new Date());
         userService.update(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
@@ -107,7 +116,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("deleteUser")
     public void deleteUser(UserEntity user, HttpServletResponse response){
-        user.setUpdateUser(getSessionUser().getUserId());
+    	user.setUpdateUser(getSessionUser().getUserId());
         user.setUpdateTime(new Date());
         userService.delete(user);
         super.ajaxJson(response, AjaxSuccessInfo.success());
@@ -123,5 +132,14 @@ public class UserController extends BaseController {
     public String viewUserDetail(UserEntity user, Model model){
         model.addAttribute("userId",user.getUserId());
         return "admin/user/userDetail";
+    }
+    
+    /**
+     * <p>Description: 用户树</p>
+     * @return
+     */
+    @RequestMapping("userTree")
+    public String tree(){
+        return "admin/user/userTree";
     }
 }

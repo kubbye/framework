@@ -1,5 +1,5 @@
 
-
+/*新增用户*/
 function submitForm_add(){
 	if($("#userForm").form("validate")){
 		$.ajax({
@@ -16,6 +16,7 @@ function submitForm_add(){
 	}
 }
 
+/*修改用户*/
 function submitForm_edit(){
 	if($("#userForm").form("validate")){
 		$.ajax({

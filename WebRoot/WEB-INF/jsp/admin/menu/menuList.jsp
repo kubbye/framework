@@ -11,7 +11,6 @@
 <body class="easyui-layout">
 <div data-options="region:'north',split:false,border:false" style="overflow:hidden;padding:5px;">
     <fieldset>
-    
     <legend>查询条件</legend>
     	<table>
     		<tr>
@@ -31,7 +30,7 @@
     </div>
     
  
-    <div data-options="region:'center',border:'false'"  style="padding-top:10px;">
+    <div data-options="region:'center',border:'false'"  style="padding-top:0px;">
     
 	  <table id="menu_table">
 	  </table>

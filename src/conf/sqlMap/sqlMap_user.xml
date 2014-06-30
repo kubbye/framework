@@ -5,49 +5,127 @@
 	<resultMap id="userResultMap" type="com.wade.framework.admin.entity.UserEntity" >
 		<result property="userId" column="USER_ID"></result>
 		<result property="orgId" column="ORG_ID"></result>
+		<result property="loginId" column="LOGIN_ID"></result>
 		<result property="lgName" column="LG_NAME"></result>
 		<result property="userName" column="USER_NAME"></result>
-		<result property="available" column="AVAILABLE"></result>
+		<result property="passWord" column="PASS_WORD"></result>
+		<result property="sex" column="SEX"></result>
+		<result property="photo" column="PHOTO"></result>
+		<result property="memo" column="MEMO"></result>
+		<result property="defaultRole" column="DEFAULT_ROLE"></result>
+		<result property="defaultRoleName" column="DEFAULT_ROLE_NAME"></result>
+		<result property="userType" column="USER_TYPE"></result>
+		<result property="avaliable" column="AVALIABLE"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入用户记录 -->
 	<insert id="insertUser">
 		INSERT INTO ts_user 
 			( 
-			ORG_ID, 
-			LG_NAME, 
-			USER_NAME, 
-			AVAILABLE 
+			  	ORG_ID,
+			  	LOGIN_ID,
+			  	LG_NAME,
+			  	USER_NAME,
+			  	PASS_WORD,
+			  	SEX,
+			  	PHOTO,
+			  	MEMO,
+			  	DEFAULT_ROLE,
+			  	DEFAULT_ROLE_NAME,
+			  	USER_TYPE,
+			  	AVALIABLE,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
 			)
 			VALUES
 			(
-			#{orgId},
-			#{lgName},
-			#{userName},
-			#{available}
+			  	#{orgId},
+			  	#{loginId},
+			  	#{lgName},
+			  	#{userName},
+			  	#{passWord},
+			  	#{sex},
+			  	#{photo},
+			  	#{memo},
+			  	#{defaultRole},
+			  	#{defaultRoleName},
+			  	#{userType},
+			  	#{avaliable},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
 			) 
 	</insert>
 	<!-- 更新用户记录 -->
 	<update id="updateUser">
 		update ts_user set  
-				ORG_ID=#{orgId}, 
-				LG_NAME=#{lgName}, 
-				USER_NAME=#{userName}, 
-				AVAILABLE=#{available} 
+			USER_NAME=#{userName},
+			SEX=#{sex},
+			PHOTO=#{photo},
+			MEMO=#{memo},
+			AVALIABLE=#{avaliable},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
 		 where USER_ID=#{userId}
 	</update>
 	<!-- 分页查询记录 -->
 	<select id="queryUsersByPage" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
-		SELECT user_id,org_id,lg_name,user_name,AVAILABLE FROM ts_user
-		<if test="lgName!=null and lgName!=''">
-			where lg_name like concat('%',#{lgName},'%')
-		</if>
+		SELECT 
+			USER_ID,
+			ORG_ID,
+			LOGIN_ID,
+			LG_NAME,
+			USER_NAME,
+			PASS_WORD,
+			SEX,
+			PHOTO,
+			MEMO,
+			DEFAULT_ROLE,
+			DEFAULT_ROLE_NAME,
+			USER_TYPE,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_user where delete_mark=0
+		 and org_id=#{orgId}
 	</select>
 	<!-- 根据主键查询用户记录 -->
 	<select id="queryUserById"  resultMap="userResultMap">
-		select * from ts_user where user_id=#{userId}
+		select 
+			USER_ID,
+			ORG_ID,
+			LOGIN_ID,
+			LG_NAME,
+			USER_NAME,
+			PASS_WORD,
+			SEX,
+			PHOTO,
+			MEMO,
+			DEFAULT_ROLE,
+			DEFAULT_ROLE_NAME,
+			USER_TYPE,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_user where USER_ID=#{userId}
 	</select>
 	<!-- 删除用户记录 -->
 	<delete id="deleteUser"  parameterType="com.wade.framework.admin.entity.UserEntity">
-		delete from ts_user where user_id=#{userId}
+		update ts_user set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where USER_ID=#{userId}
 	</delete>
 </mapper>

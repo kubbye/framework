@@ -5,33 +5,49 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>用户管理</title>
 <jsp:include page="/WEB-INF/jsp/common/style.jsp"></jsp:include>
 </head>
 <body>
 	
-	<div class="easyui-panel" title="用户明细" style="width:500px">
+	<div class="easyui-panel" title="&nbsp;" style="width:500px">
 		<div style="padding:10px 60px 20px 60px">
 	    <form id="userForm" method="post">
 	    	<input type="hidden" id="userId" name="userId">
 	    	<table cellpadding="5">
-	    		<tr>
-	    			<td>机构:</td>
-	    			<td><input class="textbox" type="text" id="orgId" name="orgId" readonly="readonly"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>登录名:</td>
-	    			<td><input type="text" class="textbox" id="lgName" name="lgName" readonly="readonly"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>员工名:</td>
-	    			<td><input class="textbox" type="text" id="userName" name="userName" readonly="readonly"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>AVALILABLE:</td>
-	    			<td><input class="textbox" id="available" name="available" readonly="readonly"></input></td>
-	    		</tr>
-	    	
+				  	<tr>
+		    			<td>登录名称:</td>
+		    			<td><input class="textbox" type="text" id="lgName" name="lgName" readonly="readonly"></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>用户昵称:</td>
+		    			<td><input class="textbox" type="text" id="userName" name="userName" readonly="readonly"></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>密码:</td>
+		    			<td><input class="textbox" type="text" id="passWord" name="passWord" readonly="readonly"></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>性别:</td>
+		    			<td><select id="sex" name="sex" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" disabled>
+	    				<option value="1">男</option>
+	    				<option value="0">女</option>
+	    			</select></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>照片:</td>
+		    			<td><input class="textbox" type="text" id="photo" name="photo" readonly="readonly"></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>备注:</td>
+		    			<td><input class="textbox" type="text" id="memo" name="memo" readonly="readonly"></input></td>
+		    		</tr>
+				  	<tr>
+		    			<td>状态:</td>
+		    			<td><select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" disabled>
+	    				<option value="Y">有效</option>
+	    				<option  value="N">无效</option>
+	    			</select></td>
+		    		</tr>
 	    	</table>
 	    </form>
 	    <div style="text-align:center;padding:5px">
@@ -44,7 +60,7 @@
 		$(document).ready(function(){
 			<c:if test="${!empty userId}">
 				var userId='${userId}';
-				$.formLoad('userForm','http://localhost:8080/framework/admin/user/getUserById.json?userId='+userId,function(data){
+				$.formLoad('userForm',contextPath+'/admin/user/getUserById.json?userId='+userId,function(data){
 					
 				});
 			</c:if>

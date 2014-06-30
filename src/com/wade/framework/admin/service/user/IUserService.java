@@ -10,7 +10,7 @@ import com.wade.framework.base.PaginationResult;
  * <p>ClassName: IUserService</p>
  * <p>Description: 用户Service接口</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-6-16</p>
+ * <p>Date: 2014-06-26</p>
  */
 public interface IUserService {
     /**

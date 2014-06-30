@@ -10,7 +10,7 @@ import com.wade.framework.base.dao.BaseDaoImpl;
  * <p>ClassName: RoleDaoImpl</p>
  * <p>Description: 角色dao实现类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-25</p>
+ * <p>Date: 2014-06-28</p>
  */
 @Repository("roleDao")
 public class RoleDaoImpl extends BaseDaoImpl implements IRoleDao {

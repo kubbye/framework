@@ -3,7 +3,7 @@
 function submitForm_add(){
 	if($("#${key}Form").form("validate")){
 		$.ajax({
-			url:contextPath+"/${urlPrefix}/save${UpperKey}.htm",
+			url:contextPath+"${urlPrefix}/save${UpperKey}.htm",
 			dataType:"json",
 			data:$("#${key}Form").serialize(),
 			success:function(data){

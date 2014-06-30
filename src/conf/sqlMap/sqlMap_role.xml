@@ -5,8 +5,6 @@
 	<resultMap id="roleResultMap" type="com.wade.framework.admin.entity.RoleEntity" >
 		<result property="roleId" column="ROLE_ID"></result>
 		<result property="roleName" column="ROLE_NAME"></result>
-		<result property="roleType" column="ROLE_TYPE"></result>
-		<result property="roleScope" column="ROLE_SCOPE"></result>
 		<result property="orgId" column="ORG_ID"></result>
 		<result property="memo" column="MEMO"></result>
 		<result property="avaliable" column="AVALIABLE"></result>
@@ -21,8 +19,6 @@
 		INSERT INTO ts_role 
 			( 
 			  	ROLE_NAME,
-			  	ROLE_TYPE,
-			  	ROLE_SCOPE,
 			  	ORG_ID,
 			  	MEMO,
 			  	AVALIABLE,
@@ -35,8 +31,6 @@
 			VALUES
 			(
 			  	#{roleName},
-			  	#{roleType},
-			  	#{roleScope},
 			  	#{orgId},
 			  	#{memo},
 			  	#{avaliable},
@@ -51,8 +45,6 @@
 	<update id="updateRole">
 		update ts_role set  
 			ROLE_NAME=#{roleName},
-			ROLE_TYPE=#{roleType},
-			ROLE_SCOPE=#{roleScope},
 			ORG_ID=#{orgId},
 			MEMO=#{memo},
 			AVALIABLE=#{avaliable},
@@ -65,8 +57,6 @@
 		SELECT 
 			ROLE_ID,
 			ROLE_NAME,
-			ROLE_TYPE,
-			ROLE_SCOPE,
 			ORG_ID,
 			MEMO,
 			AVALIABLE,
@@ -76,14 +66,15 @@
 			UPDATE_TIME,
 			DELETE_MARK
 		 FROM ts_role where delete_mark=0
+		 <if test="orgId!=null">
+		 	and org_id=#{orgId}
+		 </if>
 	</select>
 	<!-- 根据主键查询角色记录 -->
 	<select id="queryRoleById"  resultMap="roleResultMap">
 		select 
 			ROLE_ID,
 			ROLE_NAME,
-			ROLE_TYPE,
-			ROLE_SCOPE,
 			ORG_ID,
 			MEMO,
 			AVALIABLE,

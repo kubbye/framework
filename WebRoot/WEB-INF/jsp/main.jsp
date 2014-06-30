@@ -11,12 +11,13 @@
 <body class="easyui-layout" scroll="no">
 	<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
 	<div data-options="region:'west',split:true,title:'功能菜单'" style="width:150px;padding:10px;">
-	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('用户管理');">用户</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('菜单管理');">菜单</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('角色管理');">角色</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('用户管理');">用户管理</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('岗位管理');">岗位管理</a><br>
 	</div>
 	
-	<div data-options="region:'south',border:false" style="height:30px;background:#A9FACD;padding:10px;">copyright</div>
+	<div data-options="region:'south',border:false" style="height:30px;padding:10px;">copyright</div>
 	<div id="center" data-options="region:'center'" style="overflow:hidden">
 		<div id="tt" class="easyui-tabs" fit="true" border="false" plain="true">
 			<div title="Welcome"  data-options="closable:true">welcome</div>
@@ -26,12 +27,18 @@
 	</div>
 	<script>
 	function changeTitle(name){
-		var _url=contextPath+'/admin/user/list.htm';
+		var _url;
 		if('菜单管理'==name){
 			_url=contextPath+'/admin/menu/list.htm';
 		}
 		if('角色管理'==name){
-			_url=contextPath+'/admin/role/list.htm';
+			_url=contextPath+'/admin/role/roleTree.htm';
+		}
+		if('用户管理'==name){
+			_url=contextPath+'/admin/user/userTree.htm';
+		}
+		if('岗位管理'==name){
+			_url=contextPath+'/admin/post/postTree.htm';
 		}
 		openTab(name,_url);
 	}

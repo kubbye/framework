@@ -3,7 +3,7 @@
 function submitForm_add(){
 	if($("#menuForm").form("validate")){
 		$.ajax({
-			url:contextPath+"//admin/menu/saveMenu.htm",
+			url:contextPath+"/admin/menu/saveMenu.htm",
 			dataType:"json",
 			data:$("#menuForm").serialize(),
 			success:function(data){

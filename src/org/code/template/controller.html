@@ -82,6 +82,12 @@ public class ${UpperKey}Controller extends BaseController {
         model.addAttribute("${primaryKey}",${key}.get${UpperPrimaryKey}());
         return "${pagePrefix}/${key}Edit";
     }
+    
+   /**
+     * <p>Description: 保存${ZhKey}修改记录</p>
+     * @param ${key} ${ZhKey}对象
+     * @param response
+     */
     @RequestMapping("/edit${UpperKey}")
     public void edit${UpperKey}(${UpperKey}Entity ${key}, HttpServletResponse response){
     	${key}.setUpdateUser(getSessionUser().getUserId());

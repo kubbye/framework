@@ -10,7 +10,7 @@ import com.wade.framework.base.PaginationResult;
  * <p>ClassName: IRoleService</p>
  * <p>Description: 角色Service接口</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-25</p>
+ * <p>Date: 2014-06-28</p>
  */
 public interface IRoleService {
     /**

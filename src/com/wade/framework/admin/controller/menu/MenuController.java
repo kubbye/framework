@@ -19,7 +19,7 @@ import com.wade.framework.base.controller.BaseController;
  * <p>ClassName: MenuController</p>
  * <p>Description: 菜单Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-25</p>
+ * <p>Date: 2014-06-26</p>
  */
 @Controller
 @RequestMapping("/admin/menu")

@@ -12,6 +12,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.wade.framework.base.entity.SessionUserInfo;
 import com.wade.framework.base.interceptor.PaginationInterceptor;
 
@@ -43,7 +44,10 @@ public class BaseController {
      */
     public void ajaxJson(HttpServletResponse response,Object obj){
         Gson gson = new Gson();
-        String json=gson.toJson(obj);
+       // String json=gson.toJson(obj,);
+        GsonBuilder gb=new GsonBuilder();
+        gb.setDateFormat("yyyy-MM-dd");
+        String json = gb.create().toJson(obj);
         log.info("json:"+json);
         ajax(response, json, "text/html");
     }

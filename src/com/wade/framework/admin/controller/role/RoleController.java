@@ -19,7 +19,7 @@ import com.wade.framework.base.controller.BaseController;
  * <p>ClassName: RoleController</p>
  * <p>Description: 角色Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-25</p>
+ * <p>Date: 2014-06-28</p>
  */
 @Controller
 @RequestMapping("/admin/role")
@@ -44,7 +44,8 @@ public class RoleController extends BaseController {
      * @return
      */
     @RequestMapping("/list")
-    public String list(RoleEntity role){
+    public String list(RoleEntity role , Model model){
+        model.addAttribute("orgId", role.getOrgId());
         return "admin/role/roleList";
     }
     
@@ -82,6 +83,12 @@ public class RoleController extends BaseController {
         model.addAttribute("roleId",role.getRoleId());
         return "admin/role/roleEdit";
     }
+    
+   /**
+     * <p>Description: 保存角色修改记录</p>
+     * @param role 角色对象
+     * @param response
+     */
     @RequestMapping("/editRole")
     public void editRole(RoleEntity role, HttpServletResponse response){
     	role.setUpdateUser(getSessionUser().getUserId());
@@ -121,5 +128,18 @@ public class RoleController extends BaseController {
     public String viewRoleDetail(RoleEntity role, Model model){
         model.addAttribute("roleId",role.getRoleId());
         return "admin/role/roleDetail";
+    }
+    
+    /**
+     * 功能描述: 角色管理树<br>
+     * 〈功能详细描述〉
+     *
+     * @return
+     * @see [相关类/方法](可选)
+     * @since [产品/模块版本](可选)
+     */
+    @RequestMapping("/roleTree")
+    public String roleTree(){
+        return "admin/role/roleTree";
     }
 }
