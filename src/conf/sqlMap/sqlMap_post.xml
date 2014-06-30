@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	<!-- 岗位resultMap -->
+	<resultMap id="postResultMap" type="com.wade.framework.admin.entity.PostEntity" >
+		<result property="id" column="ID"></result>
+		<result property="orgId" column="ORG_ID"></result>
+		<result property="parentId" column="PARENT_ID"></result>
+		<result property="postPath" column="POST_PATH"></result>
+		<result property="postName" column="POST_NAME"></result>
+		<result property="postDesc" column="POST_DESC"></result>
+		<result property="avaliable" column="AVALIABLE"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
+	</resultMap>
+	<!-- 插入岗位记录 -->
+	<insert id="insertPost">
+		INSERT INTO ts_post 
+			( 
+			  	ORG_ID,
+			  	PARENT_ID,
+			  	POST_PATH,
+			  	POST_NAME,
+			  	POST_DESC,
+			  	AVALIABLE,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
+			)
+			VALUES
+			(
+			  	#{orgId},
+			  	#{parentId},
+			  	#{postPath},
+			  	#{postName},
+			  	#{postDesc},
+			  	#{avaliable},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
+			) 
+	</insert>
+	<!-- 更新岗位记录 -->
+	<update id="updatePost">
+		update ts_post set  
+			ORG_ID=#{orgId},
+			PARENT_ID=#{parentId},
+			POST_PATH=#{postPath},
+			POST_NAME=#{postName},
+			POST_DESC=#{postDesc},
+			AVALIABLE=#{avaliable},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
+	</update>
+	<!-- 分页查询记录 -->
+	<select id="queryPostsByPage" parameterType="com.wade.framework.admin.entity.PostEntity" resultMap="postResultMap">
+		SELECT 
+			ID,
+			ORG_ID,
+			PARENT_ID,
+			POST_PATH,
+			POST_NAME,
+			POST_DESC,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_post where delete_mark=0
+	</select>
+	<!-- 根据主键查询岗位记录 -->
+	<select id="queryPostById"  resultMap="postResultMap">
+		select 
+			ID,
+			ORG_ID,
+			PARENT_ID,
+			POST_PATH,
+			POST_NAME,
+			POST_DESC,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_post where ID=#{id}
+	</select>
+	<!-- 删除岗位记录 -->
+	<delete id="deletePost"  parameterType="com.wade.framework.admin.entity.PostEntity">
+		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</delete>
+</mapper>
