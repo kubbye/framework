@@ -27,6 +27,11 @@ public class PostEntity extends BaseEntity {
     private Long parentId;
     
     /**
+     * 上级岗位
+     */
+    private PostEntity parentPost;
+    
+    /**
      * <p>Field postPath: 岗位路径</p>
      */
     private String postPath;
@@ -101,6 +106,14 @@ public class PostEntity extends BaseEntity {
     
     public void setAvaliable(String avaliable) {
         this.avaliable = avaliable;
+    }
+
+    public PostEntity getParentPost() {
+        return parentPost;
+    }
+
+    public void setParentPost(PostEntity parentPost) {
+        this.parentPost = parentPost;
     }
     
     

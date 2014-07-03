@@ -129,6 +129,7 @@ public class CodeUtil {
         data.put("key", key);
         data.put("UpperKey", upperKey);
         data.put("ZhKey", zhKey);
+        data.put("primaryKey", StringUtil.upperFirst(primaryKey.getName()));
         data.put("author", author);
         data.put("createDate", createDate);
 

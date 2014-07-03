@@ -11,17 +11,21 @@
 <body class="easyui-layout">
 <div data-options="region:'north',split:false,border:false" style="overflow:hidden;padding:5px;">
     <fieldset>
-    
     <legend>查询条件</legend>
+    	<input id="search_orgId" name="orgId" type="hidden" value="${orgId }"/>
+    	<input id="search_parentId" name="parentId" type="hidden" value="${parentId }"/>
     	<table>
     		<tr>
-		    		<td>机构ID：</td>
-    				<td><input id="search_orgId" name="orgId" type="text" value=""/></td>
-		    		<td>上级岗位ID：</td>
-    				<td><input id="search_parentId" name="parentId" type="text" value=""/></td>
-		    		<td>岗位路径：</td>
-    				<td><input id="search_postPath" name="postPath" type="text" value=""/></td>
-    			
+		    		<td>岗位名称：</td>
+    				<td><input id="search_postName" name="postName" type="text" class="textbox"/></td>
+		    		<td>状态：</td>
+    				<td>
+    					<select id="search_avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">全部</option>
+		    				<option value="Y">有效</option>
+		    				<option value="N">无效</option>
+		    			</select>
+    				</td>
     			<td><a id="post_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>
     	</table>

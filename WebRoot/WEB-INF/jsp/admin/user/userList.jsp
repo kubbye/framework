@@ -17,9 +17,9 @@
     	<table>
     		<tr>
 		    		<td>用户登录号：</td>
-    				<td><input id="search_loginId" name="loginId" type="text" value=""/></td>
+    				<td><input id="search_loginId" name="loginId" type="text"  class="textbox"/></td>
 		    		<td>登录名称：</td>
-    				<td><input id="search_lgName" name="lgName" type="text" value=""/></td>
+    				<td><input id="search_lgName" name="lgName" type="text"  class="textbox"/></td>
     			
     			<td><a id="user_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>

@@ -45,7 +45,6 @@
 	<update id="updateRole">
 		update ts_role set  
 			ROLE_NAME=#{roleName},
-			ORG_ID=#{orgId},
 			MEMO=#{memo},
 			AVALIABLE=#{avaliable},
 			update_by = #{updateUser},
@@ -71,7 +70,7 @@
 		 </if>
 	</select>
 	<!-- 根据主键查询角色记录 -->
-	<select id="queryRoleById"  resultMap="roleResultMap">
+	<select id="queryRoleById" parameterType="java.lang.Long" resultMap="roleResultMap">
 		select 
 			ROLE_ID,
 			ROLE_NAME,

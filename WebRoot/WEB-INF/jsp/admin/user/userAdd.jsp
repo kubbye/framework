@@ -25,10 +25,6 @@
 	    			<td><input class="easyui-validatebox textbox" type="text" id="userName" name="userName" data-options="required:true"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td align="right">密码:</td>
-	    			<td><input class="textbox" type="text" id="passWord" name="passWord"></input></td>
-	    		</tr>
-	    		<tr>
 	    			<td align="right">性别:</td>
 	    			<td>
 	    			<select id="sex" name="sex" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'">

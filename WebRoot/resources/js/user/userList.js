@@ -99,9 +99,9 @@ var dataTable;
 			rownumbers:true,
 			columns:[[
 				  	{field:'lgName',title:'登录名称',resizable:false,width:'90',align:'center'},
+				  	{field:'userName',title:'用户昵称',resizable:false},
 				  	/*
 				  	{field:'loginId',title:'用户登录号',resizable:false},
-				  	{field:'userName',title:'用户昵称',resizable:false},
 				  	{field:'userType',title:'用户类型',resizable:false,width:'90'},
 				  	*/
 				  	{field:'sex',title:'性别',resizable:false,width:'90',formatter:function(data){return '1'==data?'男':'女'}},

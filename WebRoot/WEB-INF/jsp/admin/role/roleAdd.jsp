@@ -30,7 +30,7 @@
 	    			<td>
 	    			<select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
 	    				<option value="Y">有效</option>
-	    				<option  value="N">无效</option>
+	    				<option value="N">无效</option>
 	    			</select>
 	    			</td>
 	    		</tr>

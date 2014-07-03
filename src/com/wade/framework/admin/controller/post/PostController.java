@@ -44,7 +44,9 @@ public class PostController extends BaseController {
      * @return
      */
     @RequestMapping("/list")
-    public String list(PostEntity post){
+    public String list(PostEntity post,Model model){
+        model.addAttribute("orgId", post.getOrgId());
+        model.addAttribute("parentId", post.getParentId());
         return "admin/post/postList";
     }
     
@@ -66,6 +68,8 @@ public class PostController extends BaseController {
      */
     @RequestMapping("/savePost")
     public void savePost(PostEntity post,HttpServletResponse response){
+        System.out.println(post.getPostName());
+        System.out.println(post.getPostDesc());
     	post.setCreateUser(getSessionUser().getUserId());
         post.setCreateTime(new Date());
         postService.insert(post);
@@ -84,6 +88,8 @@ public class PostController extends BaseController {
     }
     @RequestMapping("/editPost")
     public void editPost(PostEntity post, HttpServletResponse response){
+        System.out.println(post.getPostName());
+        System.out.println(post.getPostDesc());
     	post.setUpdateUser(getSessionUser().getUserId());
         post.setUpdateTime(new Date());
         postService.update(post);

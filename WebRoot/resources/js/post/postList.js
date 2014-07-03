@@ -17,7 +17,7 @@ var dataTable;
 		});
 	});
 	$(document).ready(function(){
-		initPostDatagrid(contextPath+'/admin/post/getListData.json');
+		initPostDatagrid(contextPath+'/admin/post/getListData.json?orgId='+$("#search_orgId").val());
 	});
 	/*查询岗位*/
 	function postSearch(){
@@ -25,6 +25,7 @@ var dataTable;
         /* 此处添加自己的查询条件，类似
         queryParams.lgName = $("#search_lgName").val();  
         */
+		queryParams.orgId = $("#search_orgId").val();
         //重新加载datagrid的数据  
         $("#post_table").datagrid('reload');  
 	}
@@ -85,7 +86,7 @@ var dataTable;
 			title:'岗位信息',
 			url:_url,
 			iconCls:'icon-ok',
-			nowrap: false,
+			nowrap: true,
 			autoRowHeight: false,
 			resizable:true,
 			striped: true,
@@ -97,17 +98,16 @@ var dataTable;
 			pagination:true,pageSize:10,
 			rownumbers:true,
 			columns:[[
+			        /*
 				  	{field:'orgId',title:'机构ID'},
-				  	{field:'parentId',title:'上级岗位ID'},
 				  	{field:'postPath',title:'岗位路径'},
-				  	{field:'postName',title:'岗位名称'},
+				  	*/
+			        {field:'postName',title:'岗位名称'},
+			        {field:'parentPost',title:'上级岗位',formatter:function(data){return (null==data)?'':data.postName;}},
 				  	{field:'postDesc',title:'岗位描述'},
-				  	{field:'avaliable',title:'状态：Y 可用，N 不可用'},
-				  	{field:'createUser',title:'创建人'},
-				  	{field:'updateUser',title:'更新人'},
+				  	{field:'avaliable',title:'状态',formatter:function(data){return 'Y'==data?'有效':'无效'}},
 				  	{field:'createTime',title:'创建时间'},
 				  	{field:'updateTime',title:'更新时间'},
-				  	{field:'deleteMark',title:'删除标记：0，未删除；1，已删除'}
 			]],
 			toolbar:'#toolbar_post',
 			onBeforeLoad:function(data){

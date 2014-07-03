@@ -13,19 +13,10 @@
 		<div style="padding:10px 60px 20px 60px">
 	    <form id="postForm" method="post">
 	    	<input type="hidden" id="id" name="id">
+	    	<input type="hidden" id="orgId" name="orgId"></input>
+	    	<input type="hidden" id="parentId" name="parentId"></input>
+	    	<input type="hidden" id="postPath" name="postPath"></input>
 	    	<table cellpadding="5">
-	    		<tr>
-	    			<td>机构ID:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="orgId" name="orgId" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>上级岗位ID:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="parentId" name="parentId" data-options="required:true"></input></td>
-	    		</tr>
-	    		<tr>
-	    			<td>岗位路径:</td>
-	    			<td><input class="textbox" type="text" id="postPath" name="postPath"></input></td>
-	    		</tr>
 	    		<tr>
 	    			<td>岗位名称:</td>
 	    			<td><input class="textbox" type="text" id="postName" name="postName"></input></td>
@@ -35,8 +26,13 @@
 	    			<td><input class="textbox" type="text" id="postDesc" name="postDesc"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>状态：Y 可用，N 不可用:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="avaliable" name="avaliable" data-options="required:true"></input></td>
+	    			<td>状态:</td>
+	    			<td>
+	    				<select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="Y">有效</option>
+		    				<option value="N">无效</option>
+		    			</select>
+	    			</td>
 	    		</tr>
 	    		
 	    	</table>

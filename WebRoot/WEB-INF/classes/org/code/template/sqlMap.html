@@ -47,7 +47,7 @@
 		 FROM ${tableName} where delete_mark=0
 	</select>
 	<!-- 根据主键查询${ZhKey}记录 -->
-	<select id="query${UpperKey}ById"  resultMap="${key}ResultMap">
+	<select id="query${UpperKey}ById" parameterType="java.lang.String" resultMap="${key}ResultMap">
 		select 
 		<#list fieldList as field>
 			${field.columnName}<#if field_has_next>,</#if>

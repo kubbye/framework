@@ -15,18 +15,6 @@
 	    	<input type="hidden" id="id" name="id">
 	    	<table cellpadding="5">
 				  	<tr>
-		    			<td>机构ID:</td>
-		    			<td><input class="textbox" type="text" id="orgId" name="orgId" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
-		    			<td>上级岗位ID:</td>
-		    			<td><input class="textbox" type="text" id="parentId" name="parentId" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
-		    			<td>岗位路径:</td>
-		    			<td><input class="textbox" type="text" id="postPath" name="postPath" readonly="readonly"></input></td>
-		    		</tr>
-				  	<tr>
 		    			<td>岗位名称:</td>
 		    			<td><input class="textbox" type="text" id="postName" name="postName" readonly="readonly"></input></td>
 		    		</tr>
@@ -35,8 +23,13 @@
 		    			<td><input class="textbox" type="text" id="postDesc" name="postDesc" readonly="readonly"></input></td>
 		    		</tr>
 				  	<tr>
-		    			<td>状态：Y 可用，N 不可用:</td>
-		    			<td><input class="textbox" type="text" id="avaliable" name="avaliable" readonly="readonly"></input></td>
+		    			<td>状态:</td>
+		    			<td>
+		    			<select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" disabled>
+		    				<option value="Y">有效</option>
+		    				<option  value="N">无效</option>
+		    			</select>
+		    			</td>
 		    		</tr>
 	    	</table>
 	    </form>

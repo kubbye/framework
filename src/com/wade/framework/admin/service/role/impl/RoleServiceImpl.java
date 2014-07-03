@@ -36,7 +36,7 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public RoleEntity queryObjectById(RoleEntity role) {
-        return roleDao.queryObjectById("role.queryRoleById", role);
+        return roleDao.queryObjectById("role.queryRoleById", role.getRoleId());
     }
 
     @Override

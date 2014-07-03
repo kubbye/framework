@@ -46,9 +46,9 @@
 
 		var zNodes =[
 			{ id:100, pId:0, name:"集团公司", open:true},        
-			{ id:1, pId:100, name:"总公司", open:true},
-			{ id:11, pId:1, name:"北京分公司",_url:'/framework/admin/role/list.htm?orgId=1'},
-			{ id:12, pId:1, name:"上海分公司",_url:'/framework/admin/role/list.htm?orgId=2'}
+			{ id:11, pId:100, name:"总公司", open:true},
+			{ id:1, pId:11, name:"北京分公司"},
+			{ id:2, pId:11, name:"上海分公司"}
 			
 		];
 		function dblClickExpand(treeId, treeNode) {
@@ -60,8 +60,8 @@
 		}
 		
 		function onClick(event, treeId, treeNode, clickFlag) {
-			//alert("treeNode.url="+treeNode._url+",treeNode.name="+treeNode.name+",treeNode.click="+treeNode.click);
-			$("#role_frame").attr("src",treeNode._url);
+			var _url=contextPath+'/admin/role/list.htm';
+			$("#role_frame").attr("src",_url+"?orgId="+treeNode.id);
 			return false;
 		}	
 		function showIconForTree(treeId, treeNode) {

@@ -18,7 +18,7 @@
     			<#list fieldList as field>
 				  <#if field.priKey?c =='false' && field_index<=3>
 		    		<td>${field.comment}：</td>
-    				<td><input id="search_${field.name}" name="${field.name}" type="text" value=""/></td>
+    				<td><input id="search_${field.name}" name="${field.name}" type="text"  class="textbox"/></td>
 				  </#if>
 				</#list>
     			

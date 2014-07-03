@@ -102,7 +102,7 @@
 		 and org_id=#{orgId}
 	</select>
 	<!-- 根据主键查询用户记录 -->
-	<select id="queryUserById"  resultMap="userResultMap">
+	<select id="queryUserById" parameterType="java.lang.Long" resultMap="userResultMap">
 		select 
 			USER_ID,
 			ORG_ID,

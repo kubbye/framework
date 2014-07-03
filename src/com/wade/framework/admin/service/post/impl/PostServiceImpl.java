@@ -36,7 +36,7 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public PostEntity queryObjectById(PostEntity post) {
-        return postDao.queryObjectById("post.queryPostById", post);
+        return postDao.queryObjectById("post.queryPostById", post.getId());
     }
 
     @Override

@@ -3,7 +3,7 @@
 <mapper namespace="post">
 	<!-- 岗位resultMap -->
 	<resultMap id="postResultMap" type="com.wade.framework.admin.entity.PostEntity" >
-		<result property="id" column="ID"></result>
+		<id property="id" column="ID"></id>
 		<result property="orgId" column="ORG_ID"></result>
 		<result property="parentId" column="PARENT_ID"></result>
 		<result property="postPath" column="POST_PATH"></result>
@@ -15,6 +15,7 @@
 		<result property="createTime" column="CREATE_TIME"></result>
 		<result property="updateTime" column="UPDATE_TIME"></result>
 		<result property="deleteMark" column="DELETE_MARK"></result>
+		<association property="parentPost"  column="PARENT_ID" select="queryPostById"/>
 	</resultMap>
 	<!-- 插入岗位记录 -->
 	<insert id="insertPost">
@@ -50,7 +51,6 @@
 	<!-- 更新岗位记录 -->
 	<update id="updatePost">
 		update ts_post set  
-			ORG_ID=#{orgId},
 			PARENT_ID=#{parentId},
 			POST_PATH=#{postPath},
 			POST_NAME=#{postName},
@@ -76,9 +76,10 @@
 			UPDATE_TIME,
 			DELETE_MARK
 		 FROM ts_post where delete_mark=0
+		 and org_id=#{orgId}
 	</select>
 	<!-- 根据主键查询岗位记录 -->
-	<select id="queryPostById"  resultMap="postResultMap">
+	<select id="queryPostById" parameterType="java.lang.Long" resultMap="postResultMap">
 		select 
 			ID,
 			ORG_ID,

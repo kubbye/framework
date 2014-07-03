@@ -36,7 +36,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public UserEntity queryObjectById(UserEntity user) {
-        return userDao.queryObjectById("user.queryUserById", user);
+        return userDao.queryObjectById("user.queryUserById", user.getUserId());
     }
 
     @Override

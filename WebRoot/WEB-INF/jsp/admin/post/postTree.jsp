@@ -39,33 +39,32 @@
 				}
 			},
 			callback: {
-				//beforeClick: beforeClick,
+				beforeClick: beforeClick,
 				onClick: onClick
 			}
 		};
 
 		var zNodes =[
 			{ id:100, pId:0, name:"集团公司", open:true},        
-			{ id:1, pId:100, name:"总公司", open:true},
-			{ id:11, pId:1, name:"北京分公司",_url:'/framework/admin/post/list.htm?orgId=1'},
-			{ id:12, pId:1, name:"上海分公司",_url:'/framework/admin/post/list.htm?orgId=2'},
-			{ id:111, pId:11, name:"组长",_url:'/framework/admin/post/list.htm?orgId=1'},
-			{ id:112, pId:11, name:"组员",_url:'/framework/admin/post/list.htm?orgId=1'},
-			{ id:121, pId:12, name:"组长",_url:'/framework/admin/post/list.htm?orgId=1'},
-			{ id:122, pId:12, name:"组员",_url:'/framework/admin/post/list.htm?orgId=1'},
+			{ id:11, pId:100, name:"总公司", open:true},
+			{ id:1, pId:11, _orgId:1,name:"北京分公司"},
+			{ id:2, pId:11, _orgId:2,name:"上海分公司"},
+			{ id:111, pId:1,_orgId:1, name:"组长",click:false},
+			{ id:112, pId:111,_orgId:1, name:"组员",click:false},
+			{ id:121, pId:2, _orgId:2,name:"组长",click:false},
+			{ id:122, pId:121, _orgId:2,name:"组员",click:false},
 			
 		];
 		function dblClickExpand(treeId, treeNode) {
 			return treeNode.level > 0;
 		}
 		function beforeClick(treeId, treeNode, clickFlag) {
-			//alert("treeId="+treeId+",treeNode.name="+treeNode.name+",treeNode.click="+treeNode.click);
 			return (treeNode.click != false);
 		}
 		
 		function onClick(event, treeId, treeNode, clickFlag) {
-			//alert("treeNode.url="+treeNode._url+",treeNode.name="+treeNode.name+",treeNode.click="+treeNode.click);
-			$("#post_frame").attr("src",treeNode._url);
+			var _url=contextPath+'/admin/post/list.htm';
+			$("#post_frame").attr("src",_url+"?orgId="+treeNode._orgId);
 			return false;
 		}	
 		function showIconForTree(treeId, treeNode) {

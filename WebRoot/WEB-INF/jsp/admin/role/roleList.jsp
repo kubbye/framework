@@ -16,9 +16,9 @@
     	<table>
     		<tr>
 		    		<td>角色名称：</td>
-    				<td><input id="search_roleName" name="roleName" type="text" value=""/></td>
+    				<td><input id="search_roleName" name="roleName" type="text"  class="textbox"/></td>
 		    		<td>备注：</td>
-    				<td><input id="search_memo" name="memo" type="text" value=""/></td>
+    				<td><input id="search_memo" name="memo" type="text"  class="textbox"/></td>
     			
     			<td><a id="role_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>
