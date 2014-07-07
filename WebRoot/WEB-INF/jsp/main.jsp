@@ -12,6 +12,7 @@
 	<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div>
 	<div data-options="region:'west',split:true,title:'功能菜单'" style="width:150px;padding:10px;">
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('菜单管理');">菜单</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('机构管理');">机构</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('角色管理');">角色</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('用户管理');">用户管理</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('岗位管理');">岗位管理</a><br>
@@ -39,6 +40,9 @@
 		}
 		if('岗位管理'==name){
 			_url=contextPath+'/admin/post/postTree.htm';
+		}
+		if('机构管理'==name){
+			_url=contextPath+'/admin/org/orgTree.htm';
 		}
 		openTab(name,_url);
 	}

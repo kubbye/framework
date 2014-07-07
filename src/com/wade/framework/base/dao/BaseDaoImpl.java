@@ -136,7 +136,9 @@ public class BaseDaoImpl implements IBaseDao {
         return sqlSession.selectOne(sqlId, param);
     }
 
-    
-    
-    
+    @Override
+    public Long getCount(String sqlId, BaseEntity param) {
+        return sqlSession.selectOne(sqlId, param);
+    }
+
 }

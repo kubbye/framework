@@ -11,15 +11,16 @@
 <body class="easyui-layout">
 <div data-options="region:'north',split:false,border:false" style="overflow:hidden;padding:5px;">
     <fieldset>
+    
     <legend>查询条件</legend>
     	<table>
     		<tr>
 		    		<td>上级菜单ID：</td>
-    				<td><input id="search_parentId" name="parentId" type="text" value=""/></td>
+    				<td><input id="search_parentId" name="parentId" type="text"  class="textbox"/></td>
 		    		<td>图标样式：</td>
-    				<td><input id="search_iconCls" name="iconCls" type="text" value=""/></td>
+    				<td><input id="search_iconCls" name="iconCls" type="text"  class="textbox"/></td>
 		    		<td>桌面图标：</td>
-    				<td><input id="search_picUrl" name="picUrl" type="text" value=""/></td>
+    				<td><input id="search_picUrl" name="picUrl" type="text"  class="textbox"/></td>
     			
     			<td><a id="menu_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>

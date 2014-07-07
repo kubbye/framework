@@ -15,7 +15,7 @@
 		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入角色记录 -->
-	<insert id="insertRole">
+	<insert id="insertRole" parameterType="com.wade.framework.admin.entity.RoleEntity" useGeneratedKeys="true" keyProperty="roleId">
 		INSERT INTO ts_role 
 			( 
 			  	ROLE_NAME,
@@ -42,7 +42,7 @@
 			) 
 	</insert>
 	<!-- 更新角色记录 -->
-	<update id="updateRole">
+	<update id="updateRole" parameterType="com.wade.framework.admin.entity.RoleEntity">
 		update ts_role set  
 			ROLE_NAME=#{roleName},
 			MEMO=#{memo},

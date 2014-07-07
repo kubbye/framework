@@ -15,6 +15,12 @@ var dataTable;
 		$("#user_delete").on("click",function(){
 			userDelete();
 		});
+		$("#user_auth_post").on("click",function(){
+			var sel=isUserSelected();
+			if(sel){
+				openWindow(contextPath+"/admin/user/postSelect.htm?userId="+sel.userId,'岗位授权');
+			}
+		});
 	});
 	$(document).ready(function(){
 		initUserDatagrid(contextPath+'/admin/user/getListData.json?orgId='+$("#search_orgId").val());
@@ -102,8 +108,8 @@ var dataTable;
 				  	{field:'userName',title:'用户昵称',resizable:false},
 				  	/*
 				  	{field:'loginId',title:'用户登录号',resizable:false},
-				  	{field:'userType',title:'用户类型',resizable:false,width:'90'},
 				  	*/
+				  	{field:'userType',title:'用户类型',resizable:false,width:'90',formatter:function(data){return 'A'==data?'管理员':'应用用户'}},
 				  	{field:'sex',title:'性别',resizable:false,width:'90',formatter:function(data){return '1'==data?'男':'女'}},
 				  	{field:'defaultRoleName',title:'默认角色名称',resizable:false,width:'90'},
 				  	{field:'avaliable',title:'状态',resizable:false,width:'90',formatter:function(data){return 'Y'==data?'有效':'无效'}},

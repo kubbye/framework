@@ -19,10 +19,26 @@
 	    		<tr>
 	    			<td  align="right">${field.comment}:</td>
 	    			<#if field.nullable?c='true'>
-	    			<td><input class="textbox" type="text" id="${field.name}" name="${field.name}"></input></td>
+	    			<#if field.type='Long' || field.type='Integer'>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="validType:['digit']"></input></td>
+	    				<#elseif field.type='Double'> 
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="validType:['number']"></input></td>
+	    				<#elseif field.type='String'> 
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="validType:['maxLength[${field.length}]']"></input></td>
+	    				<#elseif field.type='Date'> 
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" ></input></td>
+	    				</#if>
 	    			</#if>
 	    			<#if field.nullable?c='false'>
+	    				<#if field.type='Long' || field.type='Integer'>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="required:true,validType:['digit']"></input></td>
+	    				<#elseif field.type='Double'> 
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="required:true,validType:['number']"></input></td>
+	    				<#elseif field.type='String'> 
+	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="required:true,validType:['maxLength[${field.length}]']"></input></td>
+	    				<#elseif field.type='Date'> 
 	    			<td><input class="easyui-validatebox textbox" type="text" id="${field.name}" name="${field.name}" data-options="required:true"></input></td>
+	    				</#if>
 	    			</#if>
 	    		</tr>
 	    		 </#if>

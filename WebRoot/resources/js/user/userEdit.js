@@ -32,3 +32,19 @@ function submitForm_edit(){
 		});
 	}
 }
+/*提交用户岗位*/
+function submitRel(){
+	if($("#userPostForm").form("validate")){
+		$.ajax({
+			url:contextPath+"/admin/user/saveUserPostRel.htm",
+			dataType:"json",
+			data:$("#userPostForm").serialize(),
+			success:function(data){
+				$.INFO(data.message,closeWindow);
+			},
+			error:function(data){
+				$.ERROR(ajaxError+JSON.stringify(data));
+			}
+		});
+	}
+}

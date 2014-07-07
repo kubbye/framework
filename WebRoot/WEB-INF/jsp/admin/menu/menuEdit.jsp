@@ -15,48 +15,48 @@
 	    	<input type="hidden" id="id" name="id">
 	    	<table cellpadding="5">
 	    		<tr>
-	    			<td>上级菜单ID:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="parentId" name="parentId" data-options="required:true"></input></td>
+	    			<td  align="right">上级菜单ID:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="parentId" name="parentId" data-options="required:true,validType:['digit']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>图标样式:</td>
-	    			<td><input class="textbox" type="text" id="iconCls" name="iconCls"></input></td>
+	    			<td  align="right">图标样式:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="iconCls" name="iconCls" data-options="validType:['maxLength[128]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>桌面图标:</td>
-	    			<td><input class="textbox" type="text" id="picUrl" name="picUrl"></input></td>
+	    			<td  align="right">桌面图标:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="picUrl" name="picUrl" data-options="validType:['maxLength[128]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单路径:</td>
-	    			<td><input class="textbox" type="text" id="menuPath" name="menuPath"></input></td>
+	    			<td  align="right">菜单路径:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="menuPath" name="menuPath" data-options="validType:['maxLength[256]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单层级:</td>
-	    			<td><input class="textbox" type="text" id="mlevel" name="mlevel"></input></td>
+	    			<td  align="right">菜单层级:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="mlevel" name="mlevel" data-options="validType:['digit']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单名称:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="mname" name="mname" data-options="required:true"></input></td>
+	    			<td  align="right">菜单名称:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="mname" name="mname" data-options="required:true,validType:['maxLength[128]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单路径:</td>
-	    			<td><input class="textbox" type="text" id="url" name="url"></input></td>
+	    			<td  align="right">菜单路径:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="url" name="url" data-options="validType:['maxLength[256]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单编码:</td>
-	    			<td><input class="textbox" type="text" id="deCode" name="deCode"></input></td>
+	    			<td  align="right">菜单编码:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="deCode" name="deCode" data-options="validType:['maxLength[256]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>菜单排序字段：越小越靠前:</td>
-	    			<td><input class="textbox" type="text" id="menuSort" name="menuSort"></input></td>
+	    			<td  align="right">菜单排序字段：越小越靠前:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="menuSort" name="menuSort" data-options="validType:['digit']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>是否系统菜单：N，否；Y，是:</td>
-	    			<td><input class="textbox" type="text" id="sysMenu" name="sysMenu"></input></td>
+	    			<td  align="right">是否系统菜单：N，否；Y，是:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="sysMenu" name="sysMenu" data-options="validType:['maxLength[8]']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td>Y 可用，N 不可用:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="avaliable" name="avaliable" data-options="required:true"></input></td>
+	    			<td  align="right">Y 可用，N 不可用:</td>
+	    				<td><input class="easyui-validatebox textbox" type="text" id="avaliable" name="avaliable" data-options="required:true,validType:['maxLength[1]']"></input></td>
 	    		</tr>
 	    		
 	    	</table>

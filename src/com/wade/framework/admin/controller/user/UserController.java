@@ -1,15 +1,22 @@
 package com.wade.framework.admin.controller.user;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.gson.Gson;
+import com.wade.framework.admin.entity.PostEntity;
 import com.wade.framework.admin.entity.UserEntity;
+import com.wade.framework.admin.entity.UserPostEntity;
+import com.wade.framework.admin.service.post.IPostService;
 import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.AjaxSuccessInfo;
 import com.wade.framework.base.PageInfo;
@@ -30,6 +37,17 @@ public class UserController extends BaseController {
      */
     @Autowired
     IUserService userService;
+    
+    /**
+     * 注入岗位service
+     */
+    @Autowired 
+    IPostService postService;
+    
+    /**
+     * 日志对象
+     */
+    private Logger log=Logger.getLogger(UserController.class);
     
     /**
      * <p>Description: 跳转用户新增页面</p>
@@ -68,6 +86,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/saveUser")
     public void saveUser(UserEntity user,HttpServletResponse response){
+        log.info("用户"+getSessionUser().getUserName()+"新增了用户:"+(new Gson()).toJson(user));
     	user.setCreateUser(getSessionUser().getUserId());
     	Date date = new Date();
         user.setCreateTime(date);
@@ -95,6 +114,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/editUser")
     public void editUser(UserEntity user, HttpServletResponse response){
+        log.info("用户"+getSessionUser().getUserName()+"修改了用户:"+(new Gson()).toJson(user));
     	user.setUpdateUser(getSessionUser().getUserId());
         user.setUpdateTime(new Date());
         userService.update(user);
@@ -116,6 +136,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("deleteUser")
     public void deleteUser(UserEntity user, HttpServletResponse response){
+        log.info("用户"+getSessionUser().getUserName()+"删除了用户:"+(new Gson()).toJson(user));
     	user.setUpdateUser(getSessionUser().getUserId());
         user.setUpdateTime(new Date());
         userService.delete(user);
@@ -141,5 +162,36 @@ public class UserController extends BaseController {
     @RequestMapping("userTree")
     public String tree(){
         return "admin/user/userTree";
+    }
+    
+    /**
+     * 功能描述: 岗位选择<br>
+     * 〈功能详细描述〉
+     *
+     * @return
+     */
+    @RequestMapping("/postSelect")
+    public String postSelect(UserEntity user, Model model){
+        model.addAttribute("userId",user.getUserId());
+        List<PostEntity> list =postService.getPostsByUserId(user.getUserId());
+        if(null!=list && !list.isEmpty()){
+            model.addAttribute("post",list.get(0));
+        }else{
+            model.addAttribute("post",null);
+        }
+        return "admin/user/postSelect"; 
+    }
+    
+    /**
+     * 功能描述: 保存用户岗位关系信息<br>
+     * 〈功能详细描述〉
+     *
+     * @param userPost
+     * @param response
+     */
+    @RequestMapping("/saveUserPostRel")
+    public void saveUserPost(UserPostEntity userPost, HttpServletResponse response){
+        userService.saveUserPost(userPost);
+        super.ajaxJson(response, AjaxSuccessInfo.success());
     }
 }

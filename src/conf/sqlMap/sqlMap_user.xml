@@ -23,7 +23,7 @@
 		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入用户记录 -->
-	<insert id="insertUser">
+	<insert id="insertUser" parameterType="com.wade.framework.admin.entity.UserEntity" useGeneratedKeys="true" keyProperty="userId" >
 		INSERT INTO ts_user 
 			( 
 			  	ORG_ID,
@@ -66,7 +66,7 @@
 			) 
 	</insert>
 	<!-- 更新用户记录 -->
-	<update id="updateUser">
+	<update id="updateUser" parameterType="com.wade.framework.admin.entity.UserEntity">
 		update ts_user set  
 			USER_NAME=#{userName},
 			SEX=#{sex},
@@ -128,4 +128,12 @@
 	<delete id="deleteUser"  parameterType="com.wade.framework.admin.entity.UserEntity">
 		update ts_user set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where USER_ID=#{userId}
 	</delete>
+	<!-- 插入用户岗位信息 -->
+	<insert id="saveUserPost" parameterType="com.wade.framework.admin.entity.UserPostEntity">
+		insert into tr_user_post(USER_ID,POST_ID)values(#{userId},#{postId})
+	</insert>
+	<!-- 删除用户岗位信息 -->
+	<insert id="deleteUserPost" parameterType="com.wade.framework.admin.entity.UserPostEntity">
+		delete from tr_user_post where user_id=#{userId}
+	</insert>
 </mapper>

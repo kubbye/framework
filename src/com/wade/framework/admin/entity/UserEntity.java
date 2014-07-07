@@ -1,6 +1,5 @@
 package com.wade.framework.admin.entity;
 
-import java.util.Date;
 import com.wade.framework.base.entity.BaseEntity;
 
 /**
@@ -76,6 +75,10 @@ public class UserEntity extends BaseEntity {
      */
     private String avaliable;
     
+    /**
+     * 员工
+     */
+    private EmplyEntity emply = new EmplyEntity();
     
     public Long getUserId() {
         return userId;
@@ -180,6 +183,13 @@ public class UserEntity extends BaseEntity {
     public void setAvaliable(String avaliable) {
         this.avaliable = avaliable;
     }
-    
+
+    public EmplyEntity getEmply() {
+        return emply;
+    }
+
+    public void setEmply(EmplyEntity emply) {
+        this.emply = emply;
+    }
     
 }

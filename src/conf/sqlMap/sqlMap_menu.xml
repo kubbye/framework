@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="menu">
 	<!-- 菜单resultMap -->
-	<resultMap id="menuResultMap" type="com.wade.framework.admin.entity.MenuEntity" >
+	<resultMap id="menuResultMap" type="com.wade.framework.admin.entity.MenuEntity">
 		<result property="id" column="ID"></result>
 		<result property="parentId" column="PARENT_ID"></result>
 		<result property="iconCls" column="ICON_CLS"></result>
@@ -22,7 +22,7 @@
 		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入菜单记录 -->
-	<insert id="insertMenu">
+	<insert id="insertMenu" parameterType="com.wade.framework.admin.entity.MenuEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ts_menu 
 			( 
 			  	PARENT_ID,
@@ -63,7 +63,7 @@
 			) 
 	</insert>
 	<!-- 更新菜单记录 -->
-	<update id="updateMenu">
+	<update id="updateMenu"  parameterType="com.wade.framework.admin.entity.MenuEntity">
 		update ts_menu set  
 			PARENT_ID=#{parentId},
 			ICON_CLS=#{iconCls},
@@ -80,8 +80,7 @@
 			update_time=#{updateTime}
 		 where ID=#{id}
 	</update>
-	<!-- 分页查询记录 -->
-	<select id="queryMenusByPage" parameterType="com.wade.framework.admin.entity.MenuEntity" resultMap="menuResultMap">
+	<sql id="queryMenusSql">
 		SELECT 
 			ID,
 			PARENT_ID,
@@ -101,9 +100,13 @@
 			UPDATE_TIME,
 			DELETE_MARK
 		 FROM ts_menu where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryMenusByPage" parameterType="com.wade.framework.admin.entity.MenuEntity" resultMap="menuResultMap">
+		<include refid="queryMenusSql"/>
 	</select>
 	<!-- 根据主键查询菜单记录 -->
-	<select id="queryMenuById"  resultMap="menuResultMap">
+	<select id="queryMenuById" parameterType="java.lang.Long" resultMap="menuResultMap">
 		select 
 			ID,
 			PARENT_ID,

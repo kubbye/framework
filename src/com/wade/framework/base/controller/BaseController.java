@@ -43,8 +43,6 @@ public class BaseController {
      * @param obj
      */
     public void ajaxJson(HttpServletResponse response,Object obj){
-        Gson gson = new Gson();
-       // String json=gson.toJson(obj,);
         GsonBuilder gb=new GsonBuilder();
         gb.setDateFormat("yyyy-MM-dd");
         String json = gb.create().toJson(obj);
@@ -52,6 +50,32 @@ public class BaseController {
         ajax(response, json, "text/html");
     }
     
+    /**
+     * 功能描述: ajax输出json数组<br>
+     * 〈功能详细描述〉
+     *
+     * @param response
+     * @param obj
+     */
+    public void ajaxJsonTree(HttpServletResponse response,Object obj){
+         GsonBuilder gb=new GsonBuilder();
+         gb.setDateFormat("yyyy-MM-dd");
+         String json=gb.create().toJsonTree(obj).getAsJsonArray().toString();
+         log.info("json:"+json);
+         ajax(response, json, "text/html");
+    }
+    
+    /**
+     * 功能描述: ajax输出字符窜消息<br>
+     * 〈功能详细描述〉
+     *
+     * @param response
+     * @param message
+     */
+    public void ajaxMessage(HttpServletResponse response,String message){
+        log.info("message:" + message);
+        ajax(response, message, "text/html");
+    }
     /**
      * <p>Description: 得到当前的session用户对象</p>
      * @return
@@ -61,6 +85,7 @@ public class BaseController {
         HttpServletRequest request = ((ServletRequestAttributes)ra).getRequest();  
         SessionUserInfo user = new SessionUserInfo();//(SessionUserInfo)request.getSession().getAttribute("");
         user.setUserId(1L);
+        user.setUserName("admin");
         return user;
     }
 }

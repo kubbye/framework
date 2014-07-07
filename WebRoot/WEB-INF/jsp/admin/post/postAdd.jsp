@@ -16,7 +16,7 @@ ul.ztree {height:100px;}
 	    <form id="postForm" method="post">
 	    	<input type="hidden" id="id" name="id">
 	    	<input type="hidden" id="orgId" name="orgId"></input>
-	    	<input type="hidden" id="parentId" name="parentId"></input>
+	    	<input type="hidden" id="parentId" name="parentId" value="0"></input>
 	    	<input type="hidden" id="postPath" name="postPath"></input>
 	    	<table cellpadding="5">
 	    		<tr>
@@ -29,7 +29,7 @@ ul.ztree {height:100px;}
 	    		</tr>
 	    		<tr>
 	    			<td>上级岗位:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="parentName" readonly="readonly" data-options="required:true"></input>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="parentName" readonly="readonly" ></input>
 	    			<a  id="menuBtn" href="#" onclick="showMenu();return false;">选择</a>
 	    			</td>
 	    		</tr>

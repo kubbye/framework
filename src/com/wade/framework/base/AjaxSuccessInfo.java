@@ -3,6 +3,12 @@ package com.wade.framework.base;
 import java.io.Serializable;
 
 public class AjaxSuccessInfo implements Serializable {
+    
+    /**
+     * message key
+     */
+    public static final String MESSAGE_KEY = "message";
+    
     /**
      * <p>Field serialVersionUID: serialVersionUID</p>
      */

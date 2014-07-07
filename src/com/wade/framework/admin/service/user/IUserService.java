@@ -3,6 +3,7 @@ package com.wade.framework.admin.service.user;
 import java.util.List;
 
 import com.wade.framework.admin.entity.UserEntity;
+import com.wade.framework.admin.entity.UserPostEntity;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 
@@ -55,4 +56,13 @@ public interface IUserService {
      * @return 分页记录
      */
     PaginationResult<UserEntity> queryListByPage(UserEntity param, PageInfo pageinfo);
+    
+    /**
+     * 功能描述: 保存用户岗位信息<br>
+     * 〈功能详细描述〉
+     *
+     * @param userPost
+     * @return
+     */
+    int saveUserPost(UserPostEntity userPost);
 }

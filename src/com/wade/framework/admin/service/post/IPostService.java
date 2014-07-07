@@ -5,6 +5,7 @@ import java.util.List;
 import com.wade.framework.admin.entity.PostEntity;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.entity.TreeEntity;
 
 /**
  * <p>ClassName: IPostService</p>
@@ -55,4 +56,22 @@ public interface IPostService {
      * @return 分页记录
      */
     PaginationResult<PostEntity> queryListByPage(PostEntity param, PageInfo pageinfo);
+    
+    /**
+     * 功能描述: 初始化岗位树<br>
+     * 〈功能详细描述〉
+     *
+     * @param orgId
+     * @return
+     */
+    List<TreeEntity> initPostTree(Long orgId);
+    
+    /**
+     * 功能描述: 根据用户id查询用户的岗位<br>
+     * 〈功能详细描述〉
+     *
+     * @param userId
+     * @return
+     */
+    List<PostEntity> getPostsByUserId(Long userId);
 }

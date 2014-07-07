@@ -10,8 +10,10 @@
 	<mappers>
 		<mapper resource="conf/sqlMap/sqlMap_base.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_user.xml" />
+		<mapper resource="conf/sqlMap/sqlMap_emply.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_menu.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_role.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_post.xml" />
+		<mapper resource="conf/sqlMap/sqlMap_org.xml" />
 	</mappers>
 </configuration>

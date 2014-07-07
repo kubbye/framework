@@ -16,47 +16,47 @@
 	    	<table cellpadding="5">
 				  	<tr>
 		    			<td>上级菜单ID:</td>
-		    			<td><input class="textbox" type="text" id="parentId" name="parentId" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="parentId" name="parentId" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>图标样式:</td>
-		    			<td><input class="textbox" type="text" id="iconCls" name="iconCls" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="iconCls" name="iconCls" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>桌面图标:</td>
-		    			<td><input class="textbox" type="text" id="picUrl" name="picUrl" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="picUrl" name="picUrl" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单路径:</td>
-		    			<td><input class="textbox" type="text" id="menuPath" name="menuPath" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="menuPath" name="menuPath" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单层级:</td>
-		    			<td><input class="textbox" type="text" id="mlevel" name="mlevel" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="mlevel" name="mlevel" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单名称:</td>
-		    			<td><input class="textbox" type="text" id="mname" name="mname" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="mname" name="mname" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单路径:</td>
-		    			<td><input class="textbox" type="text" id="url" name="url" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="url" name="url" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单编码:</td>
-		    			<td><input class="textbox" type="text" id="deCode" name="deCode" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="deCode" name="deCode" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>菜单排序字段：越小越靠前:</td>
-		    			<td><input class="textbox" type="text" id="menuSort" name="menuSort" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="menuSort" name="menuSort" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>是否系统菜单：N，否；Y，是:</td>
-		    			<td><input class="textbox" type="text" id="sysMenu" name="sysMenu" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="sysMenu" name="sysMenu" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>Y 可用，N 不可用:</td>
-		    			<td><input class="textbox" type="text" id="avaliable" name="avaliable" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="avaliable" name="avaliable" disabled></input></td>
 		    		</tr>
 	    	</table>
 	    </form>

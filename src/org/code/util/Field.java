@@ -30,6 +30,11 @@ public class Field {
     private boolean priKey = Boolean.FALSE;
     
     /**
+     * 最大字段长度
+     */
+    private int length;
+    
+    /**
      * <p>Field comment: 字段备注</p>
      */
     private String comment;
@@ -80,6 +85,12 @@ public class Field {
     }
     public void setComment(String comment) {
         this.comment = comment;
+    }
+    public int getLength() {
+        return length;
+    }
+    public void setLength(int length) {
+        this.length = length;
     }
     
     

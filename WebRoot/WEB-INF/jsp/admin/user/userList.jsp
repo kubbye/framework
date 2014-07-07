@@ -40,7 +40,8 @@
 	  <a href="javascript:void(-1);" id="user_edit"  class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
 	  <a href="javascript:void(-1);" id="user_detail" class="easyui-linkbutton" data-options="iconCls:'icon-detail',plain:true">明细</a>
 	  <a href="javascript:void(-1);" id="user_delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a> 
-	  <a href="javascript:void(-1);" id="user_auth" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">授权</a>
+	  <a href="javascript:void(-1);" id="user_auth_post" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">岗位授权</a>
+	  <a href="javascript:void(-1);" id="user_auth_role" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">角色授权</a>
 	</div>
 </body>
 </html>

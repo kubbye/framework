@@ -51,7 +51,7 @@ public class MysqlUtil {
             Class.forName(driveName);
             conn=DriverManager.getConnection(url,userName,pwd);
             pst = conn
-                    .prepareStatement("SELECT column_name,data_type,column_comment,is_nullable,column_key FROM information_schema.columns WHERE table_name=?  AND TABLE_SCHEMA=? ORDER BY ordinal_position");
+                    .prepareStatement("SELECT column_name,data_type,character_maximum_length,column_comment,is_nullable,column_key FROM information_schema.columns WHERE table_name=?  AND TABLE_SCHEMA=? ORDER BY ordinal_position");
             pst.setString(1, tableName);
             pst.setString(2, schema);
             rs = pst.executeQuery();
@@ -63,6 +63,9 @@ public class MysqlUtil {
                 field.setType(getDatatype(rs.getString("data_type").toLowerCase()));
                 field.setUpperName(StringUtil.upperFirst(field.getName()));
                 field.setComment(rs.getString("column_comment"));
+                if(null != rs.getString("character_maximum_length") && !"".equals(rs.getString("character_maximum_length"))){
+                    field.setLength(Integer.valueOf(rs.getString("character_maximum_length")));
+                }
                 if(rs.getString("is_nullable").toUpperCase().equals("NO")){
                     field.setNullable(false);
                 }
@@ -118,11 +121,29 @@ public class MysqlUtil {
         if("bigint".equalsIgnoreCase(jdbctype)){
             datatype = "Long";
         }
+        if("double".equalsIgnoreCase(jdbctype) || "float".equalsIgnoreCase(jdbctype)){
+            datatype = "Double";
+        }
         if("datetime".equalsIgnoreCase(jdbctype) || "timestamp".equalsIgnoreCase(jdbctype)){
             datatype = "Date";
         }
         
         return datatype;
+    }
+    
+    /*数据类型*/
+    public static String getFullType(String type){
+        String fullType="java.lang.String";
+        if ("String".equals(type)) {
+            fullType="java.lang.String";
+        } else if ("Long".equals(type)) {
+            fullType="java.lang.Long";
+        } else if ("Integer".equals(type)) {
+            fullType="java.lang.Integer";
+        } else if ("Double".equals(type)) {
+            fullType="java.lang.Double";
+        }
+        return fullType;
     }
     public static void main(String[] args) {
         MysqlUtil.getInstance().getFieldList();

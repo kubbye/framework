@@ -152,6 +152,7 @@ public class CodeUtil {
         implData.put("EntityClass", entityPackagePath + "." + upperKey + "Entity");
         implData.put("daoInterFace", daoPackagePath + ".I" + upperKey + "Dao");
         implData.put("serviceInterFace", servicePackagePath + ".I" + upperKey + "Service");
+        implData.put("primaryKey", StringUtil.upperFirst(primaryKey.getName()));
         implData.put("author", author);
         implData.put("createDate", createDate);
 
@@ -216,6 +217,7 @@ public class CodeUtil {
         data.put("createDate", createDate);
         data.put("EntityClass", entityPackagePath + "." + upperKey + "Entity");
         data.put("primaryKey", primaryKey.getName());
+        data.put("primaryKeyType", MysqlUtil.getFullType(primaryKey.getType()));
         data.put("primaryColumn", primaryKey.getColumnName());
         data.put("tableName", PropertyUtil.getValue("table.name"));
         data.put("fieldList", fieldList);

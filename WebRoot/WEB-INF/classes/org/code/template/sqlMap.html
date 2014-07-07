@@ -2,13 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="${key}">
 	<!-- ${ZhKey}resultMap -->
-	<resultMap id="${key}ResultMap" type="${EntityClass}" >
+	<resultMap id="${key}ResultMap" type="${EntityClass}">
 	<#list fieldList as field>
 		<result property="${field.name}" column="${field.columnName}"></result>
 	</#list> 
 	</resultMap>
 	<!-- 插入${ZhKey}记录 -->
-	<insert id="insert${UpperKey}">
+	<insert id="insert${UpperKey}" parameterType="${EntityClass}" useGeneratedKeys="true" keyProperty="${primaryKey}">
 		INSERT INTO ${tableName} 
 			( 
 			<#list fieldList as field>
@@ -27,7 +27,7 @@
 			) 
 	</insert>
 	<!-- 更新${ZhKey}记录 -->
-	<update id="update${UpperKey}">
+	<update id="update${UpperKey}"  parameterType="${EntityClass}">
 		update ${tableName} set  
 		<#list noCommonFieldList as field>
 			<#if field.priKey?c ='false'>
@@ -38,16 +38,19 @@
 			update_time=${propertyPrefix}updateTime${propertyPostfix}
 		 where ${primaryColumn}=${propertyPrefix}${primaryKey}${propertyPostfix}
 	</update>
-	<!-- 分页查询记录 -->
-	<select id="query${UpperKey}sByPage" parameterType="${EntityClass}" resultMap="${key}ResultMap">
+	<sql id="query${UpperKey}sSql">
 		SELECT 
 		<#list fieldList as field>
 			${field.columnName}<#if field_has_next>,</#if>
 		</#list> 
 		 FROM ${tableName} where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="query${UpperKey}sByPage" parameterType="${EntityClass}" resultMap="${key}ResultMap">
+		<include refid="query${UpperKey}sSql"/>
 	</select>
 	<!-- 根据主键查询${ZhKey}记录 -->
-	<select id="query${UpperKey}ById" parameterType="java.lang.String" resultMap="${key}ResultMap">
+	<select id="query${UpperKey}ById" parameterType="${primaryKeyType}" resultMap="${key}ResultMap">
 		select 
 		<#list fieldList as field>
 			${field.columnName}<#if field_has_next>,</#if>

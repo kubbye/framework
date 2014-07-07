@@ -13,15 +13,15 @@
 		<div style="padding:10px 60px 20px 60px">
 	    <form id="roleForm" method="post">
 	    	<input type="hidden" id="roleId" name="roleId">
-	    	<input class="textbox" type="hidden" id="orgId" name="orgId" readonly="readonly"></input>
+	    	<input class="textbox" type="hidden" id="orgId" name="orgId" disabled></input>
 	    	<table cellpadding="5">
 				  	<tr>
 		    			<td>角色名称:</td>
-		    			<td><input class="textbox" type="text" id="roleName" name="roleName" readonly="readonly"></input></td>
+		    			<td><input class="textbox" type="text" id="roleName" name="roleName" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>备注:</td>
-		    			<td><textarea id="memo" name="memo" rows="3" cols="18">
+		    			<td><textarea id="memo" name="memo" rows="3" cols="18" disabled>
 	    			</textarea></td>
 		    		</tr>
 				  	<tr>

@@ -18,7 +18,7 @@
 		<association property="parentPost"  column="PARENT_ID" select="queryPostById"/>
 	</resultMap>
 	<!-- 插入岗位记录 -->
-	<insert id="insertPost">
+	<insert id="insertPost" parameterType="com.wade.framework.admin.entity.PostEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ts_post 
 			( 
 			  	ORG_ID,
@@ -49,7 +49,7 @@
 			) 
 	</insert>
 	<!-- 更新岗位记录 -->
-	<update id="updatePost">
+	<update id="updatePost" parameterType="com.wade.framework.admin.entity.PostEntity">
 		update ts_post set  
 			PARENT_ID=#{parentId},
 			POST_PATH=#{postPath},
@@ -95,8 +95,38 @@
 			DELETE_MARK
 		from ts_post where ID=#{id}
 	</select>
+	<!-- 根据主键查询岗位记录 -->
+	<select id="queryPostsByUserId" parameterType="java.lang.Long" resultMap="postResultMap">
+		SELECT 
+			b.ID,
+			b.ORG_ID,
+			b.PARENT_ID,
+			b.POST_PATH,
+			b.POST_NAME,
+			b.POST_DESC,
+			b.AVALIABLE,
+			b.CREATE_BY,
+			b.UPDATE_BY,
+			b.CREATE_TIME,
+			b.UPDATE_TIME,
+			b.DELETE_MARK
+		FROM tr_user_post a, ts_post b
+		WHERE a.POST_ID=b.ID AND a.user_id=#{userId}
+	</select>
 	<!-- 删除岗位记录 -->
 	<delete id="deletePost"  parameterType="com.wade.framework.admin.entity.PostEntity">
 		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
 	</delete>
+	<!-- 查询岗位树树 -->
+	<select id="queryPostTree" parameterType="com.wade.framework.admin.entity.PostEntity" resultType="com.wade.framework.base.entity.TreeEntity">
+		SELECT 
+			ID id,
+			PARENT_ID parentId,
+			POST_PATH path,
+			POST_NAME name
+		 FROM ts_post where delete_mark=0 and AVALIABLE='Y'
+		 <if test="orgId!=null">
+		 	and org_id=#{orgId} 
+		 </if>
+	</select>
 </mapper>

@@ -10,7 +10,7 @@ import com.wade.framework.base.dao.BaseDaoImpl;
  * <p>ClassName: MenuDaoImpl</p>
  * <p>Description: 菜单dao实现类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-26</p>
+ * <p>Date: 2014-07-05</p>
  */
 @Repository("menuDao")
 public class MenuDaoImpl extends BaseDaoImpl implements IMenuDao {

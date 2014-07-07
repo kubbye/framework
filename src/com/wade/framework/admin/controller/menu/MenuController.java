@@ -19,7 +19,7 @@ import com.wade.framework.base.controller.BaseController;
  * <p>ClassName: MenuController</p>
  * <p>Description: 菜单Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-06-26</p>
+ * <p>Date: 2014-07-05</p>
  */
 @Controller
 @RequestMapping("/admin/menu")
@@ -82,6 +82,12 @@ public class MenuController extends BaseController {
         model.addAttribute("id",menu.getId());
         return "admin/menu/menuEdit";
     }
+    
+   /**
+     * <p>Description: 保存菜单修改记录</p>
+     * @param menu 菜单对象
+     * @param response
+     */
     @RequestMapping("/editMenu")
     public void editMenu(MenuEntity menu, HttpServletResponse response){
     	menu.setUpdateUser(getSessionUser().getUserId());

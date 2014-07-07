@@ -72,4 +72,14 @@ public interface IBaseDao {
      * @return
      */
     <T> PaginationResult<T> queryListByPage(String sqlId, String countId, BaseEntity param, PageInfo pageinfo); 
+    
+    /**
+     * 功能描述: 得到记录数量<br>
+     * 〈功能详细描述〉
+     *
+     * @param sqlId
+     * @param param
+     * @return
+     */
+    Long getCount(String sqlId, BaseEntity param);
 }

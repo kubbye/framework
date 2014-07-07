@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="emply">
+	<!-- 员工resultMap -->
+	<resultMap id="emplyResultMap" type="com.wade.framework.admin.entity.EmplyEntity">
+		<result property="empId" column="EMP_ID"></result>
+		<result property="userId" column="USER_ID"></result>
+		<result property="empName" column="EMP_NAME"></result>
+		<result property="certType" column="CERT_TYPE"></result>
+		<result property="certNo" column="CERT_NO"></result>
+		<result property="nativePlace" column="NATIVE_PLACE"></result>
+		<result property="nativeLocation" column="NATIVE_LOCATION"></result>
+		<result property="address" column="ADDRESS"></result>
+		<result property="sex" column="SEX"></result>
+		<result property="zipCode" column="ZIP_CODE"></result>
+		<result property="position" column="POSITION"></result>
+		<result property="department" column="DEPARTMENT"></result>
+		<result property="mobile" column="MOBILE"></result>
+		<result property="mobile2" column="MOBILE2"></result>
+		<result property="homeTel" column="HOME_TEL"></result>
+		<result property="officeTel" column="OFFICE_TEL"></result>
+		<result property="compTel" column="COMP_TEL"></result>
+		<result property="linkTel" column="LINK_TEL"></result>
+		<result property="homeAddress" column="HOME_ADDRESS"></result>
+		<result property="email" column="EMAIL"></result>
+		<result property="weichat" column="WEICHAT"></result>
+		<result property="msn" column="MSN"></result>
+		<result property="qq" column="QQ"></result>
+		<result property="weiblog" column="WEIBLOG"></result>
+		<result property="birthday" column="BIRTHDAY"></result>
+		<result property="bloodType" column="BLOOD_TYPE"></result>
+		<result property="eduLevel" column="EDU_LEVEL"></result>
+		<result property="assumeDate" column="ASSUME_DATE"></result>
+		<result property="leaveDate" column="LEAVE_DATE"></result>
+		<result property="political" column="POLITICAL"></result>
+		<result property="nation" column="NATION"></result>
+		<result property="techLevel" column="TECH_LEVEL"></result>
+		<result property="computer" column="COMPUTER"></result>
+		<result property="fullJob" column="FULL_JOB"></result>
+		<result property="driverLic" column="DRIVER_LIC"></result>
+		<result property="other" column="OTHER"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
+	</resultMap>
+	<!-- 插入员工记录 -->
+	<insert id="insertEmply" parameterType="com.wade.framework.admin.entity.EmplyEntity" useGeneratedKeys="true" keyProperty="empId">
+		INSERT INTO ts_emply 
+			( 
+			  	USER_ID,
+			  	EMP_NAME,
+			  	CERT_TYPE,
+			  	CERT_NO,
+			  	NATIVE_PLACE,
+			  	NATIVE_LOCATION,
+			  	ADDRESS,
+			  	SEX,
+			  	ZIP_CODE,
+			  	POSITION,
+			  	DEPARTMENT,
+			  	MOBILE,
+			  	MOBILE2,
+			  	HOME_TEL,
+			  	OFFICE_TEL,
+			  	COMP_TEL,
+			  	LINK_TEL,
+			  	HOME_ADDRESS,
+			  	EMAIL,
+			  	WEICHAT,
+			  	MSN,
+			  	QQ,
+			  	WEIBLOG,
+			  	BIRTHDAY,
+			  	BLOOD_TYPE,
+			  	EDU_LEVEL,
+			  	ASSUME_DATE,
+			  	LEAVE_DATE,
+			  	POLITICAL,
+			  	NATION,
+			  	TECH_LEVEL,
+			  	COMPUTER,
+			  	FULL_JOB,
+			  	DRIVER_LIC,
+			  	OTHER,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
+			)
+			VALUES
+			(
+			  	#{userId},
+			  	#{empName},
+			  	#{certType},
+			  	#{certNo},
+			  	#{nativePlace},
+			  	#{nativeLocation},
+			  	#{address},
+			  	#{sex},
+			  	#{zipCode},
+			  	#{position},
+			  	#{department},
+			  	#{mobile},
+			  	#{mobile2},
+			  	#{homeTel},
+			  	#{officeTel},
+			  	#{compTel},
+			  	#{linkTel},
+			  	#{homeAddress},
+			  	#{email},
+			  	#{weichat},
+			  	#{msn},
+			  	#{qq},
+			  	#{weiblog},
+			  	#{birthday},
+			  	#{bloodType},
+			  	#{eduLevel},
+			  	#{assumeDate},
+			  	#{leaveDate},
+			  	#{political},
+			  	#{nation},
+			  	#{techLevel},
+			  	#{computer},
+			  	#{fullJob},
+			  	#{driverLic},
+			  	#{other},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
+			) 
+	</insert>
+	<!-- 更新员工记录 -->
+	<update id="updateEmply"  parameterType="com.wade.framework.admin.entity.EmplyEntity">
+		update ts_emply set  
+			USER_ID=#{userId},
+			EMP_NAME=#{empName},
+			CERT_TYPE=#{certType},
+			CERT_NO=#{certNo},
+			NATIVE_PLACE=#{nativePlace},
+			NATIVE_LOCATION=#{nativeLocation},
+			ADDRESS=#{address},
+			SEX=#{sex},
+			ZIP_CODE=#{zipCode},
+			POSITION=#{position},
+			DEPARTMENT=#{department},
+			MOBILE=#{mobile},
+			MOBILE2=#{mobile2},
+			HOME_TEL=#{homeTel},
+			OFFICE_TEL=#{officeTel},
+			COMP_TEL=#{compTel},
+			LINK_TEL=#{linkTel},
+			HOME_ADDRESS=#{homeAddress},
+			EMAIL=#{email},
+			WEICHAT=#{weichat},
+			MSN=#{msn},
+			QQ=#{qq},
+			WEIBLOG=#{weiblog},
+			BIRTHDAY=#{birthday},
+			BLOOD_TYPE=#{bloodType},
+			EDU_LEVEL=#{eduLevel},
+			ASSUME_DATE=#{assumeDate},
+			LEAVE_DATE=#{leaveDate},
+			POLITICAL=#{political},
+			NATION=#{nation},
+			TECH_LEVEL=#{techLevel},
+			COMPUTER=#{computer},
+			FULL_JOB=#{fullJob},
+			DRIVER_LIC=#{driverLic},
+			OTHER=#{other},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where EMP_ID=#{empId}
+	</update>
+	
+	<!-- 根据主键查询员工记录 -->
+	<select id="queryEmplyByUserId" parameterType="java.lang.Long" resultMap="emplyResultMap">
+		select 
+			EMP_ID,
+			USER_ID,
+			EMP_NAME,
+			CERT_TYPE,
+			CERT_NO,
+			NATIVE_PLACE,
+			NATIVE_LOCATION,
+			ADDRESS,
+			SEX,
+			ZIP_CODE,
+			POSITION,
+			DEPARTMENT,
+			MOBILE,
+			MOBILE2,
+			HOME_TEL,
+			OFFICE_TEL,
+			COMP_TEL,
+			LINK_TEL,
+			HOME_ADDRESS,
+			EMAIL,
+			WEICHAT,
+			MSN,
+			QQ,
+			WEIBLOG,
+			BIRTHDAY,
+			BLOOD_TYPE,
+			EDU_LEVEL,
+			ASSUME_DATE,
+			LEAVE_DATE,
+			POLITICAL,
+			NATION,
+			TECH_LEVEL,
+			COMPUTER,
+			FULL_JOB,
+			DRIVER_LIC,
+			OTHER,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_emply where USER_ID=#{userId}
+	</select>
+	<!-- 删除员工记录 -->
+	<delete id="deleteEmply"  parameterType="com.wade.framework.admin.entity.EmplyEntity">
+		update ts_emply set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where EMP_ID=#{empId}
+	</delete>
+</mapper>
