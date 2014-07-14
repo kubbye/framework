@@ -10,7 +10,7 @@ import com.wade.framework.base.PaginationResult;
  * <p>ClassName: IMenuService</p>
  * <p>Description: 菜单Service接口</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-07-05</p>
+ * <p>Date: 2014-07-14</p>
  */
 public interface IMenuService {
     /**
@@ -39,7 +39,7 @@ public interface IMenuService {
      * @param menu 菜单对象
      * @return 菜单对象
      */
-    MenuEntity queryObjectById(MenuEntity menu);
+    MenuEntity queryObjectById(Long id);
     
     /**
      * <p>Description: 查询菜单记录列表</p>

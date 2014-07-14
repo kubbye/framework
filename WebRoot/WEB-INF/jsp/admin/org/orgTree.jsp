@@ -76,6 +76,12 @@
 			node.name = name;
 			zTree.updateNode(node);
 		}
+		/*是否父节点*/
+		function isParent(id){
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
+			var node = zTree.getNodeByParam("id", id, null);
+			return node.isParent;
+		}
 		//-->
 	</SCRIPT>
 </body>

@@ -17,9 +17,14 @@
     		<tr>
 		    		<td>角色名称：</td>
     				<td><input id="search_roleName" name="roleName" type="text"  class="textbox"/></td>
-		    		<td>备注：</td>
-    				<td><input id="search_memo" name="memo" type="text"  class="textbox"/></td>
-    			
+		    		<td>状态：</td>
+    				<td>
+						<select id="search_avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">--全部--</option>
+		    				<option value="Y">有效</option>
+		    				<option value="N">无效</option>
+		    			</select>
+					</td>
     			<td><a id="role_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>
     	</table>

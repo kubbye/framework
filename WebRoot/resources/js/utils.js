@@ -15,6 +15,13 @@ jQuery.extend({
 	WARNING:function(msg,fn){
 		$.messager.alert('提示信息',msg,'warning',fn);
 	},
+	CONFIRM:function(title,msg,fn){
+		 $.messager.confirm(title, msg, function(r){
+             if (r){
+            	 fn();
+             }
+         });
+	},
 	selected:function(tableid){
 		var sel=$("#"+tableid).datagrid('getSelected');
 		return sel;

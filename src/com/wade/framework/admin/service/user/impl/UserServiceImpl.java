@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.wade.framework.admin.dao.user.IUserDao;
 import com.wade.framework.admin.entity.EmplyEntity;
-import com.wade.framework.admin.entity.PostEntity;
+import com.wade.framework.admin.entity.RoleEntity;
 import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.entity.UserPostEntity;
+import com.wade.framework.admin.entity.UserRoleEntity;
 import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
@@ -74,8 +75,29 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public int saveUserPost(UserPostEntity userPost) {
-        userDao.delete("user.deleteUserPost", userPost);
+        userDao.delete("user.deleteUserPost", userPost.getUserId());
         return userDao.insert("user.saveUserPost", userPost);
     }
+
+    @Override
+    public void saveUserRole(List<UserRoleEntity> list, Long userId) {
+        userDao.delete("user.deleteUserRole", userId);
+        for(UserRoleEntity userRole : list){
+            userDao.insert("user.saveUserRole", userRole);
+        }
+    }
+
+    @Override
+    public List<RoleEntity> getRoleListByUserId(Long userId) {
+        return userDao.queryList("role.queryRoleByUserId", userId);
+    }
+
+    @Override
+    public int updateOrg(UserEntity user) {
+        userDao.delete("user.deleteUserRole", user.getUserId());
+        userDao.delete("user.deleteUserPost", user.getUserId());
+        return userDao.update("user.updateOrg", user);
+    }
+    
     
 }

@@ -98,8 +98,31 @@
 			CREATE_TIME,
 			UPDATE_TIME,
 			DELETE_MARK
-		 FROM ts_user where delete_mark=0
-		 and org_id=#{orgId}
+		 FROM ts_user a where delete_mark=0
+		 <choose >
+		 	<when test="orgId!=-1">
+				 and org_id=#{orgId}
+		 	</when>
+		 	<otherwise>
+		 		and (org_id=-1 or org_id is null)
+		 	</otherwise>
+		 </choose>
+		 <if test="lgName!=null and lgName!=''">
+		 	and instr(LG_NAME ,#{lgName})>0 
+		 </if>
+		 <if test="userName!=null and userName!=''">
+		 	and instr(USER_NAME ,#{userName})>0 
+		 </if>
+		 <if test="postId!=null">
+		 	<choose>
+			 	<when test="postId!=-1">
+			 		and exists(select * from tr_user_post where user_id=a.user_id and post_id=#{postId})
+			 	</when>
+			 	<otherwise>
+			 		and not exists(select * from tr_user_post where user_id=a.user_id)
+			 	</otherwise>
+		 	</choose>
+		 </if>
 	</select>
 	<!-- 根据主键查询用户记录 -->
 	<select id="queryUserById" parameterType="java.lang.Long" resultMap="userResultMap">
@@ -128,12 +151,27 @@
 	<delete id="deleteUser"  parameterType="com.wade.framework.admin.entity.UserEntity">
 		update ts_user set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where USER_ID=#{userId}
 	</delete>
+	<delete id="deleteUserByOrg"  parameterType="com.wade.framework.admin.entity.OrgEntity">
+		update ts_user set org_id=-1,update_by=#{updateUser},update_time=#{updateTime} where ORG_ID=#{orgId}
+	</delete>
 	<!-- 插入用户岗位信息 -->
 	<insert id="saveUserPost" parameterType="com.wade.framework.admin.entity.UserPostEntity">
 		insert into tr_user_post(USER_ID,POST_ID)values(#{userId},#{postId})
 	</insert>
 	<!-- 删除用户岗位信息 -->
-	<insert id="deleteUserPost" parameterType="com.wade.framework.admin.entity.UserPostEntity">
+	<insert id="deleteUserPost" parameterType="java.lang.Long">
 		delete from tr_user_post where user_id=#{userId}
 	</insert>
+	<!-- 插入用户角色信息 -->
+	<insert id="saveUserRole" parameterType="com.wade.framework.admin.entity.UserRoleEntity">
+		insert into tr_user_role(USER_ID,ROLE_ID)values(#{userId},#{roleId})
+	</insert>
+	<!-- 删除用户角色信息 -->
+	<insert id="deleteUserRole" parameterType="java.lang.Long">
+		delete from tr_user_role where user_id=#{userId}
+	</insert>
+	<!-- 更新用户机构 -->
+	<update id="updateOrg"  parameterType="com.wade.framework.admin.entity.UserEntity">
+		update ts_user set org_id=#{orgId},update_by=#{updateUser},update_time=#{updateTime} where USER_ID=#{userId}
+	</update>
 </mapper>

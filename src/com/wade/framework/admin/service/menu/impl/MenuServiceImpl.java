@@ -35,8 +35,8 @@ public class MenuServiceImpl implements IMenuService {
     }
 
     @Override
-    public MenuEntity queryObjectById(MenuEntity menu) {
-        return menuDao.queryObjectById("menu.queryMenuById", menu.getId());
+    public MenuEntity queryObjectById(Long id) {
+        return menuDao.queryObjectById("menu.queryMenuById", id);
     }
 
     @Override

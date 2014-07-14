@@ -37,10 +37,10 @@ public interface IOrgService {
     
     /**
      * <p>Description: 根据机构id查询机构记录</p>
-     * @param org 机构对象
+     * @param orgId 机构对象id
      * @return 机构对象
      */
-    OrgEntity queryObjectById(OrgEntity org);
+    OrgEntity queryObjectById(Long orgId);
     
     /**
      * <p>Description: 查询机构记录列表</p>

@@ -31,7 +31,7 @@
 		var setting = {
 			view: {
 				showLine:false,
-				selectedMulti: false,
+				selectedMulti: false
 			},
 			data: {
 				simpleData: {

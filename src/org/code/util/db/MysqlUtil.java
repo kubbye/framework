@@ -1,5 +1,7 @@
-package org.code.util;
+package org.code.util.db;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,10 +9,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.WeakHashMap;
+
+import org.code.util.CodeUtil;
+import org.code.util.Field;
+import org.code.util.PropertyUtil;
+import org.code.util.StringUtil;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 public class MysqlUtil {
     static MysqlUtil util;
     static List<Field> list;
+    private static final String templatePrefix="/db/mysql";
     private MysqlUtil(){
         
     }
@@ -102,6 +114,42 @@ public class MysqlUtil {
             }
         }
         return pk;
+    }
+    
+    /**
+     * 功能描述: 生成sqlMap文件<br>
+     * 〈功能详细描述〉
+     *
+     * @throws Exception
+     */
+    public static void makeSqlMap() throws Exception {
+
+        Configuration cfg = CodeUtil.getCfg();
+        cfg.setClassForTemplateLoading(CodeUtil.class, "/org/code/template" + templatePrefix);
+        Template template = cfg.getTemplate("sqlMap.html");
+        //生成文件设置
+        String path = CodeUtil.getConfigFileRoot();
+        
+        CodeUtil.mkdirs(path);
+        path += File.separator + "sqlMap_"+CodeUtil.key+".xml";
+        
+        FileWriter sw = new FileWriter(new File(path));
+        WeakHashMap<String, Object> data = new WeakHashMap<String, Object>();
+        data.put("key", CodeUtil.key);
+        data.put("UpperKey", CodeUtil.upperKey);
+        data.put("ZhKey", CodeUtil.zhKey);
+        data.put("author", CodeUtil.author);
+        data.put("createDate", CodeUtil.createDate);
+        data.put("EntityClass", CodeUtil.entityPackagePath + "." + CodeUtil.upperKey + "Entity");
+        data.put("primaryKey", CodeUtil.primaryKey.getName());
+        data.put("primaryKeyType", MysqlUtil.getFullType(CodeUtil.primaryKey.getType()));
+        data.put("primaryColumn", CodeUtil.primaryKey.getColumnName());
+        data.put("tableName", PropertyUtil.getValue("table.name"));
+        data.put("fieldList", CodeUtil.fieldList);
+        data.put("noCommonFieldList", CodeUtil.noCommonFieldList);
+        data.put("propertyPrefix", "#{");
+        data.put("propertyPostfix", "}");
+        template.process(data, sw);
     }
     
     /**

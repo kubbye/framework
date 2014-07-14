@@ -2,8 +2,10 @@ package com.wade.framework.admin.service.user;
 
 import java.util.List;
 
+import com.wade.framework.admin.entity.RoleEntity;
 import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.entity.UserPostEntity;
+import com.wade.framework.admin.entity.UserRoleEntity;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 
@@ -65,4 +67,33 @@ public interface IUserService {
      * @return
      */
     int saveUserPost(UserPostEntity userPost);
+    
+    /**
+     * 功能描述: 保存用户角色<br>
+     * 〈功能详细描述〉
+     *
+     * @param list 用户角色列表
+     * @param userId 用户id
+     */
+    void saveUserRole(List<UserRoleEntity> list,Long userId);
+    
+    /**
+     * 功能描述: 得到用户的角色信息<br>
+     * 〈功能详细描述〉
+     *
+     * @param userId 用户id
+     * @return 角色列表
+     */
+    List<RoleEntity> getRoleListByUserId(Long userId);
+    
+    /**
+     * 功能描述: 更改用户的机构<br>
+     *    1.删除用户的角色
+     *    2.删除用户的岗位
+     *    3.更新机构
+     *
+     * @param user 用户对象
+     * @return 
+     */
+    int updateOrg(UserEntity user);
 }

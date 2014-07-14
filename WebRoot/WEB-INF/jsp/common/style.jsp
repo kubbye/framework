@@ -22,5 +22,6 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/utils.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/js/easyui.js"></script>
 	<!-- ztree begin-->
-	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/zTree_v3/js/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/zTree_v3/js/jquery.ztree.core-3.5.min.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/zTree_v3/js/jquery.ztree.excheck-3.5.min.js"></script>
 	<!-- ztree end -->

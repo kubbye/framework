@@ -28,6 +28,7 @@
 	 -->
 	<SCRIPT type="text/javascript">
 		<!--
+		var isNoOrg=true;
 		var setting = {
 			view: {
 				showLine:false,
@@ -64,6 +65,9 @@
 					var bopen=item.parentId==0?true:false;
 					zNodes.push($.extend(item,{pId:item.parentId,open:bopen}));
 				});
+				if(isNoOrg){
+					zNodes.push({id:-1, pId:0, name:"无组织",open:true});
+				}
 				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			},'json'); 
 		}

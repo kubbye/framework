@@ -98,6 +98,10 @@
 			  	#{deleteMark}
 			) 
 	</insert>
+	<!-- 更新机构路径 -->
+	<update id="updateOrgPath" parameterType="com.wade.framework.admin.entity.OrgEntity">
+		update ts_organization set ORG_PATH=#{orgPath} where ORG_ID=#{orgId}
+	</update>
 	<!-- 更新机构记录 -->
 	<update id="updateOrg" parameterType="com.wade.framework.admin.entity.OrgEntity">
 		update ts_organization set  
@@ -239,4 +243,19 @@
 			and org_id!=#{orgId}
 		</if>
 	</select>
+	<!-- 删除授权记录 -->
+	<delete id="deleteAuthByOrg"  parameterType="java.lang.Long">
+		DELETE
+			FROM ts_authority
+			WHERE ((auth_type = 1
+			        AND auth_id IN(SELECT
+			                         id
+			                       FROM ts_post
+			                       WHERE org_id = #{orgId}))
+			        OR (auth_type = 2
+			            AND auth_id IN(SELECT
+			                             role_id
+			                           FROM ts_role
+			                           WHERE org_id = #{orgId})))
+	</delete>
 </mapper>

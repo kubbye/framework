@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wade.framework.admin.service.org.IOrgService;
 import com.wade.framework.admin.service.post.IPostService;
+import com.wade.framework.admin.service.role.IRoleService;
 import com.wade.framework.base.controller.BaseController;
 import com.wade.framework.base.entity.TreeEntity;
 
@@ -42,6 +43,12 @@ public class TreeController extends BaseController {
     IPostService postService;
     
     /**
+     * 逐入角色service
+     */
+    @Autowired
+    IRoleService roleService;
+    
+    /**
      * 功能描述: 机构树<br>
      * 〈功能详细描述〉
      *
@@ -53,14 +60,40 @@ public class TreeController extends BaseController {
         List<TreeEntity> treeList = orgService.initOrgTree(parentId);
         super.ajaxJsonTree(response, treeList);
     }
+    /**
+     * 功能描述: 岗位树<br>
+     * 〈功能详细描述〉
+     *
+     * @param orgId
+     * @param response
+     */
     @RequestMapping("/post")
     public void postTree(@RequestParam("orgId")Long orgId , HttpServletResponse response){
         List<TreeEntity> treeList = postService.initPostTree(orgId);
-        super.ajaxJson(response, treeList);
+        super.ajaxJsonTree(response, treeList);
     }
+    /**
+     * 功能描述: 菜单树<br>
+     * 〈功能详细描述〉
+     *
+     * @param parentId
+     * @param response
+     */
     @RequestMapping("/menu")
     public void menuTree(@RequestParam("parentId")Long parentId , HttpServletResponse response){
         List<TreeEntity> treeList = new ArrayList<TreeEntity>();
-        super.ajaxJson(response, treeList);
+        super.ajaxJsonTree(response, treeList);
+    }
+    /**
+     * 功能描述: 角色树<br>
+     * 〈功能详细描述〉
+     *
+     * @param orgId
+     * @param response
+     */
+    @RequestMapping("/role")
+    public void roleTree(@RequestParam("orgId")Long orgId , HttpServletResponse response){
+        List<TreeEntity> treeList = roleService.initRoleTree(orgId);
+        super.ajaxJsonTree(response, treeList);
     }
 }

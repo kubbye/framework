@@ -55,7 +55,11 @@ var dataTable;
 	function orgDelete(){
 		var sel=isOrgSelected();
 		if(sel){
-		    $.messager.confirm('删除机构', '您确认要删除该机构吗?', function(r){
+			if(window.parent.isParent(sel.orgId)){
+				$.ALERT("请先删除子机构才能删除父机构");
+				return;
+			}
+		    $.messager.confirm('删除机构', '您确认要删除该机构吗，与机构相关的角色、岗位、用户都将被删除？', function(r){
                 if (r){
                 	$.ajax({
         				url:contextPath+"/admin/org/deleteOrg.json?orgId="+sel.orgId,

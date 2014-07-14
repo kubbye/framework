@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="syslog">
+	<!-- 系统日志resultMap -->
+	<resultMap id="syslogResultMap" type="com.wade.framework.admin.entity.SyslogEntity">
+		<result property="id" column="ID"></result>
+		<result property="moduleCode" column="MODULE_CODE"></result>
+		<result property="moduleName" column="MODULE_NAME"></result>
+		<result property="actType" column="ACT_TYPE"></result>
+		<result property="detailId" column="DETAIL_ID"></result>
+		<result property="memo" column="MEMO"></result>
+		<result property="operatorId" column="OPERATOR_ID"></result>
+		<result property="operatorName" column="OPERATOR_NAME"></result>
+		<result property="operateDate" column="OPERATE_DATE"></result>
+	</resultMap>
+	<!-- 插入系统日志记录 -->
+	<insert id="insertSyslog" parameterType="com.wade.framework.admin.entity.SyslogEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO TL_OPERATION 
+			( 
+			  	MODULE_CODE,
+			  	MODULE_NAME,
+			  	ACT_TYPE,
+			  	DETAIL_ID,
+			  	MEMO,
+			  	OPERATOR_ID,
+			  	OPERATOR_NAME,
+			  	OPERATE_DATE
+			)
+			VALUES
+			(
+			  	#{moduleCode},
+			  	#{moduleName},
+			  	#{actType},
+			  	#{detailId},
+			  	#{memo},
+			  	#{operatorId},
+			  	#{operatorName},
+			  	#{operateDate}
+			) 
+	</insert>
+	<!-- 更新系统日志记录 -->
+	<update id="updateSyslog"  parameterType="com.wade.framework.admin.entity.SyslogEntity">
+		update TL_OPERATION set  
+			MODULE_CODE=#{moduleCode},
+			MODULE_NAME=#{moduleName},
+			ACT_TYPE=#{actType},
+			DETAIL_ID=#{detailId},
+			MEMO=#{memo},
+			OPERATOR_ID=#{operatorId},
+			OPERATOR_NAME=#{operatorName},
+			OPERATE_DATE=#{operateDate},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
+	</update>
+	<sql id="querySyslogsSql">
+		SELECT 
+			ID,
+			MODULE_CODE,
+			MODULE_NAME,
+			ACT_TYPE,
+			DETAIL_ID,
+			MEMO,
+			OPERATOR_ID,
+			OPERATOR_NAME,
+			OPERATE_DATE
+		 FROM TL_OPERATION where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="querySyslogsByPage" parameterType="com.wade.framework.admin.entity.SyslogEntity" resultMap="syslogResultMap">
+		<include refid="querySyslogsSql"/>
+	</select>
+	<!-- 根据主键查询系统日志记录 -->
+	<select id="querySyslogById" parameterType="java.lang.Long" resultMap="syslogResultMap">
+		select 
+			ID,
+			MODULE_CODE,
+			MODULE_NAME,
+			ACT_TYPE,
+			DETAIL_ID,
+			MEMO,
+			OPERATOR_ID,
+			OPERATOR_NAME,
+			OPERATE_DATE
+		from TL_OPERATION where ID=#{id}
+	</select>
+	<!-- 删除系统日志记录 -->
+	<delete id="deleteSyslog"  parameterType="com.wade.framework.admin.entity.SyslogEntity">
+		update TL_OPERATION set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</delete>
+</mapper>

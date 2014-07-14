@@ -17,11 +17,11 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td align="right">角色名称:</td>
-	    			<td><input class="textbox" type="text" id="roleName" name="roleName"></input></td>
+	    			<td><input class="textbox" type="text" id="roleName" name="roleName" maxlength="30"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td  align="right">备注:</td>
-	    			<td><textarea id="memo" name="memo" rows="3" cols="18">
+	    			<td><textarea id="memo" name="memo" rows="3" cols="18"  maxlength="120" autofocus="autofocus">
 	    			</textarea></td>
 	    		</tr>
 	    		<tr>
@@ -29,7 +29,7 @@
 	    			<td>
 	    			<select id="avaliable" name="avaliable" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
 	    				<option value="Y">有效</option>
-	    				<option  value="N">无效</option>
+	    				<option value="N">无效</option>
 	    			</select>
 	    			</td>
 	    		</tr>

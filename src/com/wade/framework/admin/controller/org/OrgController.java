@@ -107,7 +107,7 @@ public class OrgController extends BaseController {
      */
     @RequestMapping("/getOrgById")
     public void getOrgById(OrgEntity org, HttpServletResponse response){
-        super.ajaxJson(response, orgService.queryObjectById(org));
+        super.ajaxJson(response, orgService.queryObjectById(org.getOrgId()));
     }
     /**
      * <p>Description: 删除机构记录</p>

@@ -23,8 +23,8 @@
 		    			<td><input class="textbox" type="text" id="userName" name="userName" disabled></input></td>
 		    		</tr>
 				  	<tr>
-		    			<td>密码:</td>
-		    			<td><input class="textbox" type="text" id="passWord" name="passWord" disabled></input></td>
+		    			<td>机构:</td>
+		    			<td><input class="textbox" type="text" id="org_name" name="org.orgName" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>性别:</td>
@@ -208,12 +208,13 @@
 				$.formLoad('userForm',contextPath+'/admin/user/getUserById.json?userId='+userId,function(data){
 					var emply=data.emply;
 					$.each(emply,function(key,item){
-						if("INPUT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
+						if(null!=$("#emply_"+key).get(0) && "INPUT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
 							$("#emply_"+key).val(item);
-						}else if("SELECT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
+						}else if(null!=$("#emply_"+key).get(0) && "SELECT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
 							$("#emply_"+key).searchbox('setValue',item);
 						}
 					});
+					$("#org_name").val(data.org.orgFullName);
 				});
 			</c:if>
 		});

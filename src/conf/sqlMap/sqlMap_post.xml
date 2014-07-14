@@ -77,6 +77,7 @@
 			DELETE_MARK
 		 FROM ts_post where delete_mark=0
 		 and org_id=#{orgId}
+		 order by post_path
 	</select>
 	<!-- 根据主键查询岗位记录 -->
 	<select id="queryPostById" parameterType="java.lang.Long" resultMap="postResultMap">
@@ -113,9 +114,17 @@
 		FROM tr_user_post a, ts_post b
 		WHERE a.POST_ID=b.ID AND a.user_id=#{userId}
 	</select>
+	<!-- 更新岗位路径 -->
+	<update id="updatePostPath"  parameterType="com.wade.framework.admin.entity.PostEntity">
+		update ts_post set post_path=#{postPath},update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</update>
 	<!-- 删除岗位记录 -->
 	<delete id="deletePost"  parameterType="com.wade.framework.admin.entity.PostEntity">
 		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</delete>
+	<!-- 删除机构下岗位记录 -->
+	<delete id="deletePostByOrg"  parameterType="com.wade.framework.admin.entity.OrgEntity">
+		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ORG_ID=#{orgId}
 	</delete>
 	<!-- 查询岗位树树 -->
 	<select id="queryPostTree" parameterType="com.wade.framework.admin.entity.PostEntity" resultType="com.wade.framework.base.entity.TreeEntity">

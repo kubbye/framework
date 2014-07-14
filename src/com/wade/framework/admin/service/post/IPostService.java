@@ -40,7 +40,7 @@ public interface IPostService {
      * @param post 岗位对象
      * @return 岗位对象
      */
-    PostEntity queryObjectById(PostEntity post);
+    PostEntity queryObjectById(Long postId);
     
     /**
      * <p>Description: 查询岗位记录列表</p>
@@ -61,8 +61,8 @@ public interface IPostService {
      * 功能描述: 初始化岗位树<br>
      * 〈功能详细描述〉
      *
-     * @param orgId
-     * @return
+     * @param orgId 机构id
+     * @return  岗位树
      */
     List<TreeEntity> initPostTree(Long orgId);
     

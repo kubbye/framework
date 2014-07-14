@@ -102,7 +102,7 @@ public class PostController extends BaseController {
      */
     @RequestMapping("/getPostById")
     public void getPostById(PostEntity post, HttpServletResponse response){
-        super.ajaxJson(response, postService.queryObjectById(post));
+        super.ajaxJson(response, postService.queryObjectById(post.getId()));
     }
     /**
      * <p>Description: 删除岗位记录</p>

@@ -13,15 +13,22 @@
     <fieldset>
     
     <legend>查询条件</legend>
-    <input id="search_orgId" name="orgId" type="hidden" value="${orgId }"/>
+    <input id="search_orgId" name="orgId" type="hidden" value="${orgId}"/>
     	<table>
     		<tr>
-		    		<td>用户登录号：</td>
-    				<td><input id="search_loginId" name="loginId" type="text"  class="textbox"/></td>
 		    		<td>登录名称：</td>
     				<td><input id="search_lgName" name="lgName" type="text"  class="textbox"/></td>
-    			
-    			<td><a id="user_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
+		    		<td>用户昵称：</td>
+    				<td><input id="search_userName" name="userName" type="text"  class="textbox"/></td>
+    				<td>岗位：</td>
+    				<td>
+    					<select id="search_postId" class="easyui-combobox" style="width:80px">
+    						
+    					</select>
+    				</td>
+    			<td align="center">
+    			&nbsp;&nbsp;&nbsp;
+    			<a id="user_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>
     	</table>
           
@@ -42,6 +49,7 @@
 	  <a href="javascript:void(-1);" id="user_delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a> 
 	  <a href="javascript:void(-1);" id="user_auth_post" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">岗位授权</a>
 	  <a href="javascript:void(-1);" id="user_auth_role" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">角色授权</a>
+	  <a href="javascript:void(-1);" id="user_org_change" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">机构调整</a>
 	</div>
 </body>
 </html>

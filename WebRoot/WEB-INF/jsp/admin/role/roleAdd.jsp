@@ -16,12 +16,12 @@
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td  align="right">角色名称:</td>
-	    			<td><input class="textbox" type="text" id="roleName" name="roleName"></input></td>
+	    			<td><input class="textbox" type="text" id="roleName" name="roleName" maxlength="30"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td  align="right" valign="middle">备注:</td>
 	    			<td>
-	    			<textarea id="memo" name="memo" rows="3" cols="18">
+	    			<textarea id="memo" name="memo" rows="3" cols="18"  maxlength="120">
 	    			</textarea>
 	    			</td>
 	    		</tr>

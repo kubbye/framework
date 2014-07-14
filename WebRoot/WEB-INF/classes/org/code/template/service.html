@@ -35,8 +35,8 @@ public class ${UpperKey}ServiceImpl implements I${UpperKey}Service {
     }
 
     @Override
-    public ${UpperKey}Entity queryObjectById(${UpperKey}Entity ${key}) {
-        return ${key}Dao.queryObjectById("${key}.query${UpperKey}ById", ${key}.get${primaryKey}());
+    public ${UpperKey}Entity queryObjectById(${PrimaryKeyType} ${primaryKey}) {
+        return ${key}Dao.queryObjectById("${key}.query${UpperKey}ById", ${primaryKey});
     }
 
     @Override

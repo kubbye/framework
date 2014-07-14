@@ -8,20 +8,26 @@ import org.springframework.stereotype.Service;
 import com.wade.framework.admin.dao.org.IOrgDao;
 import com.wade.framework.admin.entity.OrgEntity;
 import com.wade.framework.admin.service.org.IOrgService;
+import com.wade.framework.base.Constants;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 import com.wade.framework.base.entity.TreeEntity;
 
 @Service("orgService")
 public class OrgServiceImpl implements IOrgService {
-
+    
     @Autowired
     IOrgDao orgDao;
     
     @Override
     public int insert(OrgEntity org) {
-    	org.setDeleteMark("0");
-        int id=orgDao.insert("org.insertOrg", org);
+        org.setDeleteMark("0");
+        int id = orgDao.insert("org.insertOrg", org);
+        // 计算机构路径并插入数据库
+        String path = calcPath(org);
+        org.setOrgPath(path);
+        orgDao.update("org.updateOrgPath", org);
+
         return id;
     }
 
@@ -32,12 +38,20 @@ public class OrgServiceImpl implements IOrgService {
 
     @Override
     public int delete(OrgEntity org) {
+        //删除机构下的角色和岗位授权
+        orgDao.delete("org.deleteAuthByOrg", org.getOrgId());
+        //删除机构下的用户与角色和岗位
+        orgDao.delete("role.deleteRoleByOrg", org);
+        orgDao.delete("post.deletePostByOrg", org);
+        //删除机构下的用户
+        orgDao.delete("user.deleteUserByOrg", org);
+        //删除机构
         return orgDao.delete("org.deleteOrg", org);
     }
 
     @Override
-    public OrgEntity queryObjectById(OrgEntity org) {
-        return orgDao.queryObjectById("org.queryOrgById", org.getOrgId());
+    public OrgEntity queryObjectById(Long orgId) {
+        return orgDao.queryObjectById("org.queryOrgById", orgId);
     }
 
     @Override
@@ -53,7 +67,7 @@ public class OrgServiceImpl implements IOrgService {
     @Override
     public List<TreeEntity> initOrgTree(Long parentId) {
         OrgEntity entity = new OrgEntity();
-        if(null != parentId){
+        if (null != parentId) {
             entity.setParentId(parentId);
         }
         return orgDao.queryList("org.queryOrgTree", entity);
@@ -64,9 +78,30 @@ public class OrgServiceImpl implements IOrgService {
         OrgEntity entity = new OrgEntity();
         entity.setOrgCode(code);
         entity.setOrgId(orgId);
-        return orgDao.getCount("org.queryCountByCode", entity)>0;
+        return orgDao.getCount("org.queryCountByCode", entity) > 0;
     }
     
+    /**
+     * 功能描述: 计算机构路径<br>
+     *  
+     *
+     * @param org
+     * @return
+     */
+    private String calcPath(OrgEntity org) {
+        String path = "";
+        if (Constants.ORG_ROOT.equals(org.getParentId())) {
+            path = org.getOrgId() + Constants.PATH_SEPRATOR;
+        } else {
+            OrgEntity parent = queryObjectById(org.getParentId());
+            if (parent.getOrgPath().endsWith(Constants.PATH_SEPRATOR)) {
+                path = parent.getOrgPath() + org.getOrgId();
+            } else {
+                path = parent.getOrgPath() + Constants.PATH_SEPRATOR + org.getOrgId();
+            }
+        }
+        return path;
+    }
     
     
 }

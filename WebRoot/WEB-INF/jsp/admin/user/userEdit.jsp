@@ -206,9 +206,9 @@
 				$.formLoad('userForm',contextPath+'/admin/user/getUserById.json?userId='+userId,function(data){
 					var emply=data.emply;
 					$.each(emply,function(key,item){
-						if("INPUT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
+						if(null!=$("#emply_"+key).get(0) && "INPUT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
 							$("#emply_"+key).val(item);
-						}else if("SELECT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
+						}else if(null!=$("#emply_"+key).get(0) && "SELECT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
 							$("#emply_"+key).searchbox('setValue',item);
 						}
 					});

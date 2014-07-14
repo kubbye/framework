@@ -5,6 +5,7 @@ import java.util.List;
 import com.wade.framework.admin.entity.RoleEntity;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.entity.TreeEntity;
 
 /**
  * <p>ClassName: IRoleService</p>
@@ -55,4 +56,14 @@ public interface IRoleService {
      * @return 分页记录
      */
     PaginationResult<RoleEntity> queryListByPage(RoleEntity param, PageInfo pageinfo);
+    
+    
+    /**
+     * 功能描述: 初始化角色树<br>
+     * 〈功能详细描述〉
+     *
+     * @param orgId 机构id
+     * @return  角色树
+     */ 
+    List<TreeEntity> initRoleTree(Long orgId);
 }

@@ -21,6 +21,11 @@ public class UserEntity extends BaseEntity {
     private Long orgId;
     
     /**
+     * 机构
+     */
+    private OrgEntity org=new OrgEntity();
+    
+    /**
      * <p>Field loginId: 用户登录号</p>
      */
     private String loginId;
@@ -79,6 +84,15 @@ public class UserEntity extends BaseEntity {
      * 员工
      */
     private EmplyEntity emply = new EmplyEntity();
+    
+    /**
+     * 岗位id
+     */
+    private Long postId;
+    /**
+     * 岗位
+     */
+    private PostEntity position=new PostEntity();
     
     public Long getUserId() {
         return userId;
@@ -190,6 +204,30 @@ public class UserEntity extends BaseEntity {
 
     public void setEmply(EmplyEntity emply) {
         this.emply = emply;
+    }
+
+    public OrgEntity getOrg() {
+        return org;
+    }
+
+    public void setOrg(OrgEntity org) {
+        this.org = org;
+    }
+
+    public PostEntity getPosition() {
+        return position;
+    }
+
+    public void setPosition(PostEntity position) {
+        this.position = position;
+    }
+
+    public Long getPostId() {
+        return postId;
+    }
+
+    public void setPostId(Long postId) {
+        this.postId = postId;
     }
     
 }

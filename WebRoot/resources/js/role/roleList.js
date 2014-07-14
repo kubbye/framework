@@ -26,6 +26,8 @@ var dataTable;
         queryParams.lgName = $("#search_lgName").val();  
         */
 		queryParams.orgId=$("#search_orgId").val();
+		queryParams.roleName=$("#search_roleName").val();
+		queryParams.avaliable=$("#search_avaliable").combobox('getValue');
         //重新加载datagrid的数据  
         $("#role_table").datagrid('reload');  
 	}
@@ -52,7 +54,7 @@ var dataTable;
 	function roleDelete(){
 		var sel=isRoleSelected();
 		if(sel){
-		    $.messager.confirm('删除角色', '您确认要删除该角色吗?', function(r){
+		    $.messager.confirm('删除角色', '您确认要删除该角色吗，与角色相关的信息都将被删除？', function(r){
                 if (r){
                 	$.ajax({
         				url:contextPath+"/admin/role/deleteRole.json?roleId="+sel.roleId,

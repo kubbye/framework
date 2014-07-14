@@ -1,7 +1,7 @@
 package com.wade.framework.admin.controller.menu;
 
 import java.util.Date;
-
+import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wade.framework.admin.entity.MenuEntity;
 import com.wade.framework.admin.service.menu.IMenuService;
+import com.google.gson.Gson;
 import com.wade.framework.base.AjaxSuccessInfo;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
@@ -19,7 +20,7 @@ import com.wade.framework.base.controller.BaseController;
  * <p>ClassName: MenuController</p>
  * <p>Description: 菜单Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-07-05</p>
+ * <p>Date: 2014-07-14</p>
  */
 @Controller
 @RequestMapping("/admin/menu")
@@ -66,6 +67,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/saveMenu")
     public void saveMenu(MenuEntity menu,HttpServletResponse response){
+        log.info("用户"+getSessionUser().getUserName()+"新增了菜单:"+(new Gson()).toJson(menu));
     	menu.setCreateUser(getSessionUser().getUserId());
         menu.setCreateTime(new Date());
         menuService.insert(menu);
@@ -90,6 +92,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/editMenu")
     public void editMenu(MenuEntity menu, HttpServletResponse response){
+    	log.info("用户"+getSessionUser().getUserName()+"修改了菜单:"+(new Gson()).toJson(menu));
     	menu.setUpdateUser(getSessionUser().getUserId());
         menu.setUpdateTime(new Date());
         menuService.update(menu);
@@ -111,6 +114,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("deleteMenu")
     public void deleteMenu(MenuEntity menu, HttpServletResponse response){
+    	log.info("用户"+getSessionUser().getUserName()+"删除了菜单:"+(new Gson()).toJson(menu));
     	menu.setUpdateUser(getSessionUser().getUserId());
         menu.setUpdateTime(new Date());
         menuService.delete(menu);

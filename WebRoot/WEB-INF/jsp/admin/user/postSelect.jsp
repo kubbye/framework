@@ -22,7 +22,7 @@
 			<input type="hidden" id="select_postId" name="postId" >
 			<ul class="list">
 				<li class="title">&nbsp;&nbsp;岗位：<input id="select_postName" name="postName" type="text" readonly value="" style="width:120px;" class="easyui-validatebox textbox" data-options="required:true"/>
-			&nbsp;&nbsp;&nbsp;<a id="menuBtn" class="easyui-linkbutton" href="#" onclick="submitRel(); return false;">确&nbsp;定</a></li>
+			&nbsp;&nbsp;&nbsp;<a id="menuBtn" class="easyui-linkbutton" href="#" onclick="submitRel(); return false;">提&nbsp;交</a></li>
 			</ul>
 			</form>
 		</div>
@@ -30,6 +30,7 @@
 	<script type="text/javascript" src="${resRoot}/js/user/userEdit.js"></script>
 	<SCRIPT type="text/javascript">
 		<!--
+		var zTree;
 		var setting = {
 			view: {
 				dblClickExpand: false,
@@ -47,7 +48,6 @@
 		};
 		
 		function onClick(e, treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			nodes = zTree.getSelectedNodes();
 		    $("#select_postName").val(nodes[0].name);
 			$("#select_postId").val(nodes[0].id);
@@ -73,7 +73,6 @@
 		});
 		
 		function selectedPost(postId){
-			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			var node = zTree.getNodeByParam("id", postId, null);
 			zTree.selectNode(node);
 		}
@@ -83,9 +82,10 @@
 				var zNodes =[];
 				$.each(data,function(i,item){
 					var bopen=item.parentId==0?true:false;
+					bopen=true;
 					zNodes.push($.extend(item,{pId:item.parentId,open:bopen}));
 				});
-				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+				zTree=$.fn.zTree.init($("#treeDemo"), setting, zNodes);
 			},'json'); 
 		}
 		//-->

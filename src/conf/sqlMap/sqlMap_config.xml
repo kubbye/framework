@@ -9,6 +9,7 @@
 	</plugins>
 	<mappers>
 		<mapper resource="conf/sqlMap/sqlMap_base.xml" />
+		<mapper resource="conf/sqlMap/sqlMap_auth.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_user.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_emply.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_menu.xml" />

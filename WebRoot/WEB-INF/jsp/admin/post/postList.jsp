@@ -29,14 +29,10 @@
     			<td><a id="post_query" href="javascript:void(0)" class="easyui-linkbutton">查 询</a></td>
     		</tr>
     	</table>
-          
     </fieldset>
-    
-    </div>
-    
+</div>
  
     <div data-options="region:'center',border:'false'"  style="padding-top:10px;">
-    
 	  <table id="post_table">
 	  </table>
 	</div>
@@ -45,6 +41,7 @@
 	  <a href="javascript:void(-1);" id="post_edit"  class="easyui-linkbutton" data-options="iconCls:'icon-edit',plain:true">修改</a>
 	  <a href="javascript:void(-1);" id="post_detail" class="easyui-linkbutton" data-options="iconCls:'icon-detail',plain:true">明细</a>
 	  <a href="javascript:void(-1);" id="post_delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a> 
+	  <a href="javascript:void(-1);" id="post_auth" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">授权</a>
 	</div>
 </body>
 </html>

@@ -79,11 +79,6 @@ ul.ztree {height:100px;}
 			}
 		};
 
-		var zNodes_add =[
-			{id:1, pId:0, name:"组长",open:true},
-			{id:2, pId:1, name:"组员"}
-		 ];
-		
 		function onClick_add(e, treeId, treeNode) {
 			var zTree = $.fn.zTree.getZTreeObj("select_tree"),
 			nodes = zTree.getSelectedNodes();
@@ -110,8 +105,20 @@ ul.ztree {height:100px;}
 		}
 
 		$(document).ready(function(){
-			$.fn.zTree.init($("#select_tree"), setting_add, zNodes_add);
+			//$.fn.zTree.init($("#select_tree"), setting_add, zNodes_add);
+			initOrgTree();
 		});
+		/*初始化机构树*/
+		function initOrgTree(){
+		 	$.post(contextPath+"/common/tree/post.json?orgId="+$("#orgId").val(),function(data){
+				var zNodes =[];
+				$.each(data,function(i,item){
+					var bopen=item.parentId==0?true:false;
+					zNodes.push($.extend(item,{pId:item.parentId,open:bopen}));
+				});
+				$.fn.zTree.init($("#select_tree"), setting_add, zNodes);
+			},'json'); 
+		}
 		//-->
 	</SCRIPT>
 </body>

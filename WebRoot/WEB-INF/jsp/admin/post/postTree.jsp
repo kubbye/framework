@@ -31,7 +31,13 @@
 		var setting = {
 			view: {
 				dblClickExpand: dblClickExpand,
-				showIcon: showIconForTree
+				selectedMulti: false
+			},
+			
+			async: {
+				enable: true,
+				url:contextPath+"/common/tree/post.json",
+				autoParam:["id"]
 			},
 			data: {
 				simpleData: {
@@ -44,35 +50,32 @@
 			}
 		};
 
-		var zNodes =[
-			{ id:100, pId:0, name:"集团公司", open:true},        
-			{ id:11, pId:100, name:"总公司", open:true},
-			{ id:1, pId:11, _orgId:1,name:"北京分公司"},
-			{ id:2, pId:11, _orgId:2,name:"上海分公司"},
-			{ id:111, pId:1,_orgId:1, name:"组长",click:false},
-			{ id:112, pId:111,_orgId:1, name:"组员",click:false},
-			{ id:121, pId:2, _orgId:2,name:"组长",click:false},
-			{ id:122, pId:121, _orgId:2,name:"组员",click:false},
-			
-		];
 		function dblClickExpand(treeId, treeNode) {
 			return treeNode.level > 0;
 		}
 		function beforeClick(treeId, treeNode, clickFlag) {
-			return (treeNode.click != false);
+			return (treeNode.click != false && treeNode.parentId!=0 && 'org'==treeNode._type);
 		}
 		
 		function onClick(event, treeId, treeNode, clickFlag) {
 			var _url=contextPath+'/admin/post/list.htm';
-			$("#post_frame").attr("src",_url+"?orgId="+treeNode._orgId);
+			$("#post_frame").attr("src",_url+"?orgId="+treeNode.id);
 			return false;
 		}	
-		function showIconForTree(treeId, treeNode) {
-			return !treeNode.isParent;
-		};
 		$(document).ready(function(){
-			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			initOrgTree();
 		});
+		/*初始化机构树*/
+		function initOrgTree(){
+		 	$.post(contextPath+"/common/tree/org.json",function(data){
+				var zNodes =[];
+				$.each(data,function(i,item){
+					var bopen=item.parentId==0?true:false;
+					zNodes.push($.extend(item,{pId:item.parentId,open:bopen,_type:'org'}));
+				});
+				$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			},'json'); 
+		}
 		//-->
 	</SCRIPT>
 </body>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="auth">
+	<!-- 授权resultMap -->
+	<resultMap id="authResultMap" type="com.wade.framework.admin.entity.AuthEntity">
+		<result property="id" column="ID"></result>
+		<result property="resourceId" column="RESOURCE_ID"></result>
+		<result property="authId" column="AUTH_ID"></result>
+		<result property="authType" column="AUTH_TYPE"></result>
+		<result property="restype" column="RESTYPE"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
+	</resultMap>
+	<!-- 插入授权记录 -->
+	<insert id="insertAuth" parameterType="com.wade.framework.admin.entity.AuthEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ts_authority 
+			( 
+			  	RESOURCE_ID,
+			  	AUTH_ID,
+			  	AUTH_TYPE,
+			  	RESTYPE,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
+			)
+			VALUES
+			(
+			  	#{resourceId},
+			  	#{authId},
+			  	#{authType},
+			  	#{restype},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
+			) 
+	</insert>
+	<!-- 更新授权记录 -->
+	<update id="updateAuth"  parameterType="com.wade.framework.admin.entity.AuthEntity">
+		update ts_authority set  
+			RESOURCE_ID=#{resourceId},
+			AUTH_ID=#{authId},
+			AUTH_TYPE=#{authType},
+			RESTYPE=#{restype},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
+	</update>
+	<sql id="queryAuthsSql">
+		SELECT 
+			ID,
+			RESOURCE_ID,
+			AUTH_ID,
+			AUTH_TYPE,
+			RESTYPE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_authority where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryAuthsByPage" parameterType="com.wade.framework.admin.entity.AuthEntity" resultMap="authResultMap">
+		<include refid="queryAuthsSql"/>
+	</select>
+	<!-- 根据主键查询授权记录 -->
+	<select id="queryAuthById" parameterType="java.lang.Long" resultMap="authResultMap">
+		select 
+			ID,
+			RESOURCE_ID,
+			AUTH_ID,
+			AUTH_TYPE,
+			RESTYPE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_authority where ID=#{id}
+	</select>
+	<!-- 删除授权记录 -->
+	<delete id="deleteAuth"  parameterType="com.wade.framework.admin.entity.AuthEntity">
+		delete from ts_authority 
+		where auth_type=#{authType} and auth_id=#{authId}
+	</delete>
+</mapper>

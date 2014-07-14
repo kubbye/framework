@@ -58,6 +58,11 @@ public class TreeEntity{
      * 目标
      */
     private String target;
+    
+    /**
+     * 是否选中
+     */
+    private String checked;
 
     public Long getId() {
         return id;
@@ -137,6 +142,14 @@ public class TreeEntity{
 
     public void setPath(String path) {
         this.path = path;
+    }
+
+    public String getChecked() {
+        return checked;
+    }
+
+    public void setChecked(String checked) {
+        this.checked = checked;
     }
     
 }
