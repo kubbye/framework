@@ -42,6 +42,8 @@
 	  <a href="javascript:void(-1);" id="post_detail" class="easyui-linkbutton" data-options="iconCls:'icon-detail',plain:true">明细</a>
 	  <a href="javascript:void(-1);" id="post_delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a> 
 	  <a href="javascript:void(-1);" id="post_auth" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">授权</a>
+	  <a href="javascript:void(-1);" id="post_users" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">成员</a>
+	  <a href="javascript:void(-1);" id="post_data" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">数据权限控制</a>
 	</div>
 </body>
 </html>

@@ -51,8 +51,8 @@
 	    			<td><input class="easyui-validatebox textbox" type="text" id="menuSort" name="menuSort" data-options="validType:['digit']"></input></td>
 	    		</tr>
 	    		<tr>
-	    			<td  align="right">是否系统菜单：N，否；Y，是:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="sysMenu" name="sysMenu" data-options="validType:['maxLength[8]']"></input></td>
+	    			<td  align="right">菜单类型：N，一般菜单；S，系统菜单；D,数据监控菜单:</td>
+	    			<td><input class="easyui-validatebox textbox" type="text" id="menuType" name="menuType" data-options="validType:['maxLength[2]']"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td  align="right">Y 可用，N 不可用:</td>

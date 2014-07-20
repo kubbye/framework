@@ -106,7 +106,7 @@ var dataTable;
 				  	{field:'url',title:'菜单路径',align:'center',resizable:false,width:'58'},
 				  	{field:'deCode',title:'菜单编码',align:'center',resizable:false,width:'58'},
 				  	{field:'menuSort',title:'菜单排序字段：越小越靠前',align:'center',resizable:false,width:'58'},
-				  	{field:'sysMenu',title:'是否系统菜单：N，否；Y，是',align:'center',resizable:false,width:'58'},
+				  	{field:'menuType',title:'菜单类型：N，一般菜单；S，系统菜单；D,数据监控菜单',align:'center',resizable:false,width:'58'},
 				  	{field:'avaliable',title:'Y 可用，N 不可用',align:'center',resizable:false,width:'58'},
 				  	{field:'createUser',title:'创建人',align:'center',resizable:false,width:'58'},
 				  	{field:'updateUser',title:'更新人',align:'center',resizable:false,width:'58'},

@@ -7,7 +7,7 @@ import com.wade.framework.base.entity.BaseEntity;
  * <p>ClassName: MenuEntity</p>
  * <p>Description: 菜单实体类</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-07-14</p>
+ * <p>Date: 2014-07-20</p>
  */
 public class MenuEntity extends BaseEntity {
     
@@ -62,9 +62,9 @@ public class MenuEntity extends BaseEntity {
     private Integer menuSort;
     
     /**
-     * <p>Field sysMenu: 是否系统菜单：N，否；Y，是</p>
+     * <p>Field menuType: 菜单类型：N，一般菜单；S，系统菜单；D,数据监控菜单</p>
      */
-    private String sysMenu;
+    private String menuType;
     
     /**
      * <p>Field avaliable: Y 可用，N 不可用</p>
@@ -152,12 +152,12 @@ public class MenuEntity extends BaseEntity {
         this.menuSort = menuSort;
     }
     
-    public String getSysMenu() {
-        return sysMenu;
+    public String getMenuType() {
+        return menuType;
     }
     
-    public void setSysMenu(String sysMenu) {
-        this.sysMenu = sysMenu;
+    public void setMenuType(String menuType) {
+        this.menuType = menuType;
     }
     
     public String getAvaliable() {

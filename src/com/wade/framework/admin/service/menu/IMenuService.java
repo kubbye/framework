@@ -10,7 +10,7 @@ import com.wade.framework.base.PaginationResult;
  * <p>ClassName: IMenuService</p>
  * <p>Description: 菜单Service接口</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-07-14</p>
+ * <p>Date: 2014-07-20</p>
  */
 public interface IMenuService {
     /**

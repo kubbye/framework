@@ -13,7 +13,7 @@
 		<result property="url" column="URL"></result>
 		<result property="deCode" column="DE_CODE"></result>
 		<result property="menuSort" column="MENU_SORT"></result>
-		<result property="sysMenu" column="SYS_MENU"></result>
+		<result property="menuType" column="MENU_TYPE"></result>
 		<result property="avaliable" column="AVALIABLE"></result>
 		<result property="createUser" column="CREATE_BY"></result>
 		<result property="updateUser" column="UPDATE_BY"></result>
@@ -34,7 +34,7 @@
 			  	URL,
 			  	DE_CODE,
 			  	MENU_SORT,
-			  	SYS_MENU,
+			  	MENU_TYPE,
 			  	AVALIABLE,
 			  	CREATE_BY,
 			  	UPDATE_BY,
@@ -53,7 +53,7 @@
 			  	#{url},
 			  	#{deCode},
 			  	#{menuSort},
-			  	#{sysMenu},
+			  	#{menuType},
 			  	#{avaliable},
 			  	#{createUser},
 			  	#{updateUser},
@@ -74,7 +74,7 @@
 			URL=#{url},
 			DE_CODE=#{deCode},
 			MENU_SORT=#{menuSort},
-			SYS_MENU=#{sysMenu},
+			MENU_TYPE=#{menuType},
 			AVALIABLE=#{avaliable},
 			update_by = #{updateUser},
 			update_time=#{updateTime}
@@ -92,7 +92,7 @@
 			URL,
 			DE_CODE,
 			MENU_SORT,
-			SYS_MENU,
+			MENU_TYPE,
 			AVALIABLE,
 			CREATE_BY,
 			UPDATE_BY,
@@ -118,7 +118,7 @@
 			URL,
 			DE_CODE,
 			MENU_SORT,
-			SYS_MENU,
+			MENU_TYPE,
 			AVALIABLE,
 			CREATE_BY,
 			UPDATE_BY,

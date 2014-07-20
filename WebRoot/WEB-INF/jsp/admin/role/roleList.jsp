@@ -45,6 +45,7 @@
 	  <a href="javascript:void(-1);" id="role_detail" class="easyui-linkbutton" data-options="iconCls:'icon-detail',plain:true">明细</a>
 	  <a href="javascript:void(-1);" id="role_delete" class="easyui-linkbutton" data-options="iconCls:'icon-remove',plain:true">删除</a>
 	  <a href="javascript:void(-1);" id="role_auth" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">授权</a> 
+	  <a href="javascript:void(-1);" id="role_users" class="easyui-linkbutton" data-options="iconCls:'icon-ok',plain:true">成员</a>
 	</div>
 </body>
 </html>

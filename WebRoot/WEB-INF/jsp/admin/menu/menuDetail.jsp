@@ -51,8 +51,8 @@
 		    			<td><input class="textbox" type="text" id="menuSort" name="menuSort" disabled></input></td>
 		    		</tr>
 				  	<tr>
-		    			<td>是否系统菜单：N，否；Y，是:</td>
-		    			<td><input class="textbox" type="text" id="sysMenu" name="sysMenu" disabled></input></td>
+		    			<td>菜单类型：N，一般菜单；S，系统菜单；D,数据监控菜单:</td>
+		    			<td><input class="textbox" type="text" id="menuType" name="menuType" disabled></input></td>
 		    		</tr>
 				  	<tr>
 		    			<td>Y 可用，N 不可用:</td>
