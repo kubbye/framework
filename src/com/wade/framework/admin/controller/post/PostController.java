@@ -140,4 +140,19 @@ public class PostController extends BaseController {
     public String postTree(){
         return "admin/post/postTree";
     }
+    
+    /**
+     * 功能描述: 查看岗位已分配的人员<br>
+     * 〈功能详细描述〉
+     *
+     * @param post 岗位
+     * @param model model
+     * @return 已分配用户查询页面
+     */
+    @RequestMapping("/viewAssignUsers")
+    public String viewAssignUsers(PostEntity post, Model model) {
+        model.addAttribute("postId", post.getId());
+        model.addAttribute("orgId", post.getOrgId());
+        return "admin/post/assignedUsers";
+    }
 }

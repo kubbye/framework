@@ -15,6 +15,9 @@ var dataTable;
 		$("#post_delete").on("click",function(){
 			postDelete();
 		});
+		$("#post_users").on("click",function(){
+			viewAssignUsers();
+		});
 	});
 	$(document).ready(function(){
 		initPostDatagrid(contextPath+'/admin/post/getListData.json?orgId='+$("#search_orgId").val());
@@ -70,6 +73,13 @@ var dataTable;
             });
 		}
 	}
+	/*查看岗位的已分配人员*/
+	function viewAssignUsers(){
+		var sel=isPostSelected();
+		if(sel){
+			openWindow(contextPath+"/admin/post/viewAssignUsers.htm?id="+sel.id+"&orgId="+sel.orgId,'已分配用户');
+		}
+	}
 	/*是否有岗位记录被选中*/
 	function isPostSelected(){
 		var sel=$.selected("post_table");
@@ -105,7 +115,7 @@ var dataTable;
 			        {field:'postName',title:'岗位名称'},
 			        {field:'parentPost',title:'上级岗位',formatter:function(data){return (null==data)?'':data.postName;}},
 				  	{field:'postDesc',title:'岗位描述'},
-				  	{field:'avaliable',title:'状态',formatter:function(data){return 'Y'==data?'有效':'无效'}},
+				  	{field:'avaliable',title:'状态',formatter:function(data){return 'Y'==data?'有效':'无效';}},
 				  	{field:'createTime',title:'创建时间'},
 				  	{field:'updateTime',title:'更新时间'},
 			]],

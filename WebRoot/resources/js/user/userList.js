@@ -129,12 +129,12 @@ var dataTable;
 				  	{field:'loginId',title:'用户登录号',resizable:false},
 				  	{field:'defaultRoleName',title:'默认角色名称',resizable:false,width:'90'},
 				  	*/
-				  	{field:'userType',title:'用户类型',resizable:false,width:'90',formatter:function(data){return 'A'==data?'管理员':'应用用户'}},
-				  	{field:'sex',title:'性别',resizable:false,width:'90',formatter:function(data){return '1'==data?'男':'女'}},
+				  	{field:'userType',title:'用户类型',resizable:false,width:'90',formatter:function(data){return 'A'==data?'管理员':'应用用户';}},
+				  	{field:'sex',title:'性别',resizable:false,width:'90',formatter:function(data){return '1'==data?'男':'女';}},
 				  	{field:'defaultRoleName',title:'岗位',resizable:false,width:'90',formatter:getUserPost},
-				  	{field:'avaliable',title:'状态',resizable:false,width:'90',formatter:function(data){return 'Y'==data?'有效':'无效'}},
+				  	{field:'avaliable',title:'状态',resizable:false,width:'90',formatter:function(data){return 'Y'==data?'有效':'无效';}},
 				  	{field:'createTime',title:'创建时间',resizable:'false',width:'90'},
-				  	{field:'updateTime',title:'更新时间',resizable:'false',width:'90'},
+				  	{field:'updateTime',title:'更新时间',resizable:'false',width:'90'}
 			]],
 			toolbar:'#toolbar_user',
 			onBeforeLoad:function(data){
