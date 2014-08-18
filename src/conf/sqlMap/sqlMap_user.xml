@@ -77,8 +77,7 @@
 			update_time=#{updateTime}
 		 where USER_ID=#{userId}
 	</update>
-	<!-- 分页查询记录 -->
-	<select id="queryUsersByPage" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
+	<sql id="sql_userList">
 		SELECT 
 			USER_ID,
 			ORG_ID,
@@ -123,6 +122,13 @@
 			 	</otherwise>
 		 	</choose>
 		 </if>
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryUsersByPage" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
+		<include refid="sql_userList"/>
+	</select>
+	<select id="queryUsers" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
+		<include refid="sql_userList"/>
 	</select>
 	<!-- 根据主键查询用户记录 -->
 	<select id="queryUserById" parameterType="java.lang.Long" resultMap="userResultMap">

@@ -38,7 +38,7 @@
 			update_time=${propertyPrefix}updateTime${propertyPostfix}
 		 where ${primaryColumn}=${propertyPrefix}${primaryKey}${propertyPostfix}
 	</update>
-	<sql id="query${UpperKey}sSql">
+	<sql id="sql_${key}List">
 		SELECT 
 		<#list fieldList as field>
 			${field.columnName}<#if field_has_next>,</#if>
@@ -47,7 +47,10 @@
 	</sql>
 	<!-- 分页查询记录 -->
 	<select id="query${UpperKey}sByPage" parameterType="${EntityClass}" resultMap="${key}ResultMap">
-		<include refid="query${UpperKey}sSql"/>
+		<include refid="sql_${key}List"/>
+	</select>
+	<select id="query${UpperKey}s" parameterType="${EntityClass}" resultMap="${key}ResultMap">
+		<include refid="sql_${key}List"/>
 	</select>
 	<!-- 根据主键查询${ZhKey}记录 -->
 	<select id="query${UpperKey}ById" parameterType="${primaryKeyType}" resultMap="${key}ResultMap">

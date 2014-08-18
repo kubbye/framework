@@ -68,7 +68,7 @@ public class AuthController extends BaseController {
      */
     @RequestMapping("/saveAuth")
     public void saveAuth(AuthEntity auth,HttpServletResponse response){
-        log.info("用户"+getSessionUser().getUserName()+"新增了授权:"+(new Gson()).toJson(auth));
+        //log.info("用户"+getSessionUser().getUserName()+"新增了授权:"+(new Gson()).toJson(auth));
     	auth.setCreateUser(getSessionUser().getUserId());
         auth.setCreateTime(new Date());
         authService.insert(auth);
@@ -93,7 +93,7 @@ public class AuthController extends BaseController {
      */
     @RequestMapping("/editAuth")
     public void editAuth(AuthEntity auth, HttpServletResponse response){
-    	log.info("用户"+getSessionUser().getUserName()+"修改了授权:"+(new Gson()).toJson(auth));
+    	//log.info("用户"+getSessionUser().getUserName()+"修改了授权:"+(new Gson()).toJson(auth));
     	auth.setUpdateUser(getSessionUser().getUserId());
         auth.setUpdateTime(new Date());
         authService.update(auth);
@@ -106,7 +106,7 @@ public class AuthController extends BaseController {
      */
     @RequestMapping("/getAuthById")
     public void getAuthById(AuthEntity auth, HttpServletResponse response){
-        super.ajaxJson(response, authService.queryObjectById(auth));
+        super.ajaxJson(response, authService.queryObjectById(auth.getId()));
     }
     /**
      * <p>Description: 删除授权记录</p>
@@ -115,7 +115,7 @@ public class AuthController extends BaseController {
      */
     @RequestMapping("deleteAuth")
     public void deleteAuth(AuthEntity auth, HttpServletResponse response){
-    	log.info("用户"+getSessionUser().getUserName()+"删除了授权:"+(new Gson()).toJson(auth));
+    	//log.info("用户"+getSessionUser().getUserName()+"删除了授权:"+(new Gson()).toJson(auth));
     	auth.setUpdateUser(getSessionUser().getUserId());
         auth.setUpdateTime(new Date());
         authService.delete(auth);

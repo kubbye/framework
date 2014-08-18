@@ -65,7 +65,7 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserEntity> queryList(Object param) {
-        return userDao.queryList("user.queryUser", param);
+        return userDao.queryList("user.queryUsers", param);
     }
 
     @Override
@@ -98,6 +98,4 @@ public class UserServiceImpl implements IUserService {
         userDao.delete("user.deleteUserPost", user.getUserId());
         return userDao.update("user.updateOrg", user);
     }
-    
-    
 }

@@ -51,8 +51,7 @@
 			update_time=#{updateTime}
 		 where ROLE_ID=#{roleId}
 	</update>
-	<!-- 分页查询记录 -->
-	<select id="queryRolesByPage" parameterType="com.wade.framework.admin.entity.RoleEntity" resultMap="roleResultMap">
+	<sql id="sql_roleList">
 		SELECT 
 			ROLE_ID,
 			ROLE_NAME,
@@ -74,6 +73,13 @@
 		 <if test="avaliable!=null and avaliable!=''">
 		 	and avaliable=#{avaliable}
 		 </if>
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryRolesByPage" parameterType="com.wade.framework.admin.entity.RoleEntity" resultMap="roleResultMap">
+		<include refid="sql_roleList"/>
+	</select>
+	<select id="queryRole" parameterType="com.wade.framework.admin.entity.RoleEntity" resultMap="roleResultMap">
+		<include refid="sql_roleList"/>
 	</select>
 	<!-- 根据主键查询角色记录 -->
 	<select id="queryRoleById" parameterType="java.lang.Long" resultMap="roleResultMap">

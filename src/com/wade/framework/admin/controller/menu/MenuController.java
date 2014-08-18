@@ -67,7 +67,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/saveMenu")
     public void saveMenu(MenuEntity menu,HttpServletResponse response){
-        log.info("用户"+getSessionUser().getUserName()+"新增了菜单:"+(new Gson()).toJson(menu));
+        //log.info("用户"+getSessionUser().getUserName()+"新增了菜单:"+(new Gson()).toJson(menu));
     	menu.setCreateUser(getSessionUser().getUserId());
         menu.setCreateTime(new Date());
         menuService.insert(menu);
@@ -92,7 +92,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/editMenu")
     public void editMenu(MenuEntity menu, HttpServletResponse response){
-    	log.info("用户"+getSessionUser().getUserName()+"修改了菜单:"+(new Gson()).toJson(menu));
+    	//log.info("用户"+getSessionUser().getUserName()+"修改了菜单:"+(new Gson()).toJson(menu));
     	menu.setUpdateUser(getSessionUser().getUserId());
         menu.setUpdateTime(new Date());
         menuService.update(menu);
@@ -105,7 +105,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/getMenuById")
     public void getMenuById(MenuEntity menu, HttpServletResponse response){
-        super.ajaxJson(response, menuService.queryObjectById(menu));
+        super.ajaxJson(response, menuService.queryObjectById(menu.getId()));
     }
     /**
      * <p>Description: 删除菜单记录</p>
@@ -114,7 +114,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("deleteMenu")
     public void deleteMenu(MenuEntity menu, HttpServletResponse response){
-    	log.info("用户"+getSessionUser().getUserName()+"删除了菜单:"+(new Gson()).toJson(menu));
+    	//log.info("用户"+getSessionUser().getUserName()+"删除了菜单:"+(new Gson()).toJson(menu));
     	menu.setUpdateUser(getSessionUser().getUserId());
         menu.setUpdateTime(new Date());
         menuService.delete(menu);
