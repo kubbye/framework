@@ -1,5 +1,6 @@
 package test;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,6 @@ public class UserTest extends TestBase {
         entity.setOrgId(3L);
         List<UserEntity> list=userService.queryList(entity);
         String json =gson.toJson(list);
-        System.out.println("list===="+json);
+        System.out.println(json);
     }
 }

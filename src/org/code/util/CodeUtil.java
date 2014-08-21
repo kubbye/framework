@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.WeakHashMap;
@@ -15,6 +16,7 @@ import freemarker.template.Configuration;
 import freemarker.template.Template;
 
 public class CodeUtil {
+    public static List<String> levels = Arrays.asList(new String[]{"all","sqlMap","dao","service","controller","page"}) ;
     public static String entityPackagePath = "";
     public static String daoPackagePath = "";
     public static String servicePackagePath = "";
@@ -33,25 +35,55 @@ public class CodeUtil {
     
     public static void main(String[] args) throws Exception {
         init();
-        
+      
         makeAll();
     }
     public static void makeAll()throws Exception{
-        if(PropertyUtil.getValue("entity.only").equalsIgnoreCase("true")){
-            makeEntity();
-        }else{
-            makeEntity();
-            makeDao();
-            makeService();
-            makeController();
-            if("mysql".equalsIgnoreCase(PropertyUtil.getValue("database.type"))){
-                MysqlUtil.makeSqlMap();
-            }
-            EasyUiUtil.makeJs();
-            EasyUiUtil.makePage();
+        String level=PropertyUtil.getValue("created.code.level");
+        if(!levels.contains(level)){
+            level = "all";
         }
         
+        makeEntity();
+        
+        switch(level){
+            case "all":
+                makeDao();
+                makeService();
+                makeController();
+                if("mysql".equalsIgnoreCase(PropertyUtil.getValue("database.type"))){
+                    MysqlUtil.makeSqlMap();
+                }
+                EasyUiUtil.makeJs();
+                EasyUiUtil.makePage();
+                break;
+            case "entity":
+                break;
+            case "sqlMap":
+                if("mysql".equalsIgnoreCase(PropertyUtil.getValue("database.type"))){
+                    MysqlUtil.makeSqlMap();
+                }
+                break;
+            case "dao":
+                makeDao();
+                break;
+            case "service":
+                makeService();
+                break;
+            case "controller":
+                makeController();
+                break;
+            case "page":
+                EasyUiUtil.makeJs();
+                EasyUiUtil.makePage();
+                break;
+        }
     }
+    /**
+     * 功能描述: <br>
+     *    初始化变量
+     *
+     */
     private static void init(){
         key = PropertyUtil.getValue("key");
         upperKey = StringUtil.upperFirst(PropertyUtil.getValue("key"));
@@ -59,6 +91,36 @@ public class CodeUtil {
         author = PropertyUtil.getValue("copyright.author");
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         createDate = format.format(new Date());
+        
+        initPachagePath();
+    }
+    /**
+     * 功能描述: <br>
+     *     初始化包路径
+     *
+     */
+    private static void initPachagePath(){
+        //entity包路径
+        entityPackagePath = PropertyUtil.getValue("code.package.root") + ".entity";
+        //dao包路径
+        daoPackagePath = PropertyUtil.getValue("code.package.root") + "." + PropertyUtil.getValue("code.src.dao.root")
+                + "." + key;
+        //service包路径
+        servicePackagePath = PropertyUtil.getValue("code.package.root") + "."
+                + PropertyUtil.getValue("code.src.service.root") + "." + key;
+        //controller包路径
+        controllerPackagePath = PropertyUtil.getValue("code.package.root") + "."
+                + PropertyUtil.getValue("code.src.controller.root") + "." + key;
+        /*controller路径前缀*/
+        String prefix = PropertyUtil.getValue("code.prefix.controller");
+        if (null != prefix && !"".equals(prefix)) {
+            prefix = "/" + prefix + "/" + key;
+        } else {
+            prefix = "/" + key;
+        }
+        urlPrefix = prefix;
+        
+        
     }
     
     public static Configuration getCfg(){
@@ -74,8 +136,7 @@ public class CodeUtil {
         Configuration cfg = getCfg();
         //interface
         Template template = cfg.getTemplate("daoInterface.html");
-        daoPackagePath = PropertyUtil.getValue("code.package.root") + "." + PropertyUtil.getValue("code.src.dao.root")
-                + "." + key;
+      
         //生成文件设置
         String path = getJavaFileRoot() + File.separator + PropertyUtil.getValue("code.src.dao.root") + File.separator
                 + key;
@@ -120,8 +181,7 @@ public class CodeUtil {
         Configuration cfg = getCfg();
         //interface
         Template template = cfg.getTemplate("serviceInterface.html");
-        servicePackagePath = PropertyUtil.getValue("code.package.root") + "."
-                + PropertyUtil.getValue("code.src.service.root") + "." + key;
+        
         //生成文件设置
         String path = getJavaFileRoot() + File.separator + PropertyUtil.getValue("code.src.service.root")
                 + File.separator + key;
@@ -173,8 +233,7 @@ public class CodeUtil {
     public static void makeController() throws Exception {
         Configuration cfg = getCfg();
         Template template = cfg.getTemplate("controller.html");
-        controllerPackagePath = PropertyUtil.getValue("code.package.root") + "."
-                + PropertyUtil.getValue("code.src.controller.root") + "." + key;
+       
         //生成文件设置
         String path = getJavaFileRoot() + File.separator + PropertyUtil.getValue("code.src.controller.root")
                 + File.separator + key;
@@ -183,16 +242,11 @@ public class CodeUtil {
         FileWriter sw = new FileWriter(new File(path));
         WeakHashMap<String, Object> data = new WeakHashMap<String, Object>();
         data.put("packageName", controllerPackagePath); //包名   
-        String prefix = PropertyUtil.getValue("code.prefix.controller");
-        if (null != prefix && !"".equals(prefix)) {
-            data.put("pagePrefix", prefix + "/" + key);
-            prefix = "/" + prefix + "/" + key;
-        } else {
-            data.put("pagePrefix", key);
-            prefix = "/" + key;
-        }
-        urlPrefix = prefix;
-        data.put("urlPrefix", prefix);
+        
+        data.put("pagePrefix", urlPrefix.substring(1));
+       
+        
+        data.put("urlPrefix", urlPrefix);
         data.put("key", key);
         data.put("UpperKey", upperKey);
         data.put("ZhKey", zhKey);
@@ -212,7 +266,7 @@ public class CodeUtil {
     public static void makeEntity() throws Exception {
         Configuration cfg = getCfg();
         Template template = cfg.getTemplate("entity.html");
-        entityPackagePath = PropertyUtil.getValue("code.package.root") + ".entity";
+        
         //生成文件设置
         String path = getJavaFileRoot() + File.separator + PropertyUtil.getValue("code.src.entity.root");
         mkdirs(path);
@@ -233,7 +287,15 @@ public class CodeUtil {
 
         primaryKey = MysqlUtil.getInstance().getPrimaryKey(list);
         fieldList = list;
-        template.process(data, sw);
+        
+        
+        String level=PropertyUtil.getValue("created.code.level");
+        if(!levels.contains(level)){
+            level = "all";
+        }
+        if("all".equals(level) || "entity".equals(level)){
+            template.process(data, sw);
+        }
     }
    
     public static void mkdirs(String path){

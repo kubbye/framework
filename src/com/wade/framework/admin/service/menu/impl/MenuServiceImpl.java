@@ -41,7 +41,7 @@ public class MenuServiceImpl implements IMenuService {
 
     @Override
     public List<MenuEntity> queryList(Object param) {
-        return menuDao.queryList("menu.queryMenu", param);
+        return menuDao.queryList("menu.queryMenus", param);
     }
 
     @Override

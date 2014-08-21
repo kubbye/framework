@@ -80,7 +80,7 @@
 			update_time=#{updateTime}
 		 where ID=#{id}
 	</update>
-	<sql id="queryMenusSql">
+	<sql id="sql_menuList">
 		SELECT 
 			ID,
 			PARENT_ID,
@@ -103,7 +103,10 @@
 	</sql>
 	<!-- 分页查询记录 -->
 	<select id="queryMenusByPage" parameterType="com.wade.framework.admin.entity.MenuEntity" resultMap="menuResultMap">
-		<include refid="queryMenusSql"/>
+		<include refid="sql_menuList"/>
+	</select>
+	<select id="queryMenus" parameterType="com.wade.framework.admin.entity.MenuEntity" resultMap="menuResultMap">
+		<include refid="sql_menuList"/>
 	</select>
 	<!-- 根据主键查询菜单记录 -->
 	<select id="queryMenuById" parameterType="java.lang.Long" resultMap="menuResultMap">

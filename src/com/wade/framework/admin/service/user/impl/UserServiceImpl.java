@@ -2,6 +2,7 @@ package com.wade.framework.admin.service.user.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public List<UserEntity> queryList(Object param) {
+        Logger log=Logger.getLogger(this.getClass());
+        log.info("test special log");
         return userDao.queryList("user.queryUsers", param);
     }
 
