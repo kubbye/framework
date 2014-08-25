@@ -1,2 +1,4 @@
 /build/
-/test-output/
+/.externalToolBuilders/
+/.classpath
+/.project
