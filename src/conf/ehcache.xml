@@ -292,12 +292,4 @@
 	    timeToLiveSeconds="3000" 
 	    diskPersistent="false"  
 	    diskExpiryThreadIntervalSeconds="120" /> 
-	<cache name="dictionaryAvalidCache" 
-	    maxElementsInMemory="10000"
-	    eternal="false"  
-	    overflowToDisk="false"
-	    timeToIdleSeconds="1800"  
-	    timeToLiveSeconds="3000" 
-	    diskPersistent="false"  
-	    diskExpiryThreadIntervalSeconds="120" /> 
 </ehcache>

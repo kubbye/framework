@@ -11,7 +11,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
  *
  * @author weih
  */
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={
         "classpath:conf/spring/applicationContext.xml"
 })

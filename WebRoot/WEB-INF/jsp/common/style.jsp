@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" %>
 	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 <!-- css -->
-	<link rel="stylesheet" type="text/css" href="/framework/resources/plugin/jquery-easyui-1.3.6/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="/framework/resources/plugin/jquery-easyui-1.3.6/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="/framework/resources/plugin/jquery-easyui-1.3.6/demo/demo.css">
-	<link rel="stylesheet" type="text/css" href="/framework/resources/css/main.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugin/jquery-easyui-1.3.6/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugin/jquery-easyui-1.3.6/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/plugin/jquery-easyui-1.3.6/demo/demo.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/main.css">
 	<!-- ztree begin -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugin/zTree_v3/css/demo.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugin/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
