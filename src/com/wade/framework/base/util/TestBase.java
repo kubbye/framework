@@ -1,9 +1,10 @@
 package com.wade.framework.base.util;
 
-import org.junit.runner.RunWith;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
+import org.testng.annotations.BeforeSuite;
 
 /**
  *  testng测试基类<br> 
@@ -15,5 +16,11 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
         "classpath:conf/spring/applicationContext.xml"
 })
 public class TestBase extends AbstractTestNGSpringContextTests {
-
+    
+    @BeforeSuite
+    public void beforeTest(){
+        Container c = new Container();
+        ApplicationContext context = new ClassPathXmlApplicationContext("conf/spring/applicationContext.xml");
+        c.setApplicationContext(context);
+    }
 }

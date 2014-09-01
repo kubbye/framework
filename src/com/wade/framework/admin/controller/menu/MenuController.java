@@ -1,7 +1,8 @@
 package com.wade.framework.admin.controller.menu;
 
 import java.util.Date;
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,17 @@ import com.wade.framework.base.controller.BaseController;
  * <p>ClassName: MenuController</p>
  * <p>Description: 菜单Controller</p>
  * <p>Author: weih</p>
- * <p>Date: 2014-08-21</p>
+ * <p>Date: 2014-09-01</p>
  */
 @Controller
 @RequestMapping("/admin/menu")
 public class MenuController extends BaseController {
+
+	/**
+     * log
+     */
+    private final Log log = LogFactory.getLog(MenuController.class);
+    
     /**
      * <p>Field menuService: 菜单Service注入</p>
      */
@@ -105,7 +112,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/getMenuById")
     public void getMenuById(MenuEntity menu, HttpServletResponse response){
-        super.ajaxJson(response, menuService.queryObjectById(menu));
+        super.ajaxJson(response, menuService.queryObjectById(menu.getId()));
     }
     /**
      * <p>Description: 删除菜单记录</p>

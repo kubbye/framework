@@ -3,20 +3,22 @@ package test;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.wade.framework.admin.cache.UserCache;
 import com.wade.framework.base.cache.Cache;
-import com.wade.framework.base.util.SysLogger;
 import com.wade.framework.base.util.TestBase;
 
 public class CacheTest extends TestBase {
     
     @Autowired
     UserCache userCache;
-    
+   
+ 
    
     public void testUserCache(){
         userCache.initCache();
@@ -33,9 +35,9 @@ public class CacheTest extends TestBase {
     }
     
     @Test
-    public void logTest(){
-        SysLogger.setLogLevel("info");
-        SysLogger.setIsLogDB(Boolean.FALSE);
-        (new SysLogger(CacheTest.class)).info("test log");
+    public void testLog(){
+        Log log = LogFactory.getLog(CacheTest.class);
+        log.error("error");
+        log.info("info");
     }
 }

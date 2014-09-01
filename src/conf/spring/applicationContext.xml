@@ -28,7 +28,8 @@
     <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
     	<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
     </bean>
-    
+    <bean id="container" class="com.wade.framework.base.util.Container">
+    </bean>
     <!-- BEGIN 事务配置 -->  
     <!-- 
     <bean id="txManager"
