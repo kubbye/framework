@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dict">
+	<!-- 数据字典resultMap -->
+	<resultMap id="dictResultMap" type="com.wade.framework.admin.entity.DictEntity">
+		<result property="id" column="ID"></result>
+		<result property="typeCode" column="TYPE_CODE"></result>
+		<result property="code" column="CODE"></result>
+		<result property="displayname" column="DISPLAYNAME"></result>
+		<result property="typeName" column="TYPE_NAME"></result>
+		<result property="sortId" column="SORT_ID"></result>
+		<result property="editable" column="EDITABLE"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
+	</resultMap>
+	<!-- 插入数据字典记录 -->
+	<insert id="insertDict" parameterType="com.wade.framework.admin.entity.DictEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO tc_fixcode 
+			( 
+			  	TYPE_CODE,
+			  	CODE,
+			  	DISPLAYNAME,
+			  	TYPE_NAME,
+			  	SORT_ID,
+			  	EDITABLE,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
+			)
+			VALUES
+			(
+			  	#{typeCode},
+			  	#{code},
+			  	#{displayname},
+			  	#{typeName},
+			  	#{sortId},
+			  	#{editable},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
+			) 
+	</insert>
+	<!-- 更新数据字典记录 -->
+	<update id="updateDict"  parameterType="com.wade.framework.admin.entity.DictEntity">
+		update tc_fixcode set  
+			TYPE_CODE=#{typeCode},
+			CODE=#{code},
+			DISPLAYNAME=#{displayname},
+			TYPE_NAME=#{typeName},
+			SORT_ID=#{sortId},
+			EDITABLE=#{editable},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
+	</update>
+	<sql id="sql_dictList">
+		SELECT 
+			ID,
+			TYPE_CODE,
+			CODE,
+			DISPLAYNAME,
+			TYPE_NAME,
+			SORT_ID,
+			EDITABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM tc_fixcode where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryDictsByPage" parameterType="com.wade.framework.admin.entity.DictEntity" resultMap="dictResultMap">
+		<include refid="sql_dictList"/>
+	</select>
+	<select id="queryDicts" parameterType="com.wade.framework.admin.entity.DictEntity" resultMap="dictResultMap">
+		<include refid="sql_dictList"/>
+	</select>
+	<!-- 根据主键查询数据字典记录 -->
+	<select id="queryDictById" parameterType="java.lang.Long" resultMap="dictResultMap">
+		select 
+			ID,
+			TYPE_CODE,
+			CODE,
+			DISPLAYNAME,
+			TYPE_NAME,
+			SORT_ID,
+			EDITABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from tc_fixcode where ID=#{id}
+	</select>
+	<!-- 删除数据字典记录 -->
+	<delete id="deleteDict"  parameterType="com.wade.framework.admin.entity.DictEntity">
+		update tc_fixcode set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</delete>
+</mapper>
