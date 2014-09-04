@@ -42,7 +42,7 @@ public interface IUserService {
      * @param user 用户对象
      * @return 用户对象
      */
-    UserEntity queryObjectById(UserEntity user);
+    UserEntity queryObjectById(Long userId);
     
     /**
      * <p>Description: 查询用户记录列表</p>
@@ -51,6 +51,13 @@ public interface IUserService {
      */
     List<UserEntity> queryList(Object param);
     
+    /**
+     * 功能描述: <br>
+     *     查询所有的用户
+     *
+     * @return
+     */
+    List<UserEntity> queryAllUsers();
     /**
      * <p>Description: 分页查询用户记录列表</p>
      * @param param 用户对象

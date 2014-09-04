@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.jdbc.JDBCAppender;
 import org.apache.log4j.spi.LoggingEvent;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wade.framework.base.util.Container;
 

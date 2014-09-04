@@ -2,10 +2,10 @@ package com.wade.framework.admin.service.user.impl;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.wade.framework.admin.cache.UserCache;
 import com.wade.framework.admin.dao.user.IUserDao;
 import com.wade.framework.admin.entity.EmplyEntity;
 import com.wade.framework.admin.entity.RoleEntity;
@@ -15,12 +15,16 @@ import com.wade.framework.admin.entity.UserRoleEntity;
 import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.cache.Cache;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
 
     @Autowired
     IUserDao userDao;
+    
+    @Autowired
+    UserCache userCache;
     
     @Override
     public int insert(UserEntity user) {
@@ -34,6 +38,7 @@ public class UserServiceImpl implements IUserService {
         user.getEmply().setSex(user.getSex());
         insertEmply(user.getEmply());
         
+        userCache.addCache(new Cache(user.getUserId(), user));
         return id;
     }
 
@@ -48,27 +53,38 @@ public class UserServiceImpl implements IUserService {
         user.getEmply().setUpdateUser(user.getUpdateUser());
         user.getEmply().setSex(user.getSex());
         userDao.update("emply.updateEmply", user.getEmply());
+        
+        userCache.refreshCache(new Cache(user.getUserId(), user));
         return userDao.update("user.updateUser", user);
     }
 
     @Override
     public int delete(UserEntity user) {
-        return userDao.delete("user.deleteUser", user);
+        int res = userDao.delete("user.deleteUser", user);
+        userCache.removeCache(user.getUserId());
+        return res;
     }
 
     @Override
-    public UserEntity queryObjectById(UserEntity user) {
-        UserEntity userEntity = userDao.queryObjectById("user.queryUserById", user.getUserId());
-        EmplyEntity emply = userDao.queryObjectById("emply.queryEmplyByUserId", user.getUserId());
+    public UserEntity queryObjectById(Long userId) {
+        UserEntity userEntity = (UserEntity)userCache.getCache(userId).getValue();
+        if(null == userEntity){
+            userEntity = userDao.queryObjectById("user.queryUserById", userId);
+        }
+        EmplyEntity emply = userDao.queryObjectById("emply.queryEmplyByUserId", userId);
         userEntity.setEmply(emply);
         return userEntity;
     }
 
     @Override
     public List<UserEntity> queryList(Object param) {
-        Logger log=Logger.getLogger(this.getClass());
-        log.info("test special log");
         return userDao.queryList("user.queryUsers", param);
+    }
+    
+    
+    @Override
+    public List<UserEntity> queryAllUsers() {
+        return userDao.queryList("user.queryAllUsers", null);
     }
 
     @Override

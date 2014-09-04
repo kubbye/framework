@@ -130,6 +130,28 @@
 	<select id="queryUsers" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
 		<include refid="sql_userList"/>
 	</select>
+	<select id="queryAllUsers" parameterType="com.wade.framework.admin.entity.UserEntity" resultMap="userResultMap">
+		SELECT 
+			USER_ID,
+			ORG_ID,
+			LOGIN_ID,
+			LG_NAME,
+			USER_NAME,
+			PASS_WORD,
+			SEX,
+			PHOTO,
+			MEMO,
+			DEFAULT_ROLE,
+			DEFAULT_ROLE_NAME,
+			USER_TYPE,
+			AVALIABLE,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_user a where delete_mark=0
+	</select>
 	<!-- 根据主键查询用户记录 -->
 	<select id="queryUserById" parameterType="java.lang.Long" resultMap="userResultMap">
 		select 

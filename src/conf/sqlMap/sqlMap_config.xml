@@ -16,5 +16,6 @@
 		<mapper resource="conf/sqlMap/sqlMap_role.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_post.xml" />
 		<mapper resource="conf/sqlMap/sqlMap_org.xml" />
+		<mapper resource="conf/sqlMap/sqlMap_dict.xml" />
 	</mappers>
 </configuration>

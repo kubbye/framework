@@ -70,15 +70,4 @@
     </aop:config>
      -->
     <!-- END 事务配置 -->  
-    
-      <!-- ehcache配置 begin -->
-     <bean id="cacheManager"  
-		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">  
-		<property name="configLocation">  
-		    <value>classpath:conf/ehcache.xml</value>  
-		</property>  
-		<property name="shared" value="true"></property>
-		<property name="cacheManagerName" value="authCacheManager"></property>
-	</bean>
-	<!-- ehcache配置 end -->
 </beans>

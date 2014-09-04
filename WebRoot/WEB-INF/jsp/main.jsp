@@ -16,6 +16,7 @@
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('角色管理');">角色</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('用户管理');">用户管理</a><br>
 	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('岗位管理');">岗位管理</a><br>
+	<a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-add'" onclick="changeTitle('字典管理');">字典管理</a><br>
 	</div>
 	
 	<div data-options="region:'south',border:false" style="height:30px;padding:10px;">copyright</div>
@@ -43,6 +44,9 @@
 		}
 		if('机构管理'==name){
 			_url=contextPath+'/admin/org/orgTree.htm';
+		}
+		if('字典管理'==name){
+			_url=contextPath+'/admin/dict/list.htm';
 		}
 		openTab(name,_url);
 	}

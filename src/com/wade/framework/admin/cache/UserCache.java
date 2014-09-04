@@ -18,7 +18,7 @@ import com.wade.framework.base.cache.ICache;
 @Service("userCache")
 public class UserCache implements ICache {
     
-    @Autowired
+
     private CacheManager cacheManager;
     
     @Autowired
@@ -27,11 +27,9 @@ public class UserCache implements ICache {
     net.sf.ehcache.Cache userCache;
     @Override
     public void initCache(){
-        userCache=cacheManager.getCache("dictionaryCache");
         userCache.removeAll();
-        UserEntity param=new UserEntity();
-        param.setOrgId(2L);
-        List<UserEntity> userList=userService.queryList(param);
+     
+        List<UserEntity> userList=userService.queryAllUsers();
         for(UserEntity user: userList){
             userCache.put(new Element(user.getUserId(), new Cache(user.getUserId(),user)));
         }
@@ -70,5 +68,19 @@ public class UserCache implements ICache {
         }
         return list;
     }
+    public CacheManager getCacheManager() {
+        return cacheManager;
+    }
+    public void setCacheManager(CacheManager cacheManager) {
+        this.cacheManager = cacheManager;
+    }
+    public net.sf.ehcache.Cache getUserCache() {
+        return userCache;
+    }
+    public void setUserCache(net.sf.ehcache.Cache userCache) {
+        this.userCache = userCache;
+    }
+    
+    
     
 }

@@ -24,10 +24,13 @@ public class UserTest extends TestBase {
     @Test
     public void testQueryUsers(){
         Gson gson=new Gson();
-        UserEntity entity=new UserEntity();
+        /*UserEntity entity=new UserEntity();
         entity.setOrgId(3L);
         List<UserEntity> list=userService.queryList(entity);
-        String json =gson.toJson(list);
+        String json =gson.toJson(list);*/
+        
+        
+        String json = gson.toJson(userService.queryObjectById(12L));
         System.out.println(json);
     }
 }

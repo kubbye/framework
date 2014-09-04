@@ -19,7 +19,7 @@ public class CacheTest extends TestBase {
     UserCache userCache;
    
  
-   
+    @Test
     public void testUserCache(){
         userCache.initCache();
         //Assert.assertEquals("i am a user", userCache.getCache("user1").getValue());
@@ -28,13 +28,13 @@ public class CacheTest extends TestBase {
 //        System.out.println(userCache.getCache("user1").getValue());
         //Assert.assertEquals("i am not a user", userCache.getCache("user1").getValue());
         
-        Assert.assertEquals(userCache.size(),3);
+        Assert.assertEquals(userCache.size(),8);
         
         List<Cache> list=userCache.getAllCache();
-        Assert.assertEquals(list.size(),3);
+        Assert.assertEquals(list.size(),8);
     }
     
-    @Test
+   
     public void testLog(){
         Log log = LogFactory.getLog(CacheTest.class);
         log.error("error");

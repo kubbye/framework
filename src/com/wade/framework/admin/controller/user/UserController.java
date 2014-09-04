@@ -137,7 +137,7 @@ public class UserController extends BaseController {
      */
     @RequestMapping("/getUserById")
     public void getUserById(UserEntity user, HttpServletResponse response){
-        UserEntity userEntity = userService.queryObjectById(user);
+        UserEntity userEntity = userService.queryObjectById(user.getUserId());
         if(null != userEntity && null != userEntity.getOrgId()){
             OrgEntity org= orgService.queryObjectById(userEntity.getOrgId());
             userEntity.setOrg(org);

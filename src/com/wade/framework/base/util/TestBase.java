@@ -13,7 +13,8 @@ import org.testng.annotations.BeforeSuite;
  * @author weih
  */
 @ContextConfiguration(locations={
-        "classpath:conf/spring/applicationContext.xml"
+        "classpath:conf/spring/applicationContext.xml",
+        "classpath:conf/spring/applicationContext-cache.xml"
 })
 public class TestBase extends AbstractTestNGSpringContextTests {
     
