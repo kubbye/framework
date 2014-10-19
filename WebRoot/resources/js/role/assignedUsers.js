@@ -1,6 +1,6 @@
 var dataTable;
 $(document).ready(function(){
-	initUserDatagrid(contextPath+'/admin/user/getListData.json?orgId='+$("#assigned_orgId").val()+'&postId='+$("#assigned_postId").val());
+	initUserDatagrid(contextPath+'/admin/role/getAssignUsersByRole.json?orgId='+$("#assigned_orgId").val()+'&roleId='+$("#assigned_roleId").val());
 });
 /* 初始化用户datagrid */
 function initUserDatagrid(_url) {

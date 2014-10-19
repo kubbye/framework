@@ -99,22 +99,22 @@
 			DELETE_MARK
 		 FROM ts_user a where delete_mark=0
 		 <choose >
-		 	<when test="orgId!=-1">
+		 	<when test="orgId != -1">
 				 and org_id=#{orgId}
 		 	</when>
 		 	<otherwise>
 		 		and (org_id=-1 or org_id is null)
 		 	</otherwise>
 		 </choose>
-		 <if test="lgName!=null and lgName!=''">
+		 <if test="lgName != null and lgName != ''">
 		 	and instr(LG_NAME ,#{lgName})>0 
 		 </if>
-		 <if test="userName!=null and userName!=''">
+		 <if test="userName != null and userName != ''">
 		 	and instr(USER_NAME ,#{userName})>0 
 		 </if>
-		 <if test="postId!=null">
+		 <if test="postId != null">
 		 	<choose>
-			 	<when test="postId!=-1">
+			 	<when test="postId != -1">
 			 		and exists(select * from tr_user_post where user_id=a.user_id and post_id=#{postId})
 			 	</when>
 			 	<otherwise>

@@ -3,6 +3,7 @@ package com.wade.framework.admin.service.role;
 import java.util.List;
 
 import com.wade.framework.admin.entity.RoleEntity;
+import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 import com.wade.framework.base.entity.TreeEntity;
@@ -66,4 +67,14 @@ public interface IRoleService {
      * @return  角色树
      */ 
     List<TreeEntity> initRoleTree(Long orgId);
+    
+    /**
+     * 功能描述: <br>
+     *     根据角色查询用户
+     *
+     * @param orgId
+     * @param roleId
+     * @return
+     */
+    List<UserEntity> getAssignUsersByRole(Long orgId, Long roleId);
 }

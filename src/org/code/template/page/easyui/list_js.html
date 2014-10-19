@@ -15,6 +15,13 @@ var dataTable;
 		$("#${key}_delete").on("click",function(){
 			${key}Delete();
 		});
+		$(document).on("keypress",function(event){
+			if(event){
+	   			if(event.keyCode==13 || event.keyCode==0){
+	   			    setTimeout(${key}Search,300); 
+	  		 	}
+	  		}
+		});
 	});
 	$(document).ready(function(){
 		init${UpperKey}Datagrid(contextPath+'${urlPrefix}/getListData.json');

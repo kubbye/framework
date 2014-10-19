@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="func">
+	<!-- 菜单功能resultMap -->
+	<resultMap id="funcResultMap" type="com.wade.framework.admin.entity.FuncEntity">
+		<result property="id" column="ID"></result>
+		<result property="funcName" column="FUNC_NAME"></result>
+		<result property="funcCode" column="FUNC_CODE"></result>
+		<result property="url" column="URL"></result>
+		<result property="menuId" column="MENU_ID"></result>
+		<result property="createUser" column="CREATE_BY"></result>
+		<result property="updateUser" column="UPDATE_BY"></result>
+		<result property="createTime" column="CREATE_TIME"></result>
+		<result property="updateTime" column="UPDATE_TIME"></result>
+		<result property="deleteMark" column="DELETE_MARK"></result>
+	</resultMap>
+	<!-- 插入菜单功能记录 -->
+	<insert id="insertFunc" parameterType="com.wade.framework.admin.entity.FuncEntity" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ts_menu_func 
+			( 
+			  	FUNC_NAME,
+			  	FUNC_CODE,
+			  	URL,
+			  	MENU_ID,
+			  	CREATE_BY,
+			  	UPDATE_BY,
+			  	CREATE_TIME,
+			  	UPDATE_TIME,
+			  	DELETE_MARK
+			)
+			VALUES
+			(
+			  	#{funcName},
+			  	#{funcCode},
+			  	#{url},
+			  	#{menuId},
+			  	#{createUser},
+			  	#{updateUser},
+			  	#{createTime},
+			  	#{updateTime},
+			  	#{deleteMark}
+			) 
+	</insert>
+	<!-- 更新菜单功能记录 -->
+	<update id="updateFunc"  parameterType="com.wade.framework.admin.entity.FuncEntity">
+		update ts_menu_func set  
+			FUNC_NAME=#{funcName},
+			FUNC_CODE=#{funcCode},
+			URL=#{url},
+			MENU_ID=#{menuId},
+			update_by = #{updateUser},
+			update_time=#{updateTime}
+		 where ID=#{id}
+	</update>
+	<sql id="sql_funcList">
+		SELECT 
+			ID,
+			FUNC_NAME,
+			FUNC_CODE,
+			URL,
+			MENU_ID,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		 FROM ts_menu_func where delete_mark=0
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryFuncsByPage" parameterType="com.wade.framework.admin.entity.FuncEntity" resultMap="funcResultMap">
+		<include refid="sql_funcList"/>
+	</select>
+	<select id="queryFuncs" parameterType="com.wade.framework.admin.entity.FuncEntity" resultMap="funcResultMap">
+		<include refid="sql_funcList"/>
+	</select>
+	<!-- 根据主键查询菜单功能记录 -->
+	<select id="queryFuncById" parameterType="java.lang.Long" resultMap="funcResultMap">
+		select 
+			ID,
+			FUNC_NAME,
+			FUNC_CODE,
+			URL,
+			MENU_ID,
+			CREATE_BY,
+			UPDATE_BY,
+			CREATE_TIME,
+			UPDATE_TIME,
+			DELETE_MARK
+		from ts_menu_func where ID=#{id}
+	</select>
+	<!-- 删除菜单功能记录 -->
+	<delete id="deleteFunc"  parameterType="com.wade.framework.admin.entity.FuncEntity">
+		update ts_menu_func set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+	</delete>
+</mapper>

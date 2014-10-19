@@ -18,6 +18,13 @@ var dataTable;
 		$("#post_users").on("click",function(){
 			viewAssignUsers();
 		});
+		$(document).on("keypress",function(event){
+			if(event){
+	   			if(event.keyCode==13 || event.keyCode==0){
+	   			    setTimeout(postSearch,300); 
+	  		 	}
+	  		}
+		});
 	});
 	$(document).ready(function(){
 		initPostDatagrid(contextPath+'/admin/post/getListData.json?orgId='+$("#search_orgId").val());
@@ -29,6 +36,8 @@ var dataTable;
         queryParams.lgName = $("#search_lgName").val();  
         */
 		queryParams.orgId = $("#search_orgId").val();
+		queryParams.postName=$("#search_postName").val();
+		queryParams.avaliable=$("#search_avaliable").combobox('getValue');
         //重新加载datagrid的数据  
         $("#post_table").datagrid('reload');  
 	}

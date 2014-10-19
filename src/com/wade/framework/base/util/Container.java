@@ -31,8 +31,8 @@ public class Container implements ApplicationContextAware {
         return context.getBean(beanName);
     }
 
-    public void setApplicationContext(ApplicationContext arg0) throws BeansException {
-        context = arg0;
+    public void setApplicationContext(ApplicationContext ac) throws BeansException {
+        context = ac;
     }
     
     

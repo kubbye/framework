@@ -1,14 +1,17 @@
 package com.wade.framework.admin.controller.role;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wade.framework.admin.entity.RoleEntity;
+import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.service.role.IRoleService;
 import com.wade.framework.base.AjaxSuccessInfo;
 import com.wade.framework.base.PageInfo;
@@ -142,4 +145,40 @@ public class RoleController extends BaseController {
     public String roleTree(){
         return "admin/role/roleTree";
     }
+    
+    /**
+     * 功能描述: <br>
+     *    查看角色下的用户
+     *
+     * @param role
+     * @param model
+     * @return
+     */
+    @RequestMapping("/viewAssignUsers")
+    public String viewAssignUsers(RoleEntity role, Model model) {
+        model.addAttribute("roleId", role.getRoleId());
+        model.addAttribute("orgId", role.getOrgId());
+        return "admin/role/assignedUsers";
+    }
+    
+    /**
+     * 功能描述: <br>
+     *     查询用户
+     *
+     * @param orgId 机构id
+     * @param roleId 角色id
+     * @param response
+     */
+    @RequestMapping("/getAssignUsersByRole")
+    public void getAssignUsersByRole(Long orgId, Long roleId, HttpServletResponse response){
+        List<UserEntity> list = roleService.getAssignUsersByRole(orgId, roleId);
+        int size = null == list ? 0 : list.size();
+        PageInfo page = new PageInfo();
+        page.setPage(1);
+        page.setTotal(size);
+        page.setRows(size);
+        PaginationResult<UserEntity> result = new PaginationResult<UserEntity>(list, page);
+        super.ajaxJson(response, result);
+    }
+    
 }

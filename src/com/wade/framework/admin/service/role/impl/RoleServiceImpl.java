@@ -1,6 +1,7 @@
 package com.wade.framework.admin.service.role.impl;
 
 import java.util.List;
+import java.util.WeakHashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wade.framework.admin.dao.role.IRoleDao;
 import com.wade.framework.admin.entity.AuthEntity;
 import com.wade.framework.admin.entity.RoleEntity;
+import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.service.auth.IAuthService;
 import com.wade.framework.admin.service.role.IRoleService;
 import com.wade.framework.base.Constants;
@@ -16,7 +18,7 @@ import com.wade.framework.base.PaginationResult;
 import com.wade.framework.base.entity.TreeEntity;
 
 @Service("roleService")
-public class RoleServiceImpl implements IRoleService {
+public class RoleServiceImpl<V> implements IRoleService {
 
     /**
      * 注入dao
@@ -73,6 +75,14 @@ public class RoleServiceImpl implements IRoleService {
     @Override
     public List<TreeEntity> initRoleTree(Long orgId) {
         return roleDao.queryList("role.queryPostTree", orgId);
+    }
+
+    @Override
+    public List<UserEntity> getAssignUsersByRole(Long orgId, Long roleId) {
+        WeakHashMap<String, Long> param = new WeakHashMap<String, Long>();
+        param.put("orgId", orgId);
+        param.put("roleId", roleId);
+        return roleDao.queryList("role.queryUsersByRole", param);
     }
     
 }

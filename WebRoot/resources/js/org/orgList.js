@@ -15,6 +15,13 @@ var dataTable;
 		$("#org_delete").on("click",function(){
 			orgDelete();
 		});
+		$(document).on("keypress",function(event){
+			if(event){
+	   			if(event.keyCode==13 || event.keyCode==0){
+	   			    setTimeout(orgSearch,300); 
+	  		 	}
+	  		}
+		});
 	});
 	$(document).ready(function(){
 		initOrgDatagrid(contextPath+'/admin/org/getListData.json?parentId='+$("#search_parentId").val());

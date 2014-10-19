@@ -301,4 +301,13 @@
 	    timeToLiveSeconds="3000" 
 	    diskPersistent="false"  
 	    diskExpiryThreadIntervalSeconds="120" /> 
+	    
+	<cache name="menuCache" 
+	    maxElementsInMemory="1000"
+	    eternal="false"  
+	    overflowToDisk="false"
+	    timeToIdleSeconds="1800"  
+	    timeToLiveSeconds="3000" 
+	    diskPersistent="false"  
+	    diskExpiryThreadIntervalSeconds="120" />
 </ehcache>

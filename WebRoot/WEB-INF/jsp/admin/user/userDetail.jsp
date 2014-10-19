@@ -214,7 +214,10 @@
 							$("#emply_"+key).searchbox('setValue',item);
 						}
 					});
-					$("#org_name").val(data.org.orgFullName);
+					if(data && data.org && data.orgFullName)
+					{
+						$("#org_name").val(data.org.orgFullName);
+					}
 				});
 			</c:if>
 		});

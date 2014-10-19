@@ -60,8 +60,7 @@
 			update_time=#{updateTime}
 		 where ID=#{id}
 	</update>
-	<!-- 分页查询记录 -->
-	<select id="queryPostsByPage" parameterType="com.wade.framework.admin.entity.PostEntity" resultMap="postResultMap">
+	<sql id="sql_postList">
 		SELECT 
 			ID,
 			ORG_ID,
@@ -77,7 +76,20 @@
 			DELETE_MARK
 		 FROM ts_post where delete_mark=0
 		 and org_id=#{orgId}
+		 <if test="postName!=null and postName!=''">
+		 	and instr(post_name ,#{postName})>0 
+		 </if>
+		 <if test="avaliable!=null and avaliable!=''">
+		 	and avaliable=#{avaliable}
+		 </if>
 		 order by post_path
+	</sql>
+	<!-- 分页查询记录 -->
+	<select id="queryPostsByPage" parameterType="com.wade.framework.admin.entity.PostEntity" resultMap="postResultMap">
+		<include refid="sql_postList"/>
+	</select>
+	<select id="queryPost" parameterType="com.wade.framework.admin.entity.PostEntity" resultMap="postResultMap">
+		<include refid="sql_postList"/>
 	</select>
 	<!-- 根据主键查询岗位记录 -->
 	<select id="queryPostById" parameterType="java.lang.Long" resultMap="postResultMap">

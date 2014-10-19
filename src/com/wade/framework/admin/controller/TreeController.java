@@ -20,9 +20,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.wade.framework.admin.cache.MenuCache;
 import com.wade.framework.admin.service.org.IOrgService;
 import com.wade.framework.admin.service.post.IPostService;
 import com.wade.framework.admin.service.role.IRoleService;
+import com.wade.framework.base.cache.Cache;
+import com.wade.framework.base.cache.ICache;
 import com.wade.framework.base.controller.BaseController;
 import com.wade.framework.base.entity.TreeEntity;
 
@@ -49,6 +52,12 @@ public class TreeController extends BaseController {
     IRoleService roleService;
     
     /**
+     * 注入菜单cache
+     */
+    @Autowired
+    ICache menuCache;
+    
+    /**
      * 功能描述: 机构树<br>
      * 〈功能详细描述〉
      *
@@ -72,6 +81,7 @@ public class TreeController extends BaseController {
         List<TreeEntity> treeList = postService.initPostTree(orgId);
         super.ajaxJsonTree(response, treeList);
     }
+    
     /**
      * 功能描述: 菜单树<br>
      * 〈功能详细描述〉
@@ -80,10 +90,18 @@ public class TreeController extends BaseController {
      * @param response
      */
     @RequestMapping("/menu")
-    public void menuTree(@RequestParam("parentId")Long parentId , HttpServletResponse response){
-        List<TreeEntity> treeList = new ArrayList<TreeEntity>();
-        super.ajaxJsonTree(response, treeList);
+    public void menuTree(Long parentId , HttpServletResponse response){
+        List<Cache> cacheList = new ArrayList<Cache>();
+       
+        if(null == parentId){
+            cacheList = menuCache.getAllCache();
+        } else {
+            cacheList = (List<Cache>)menuCache.getCache(MenuCache.SUB_MENU_KEY + parentId);
+        }
+       
+        super.ajaxJsonTree(response, cacheList);
     }
+   
     /**
      * 功能描述: 角色树<br>
      * 〈功能详细描述〉

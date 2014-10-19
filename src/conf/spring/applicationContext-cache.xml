@@ -21,10 +21,17 @@
 		<property name="cacheManagerName" value="authCacheManager"></property>
 	</bean>
 	<bean id="userCache" class="com.wade.framework.admin.cache.UserCache" init-method="initCache">
-		<property name="cacheManager" ref="cacheManager"></property>
 		<property name="userCache">
 			<bean factory-bean="cacheManager" factory-method="getCache">
 				<constructor-arg value="userCache"/>
+			</bean>
+		</property>
+	</bean>
+	
+	<bean id="menuCache" class="com.wade.framework.admin.cache.MenuCache" init-method="initCache">
+		<property name="menuCache">
+			<bean factory-bean="cacheManager" factory-method="getCache">
+				<constructor-arg value="menuCache"/>
 			</bean>
 		</property>
 	</bean>

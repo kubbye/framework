@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wade.framework.admin.cache.UserCache;
 import com.wade.framework.admin.dao.user.IUserDao;
 import com.wade.framework.admin.entity.EmplyEntity;
 import com.wade.framework.admin.entity.RoleEntity;
@@ -16,6 +15,7 @@ import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 import com.wade.framework.base.cache.Cache;
+import com.wade.framework.base.cache.ICache;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService {
@@ -24,7 +24,7 @@ public class UserServiceImpl implements IUserService {
     IUserDao userDao;
     
     @Autowired
-    UserCache userCache;
+    ICache userCache;
     
     @Override
     public int insert(UserEntity user) {

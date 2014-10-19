@@ -85,7 +85,7 @@ public class UserController extends BaseController {
      * @param pageInfo 分页对象
      */
     @RequestMapping("/getListData")
-    public void getListData(UserEntity user,HttpServletResponse response,PageInfo pageInfo){
+    public void getListData(UserEntity user, HttpServletResponse response, PageInfo pageInfo){
         PaginationResult<UserEntity> result=userService.queryListByPage(user, pageInfo);
         super.ajaxJson(response, result);
     }

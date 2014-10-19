@@ -133,4 +133,30 @@
 	<insert id="deleteUserRoleByRole" parameterType="java.lang.Long">
 		delete from tr_user_role where role_id=#{roleId}
 	</insert>
+	<!-- 根据角色查询用户 -->
+	<select id="queryUsersByRole" parameterType="java.util.WeakHashMap" resultMap="user.userResultMap">
+		SELECT 
+			a.USER_ID,
+			a.ORG_ID,
+			a.LOGIN_ID,
+			a.LG_NAME,
+			a.USER_NAME,
+			a.PASS_WORD,
+			a.SEX,
+			a.PHOTO,
+			a.MEMO,
+			a.DEFAULT_ROLE,
+			a.DEFAULT_ROLE_NAME,
+			a.USER_TYPE,
+			a.AVALIABLE,
+			a.CREATE_BY,
+			a.UPDATE_BY,
+			a.CREATE_TIME,
+			a.UPDATE_TIME,
+			a.DELETE_MARK
+		 FROM ts_user a,tr_user_role b WHERE a.USER_ID=b.USER_ID
+		 AND a.delete_mark=0
+		 AND org_id=#{orgId}
+		 AND b.ROLE_ID=#{roleId}
+	</select>
 </mapper>

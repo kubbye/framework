@@ -4,23 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.service.user.IUserService;
 import com.wade.framework.base.cache.Cache;
 import com.wade.framework.base.cache.ICache;
 
-@Service("userCache")
 public class UserCache implements ICache {
-    
 
-    private CacheManager cacheManager;
-    
     @Autowired
     private IUserService userService;
     
@@ -37,7 +31,7 @@ public class UserCache implements ICache {
     @Override
     public Cache getCache(Object key){
         Element e= userCache.get(key);
-        return (Cache)e.getObjectValue();
+        return null == e ? null : (Cache)e.getObjectValue();
     }
     
     
@@ -68,12 +62,7 @@ public class UserCache implements ICache {
         }
         return list;
     }
-    public CacheManager getCacheManager() {
-        return cacheManager;
-    }
-    public void setCacheManager(CacheManager cacheManager) {
-        this.cacheManager = cacheManager;
-    }
+
     public net.sf.ehcache.Cache getUserCache() {
         return userCache;
     }

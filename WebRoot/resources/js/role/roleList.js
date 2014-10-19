@@ -15,6 +15,16 @@ var dataTable;
 		$("#role_delete").on("click",function(){
 			roleDelete();
 		});
+		$("#role_users").on("click",function(){
+			viewAssignUsers();
+		});
+		$(document).on("keypress",function(event){
+			if(event){
+	   			if(event.keyCode==13 || event.keyCode==0){
+	   			    setTimeout(roleSearch,300); 
+	  		 	}
+	  		}
+		});
 	});
 	$(document).ready(function(){
 		initRoleDatagrid(contextPath+'/admin/role/getListData.json?orgId='+$("#search_orgId").val());
@@ -70,6 +80,13 @@ var dataTable;
         			});
                 }
             });
+		}
+	}
+	/*查看角色的已分配人员*/
+	function viewAssignUsers(){
+		var sel=isRoleSelected();
+		if(sel){
+			openWindow(contextPath+"/admin/role/viewAssignUsers.htm?roleId="+sel.roleId+"&orgId="+sel.orgId,'已分配用户');
 		}
 	}
 	/*是否有角色记录被选中*/

@@ -154,7 +154,9 @@ var dataTable;
 			async : false,
 			dataType : "json",
 			success : function(data) {
-				postName=data.postName;
+				if(data){
+					postName=data.postName;
+				}
 			}
 		});
 		return postName;
