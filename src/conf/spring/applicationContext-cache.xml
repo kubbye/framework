@@ -35,5 +35,13 @@
 			</bean>
 		</property>
 	</bean>
+	
+	<bean id="funcCache" class="com.wade.framework.admin.cache.FunctionCache" init-method="initCache">
+		<property name="funcCache">
+			<bean factory-bean="cacheManager" factory-method="getCache">
+				<constructor-arg value="funcCache"/>
+			</bean>
+		</property>
+	</bean>
 	<!-- ehcache配置 end -->
 </beans>

@@ -57,6 +57,9 @@ public class TreeController extends BaseController {
     @Autowired
     ICache menuCache;
     
+    @Autowired
+    ICache funcCache;
+    
     /**
      * 功能描述: 机构树<br>
      * 〈功能详细描述〉
@@ -102,6 +105,25 @@ public class TreeController extends BaseController {
         super.ajaxJsonTree(response, cacheList);
     }
    
+    /**
+     * 功能描述: <br>
+     *    菜单功能树
+     *
+     * @param menuId
+     * @param response
+     */
+    @RequestMapping("/func")
+    public void funcTree(Long menuId, HttpServletResponse response){
+        List<Cache> cacheList = new ArrayList<Cache>();
+        
+        if(null == menuId){
+            cacheList = funcCache.getAllCache();
+        } else {
+
+        }
+       
+        super.ajaxJsonTree(response, cacheList);
+    }
     /**
      * 功能描述: 角色树<br>
      * 〈功能详细描述〉

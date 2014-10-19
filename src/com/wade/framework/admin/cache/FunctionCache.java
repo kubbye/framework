@@ -19,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import net.sf.ehcache.Element;
 
 import com.wade.framework.admin.entity.FuncEntity;
-import com.wade.framework.admin.entity.MenuEntity;
 import com.wade.framework.admin.service.func.IFuncService;
 import com.wade.framework.base.cache.Cache;
 import com.wade.framework.base.cache.ICache;

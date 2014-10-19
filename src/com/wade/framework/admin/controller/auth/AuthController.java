@@ -31,24 +31,15 @@ public class AuthController extends BaseController {
     @Autowired
     IAuthService authService;
     
-    
     /**
      * <p>Description: 跳转授权新增页面</p>
      * @return
      */
-    @RequestMapping("/toAddAuth")
-    public String toAddAuth(){
-        return "admin/auth/authAdd";
+    @RequestMapping("/toPostAuth")
+    public String toPostAuth(){
+        return "admin/post/menuAssign";
     }
-    /**
-     * <p>Description: 跳转授权列表页面</p>
-     * @param auth  授权对象
-     * @return
-     */
-    @RequestMapping("/list")
-    public String list(AuthEntity auth){
-        return "admin/auth/authList";
-    }
+ 
     
     /**
      * <p>Description: 分页查询授权记录</p>

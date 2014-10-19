@@ -18,6 +18,10 @@ var dataTable;
 		$("#post_users").on("click",function(){
 			viewAssignUsers();
 		});
+		$("#post_auth").on("click",function(){
+			toMenuAssign();
+		});
+		
 		$(document).on("keypress",function(event){
 			if(event){
 	   			if(event.keyCode==13 || event.keyCode==0){
@@ -97,6 +101,14 @@ var dataTable;
 			return false;
 		}
 		return sel;
+	}
+	
+	/*跳转权限分配页面*/
+	function toMenuAssign(){
+		var sel=isPostSelected();
+		if(sel){
+			openWindow(contextPath+"/admin/auth/toPostAuth.htm?postId="+sel.id);
+		}
 	}
 	/*初始化岗位datagrid*/
 	function initPostDatagrid(_url){

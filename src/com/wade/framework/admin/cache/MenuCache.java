@@ -39,7 +39,7 @@ public class MenuCache implements ICache {
         List<MenuEntity> list = menuService.queryList(null);
         for(MenuEntity menu : list){
             //缓存当前菜单
-            menuCache.put(new Element(MENU_KEY + menu.getId(), menu));
+            menuCache.put(new Element(MENU_KEY + menu.getId(), new Cache(menu.getId(), menu)));
             //缓存子菜单
             setSubCache(menu);
         }
