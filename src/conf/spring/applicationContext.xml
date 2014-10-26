@@ -1,73 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"  
-  xmlns:context="http://www.springframework.org/schema/context"  
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-     xmlns:aop="http://www.springframework.org/schema/aop"  
-     xmlns:tx="http://www.springframework.org/schema/tx"
-     xsi:schemaLocation="http://www.springframework.org/schema/beans 
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd   
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
         http://www.springframework.org/schema/context  
-          http://www.springframework.org/schema/context/spring-context-3.0.xsd" > 
-       <context:component-scan base-package="com.wade.framework"/>  
-       <context:annotation-config/>
-    <!-- 数据源设置 -->    
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
-        <property name="url" value="jdbc:mysql://localhost:3306/framedb"></property>
-        <property name="username" value="root"></property>
-        <property name="password" value="rootroot"></property>
-    </bean>
-    <!-- sqlSessionFactory配置 -->    
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-	     <property name="configLocation" value="classpath:conf/sqlMap/sqlMap_config.xml"></property>  
-	      <property name="dataSource" ref="dataSource" />    
-    </bean>
-    <!-- SqlSessionTemplate配置 -->  
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
-    	<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
-    </bean>
-    <bean id="container" class="com.wade.framework.base.util.Container">
-    </bean>
-    <!-- BEGIN 事务配置 -->  
-    <!-- 
-    <bean id="txManager"
-        class="org.springframework.">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <tx:advice id="txAdvice" transaction-manager="txManager">
-        <tx:attributes>
-            <tx:method name="insert*" propagation="REQUIRED"
-                rollback-for="Exception" />
-            <tx:method name="update*" propagation="REQUIRED"
-                rollback-for="Exception" />
-            <tx:method name="delete*" propagation="REQUIRED"
-                rollback-for="Exception" />
-            <tx:method name="save*" propagation="REQUIRED"
-                rollback-for="Exception" />
-                <tx:method name="add*" propagation="REQUIRED"
-                 rollback-for="Exception" />
-             <tx:method name="publish*" propagation="REQUIRED"
-                  rollback-for="Exception" />
-             <tx:method name="synchronize*" propagation="REQUIRED"
-                 rollback-for="Exception" />
-             <tx:method name="calculate*" propagation="REQUIRED"
-                 rollback-for="Exception" />
-            <tx:method name="*" read-only="true" />
-        </tx:attributes>
-    </tx:advice>
-
-    <aop:aspectj-autoproxy />
-    <aop:config proxy-target-class="true">
-        <aop:advisor id="serviceManagerTx" advice-ref="txAdvice"
-            pointcut="execution(* com..*Service*.*(..)) " />
-        <aop:advisor id="daoManagerTx" advice-ref="txAdvice"
-            pointcut="execution(* com..*Dao*.*(..)) " />
-        <aop:advisor id="jobManagerTx" advice-ref="txAdvice"
-            pointcut="execution(* com..job..Job_*.*(..)) " />
-    </aop:config>
-     -->
-    <!-- END 事务配置 -->  
+          http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:component-scan base-package="com.wade.framework" />
+	<context:annotation-config />
+	<!-- 数据源设置 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+		<property name="url" value="jdbc:mysql://localhost:3306/framedb"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="rootroot"></property>
+	</bean>
+	<!-- sqlSessionFactory配置 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="configLocation" value="classpath:conf/sqlMap/sqlMap_config.xml"></property>
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- SqlSessionTemplate配置 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>
+	</bean>
+	<bean id="container" class="com.wade.framework.base.util.Container">
+	</bean>
+	<!-- BEGIN 事务配置 -->
+	<!-- <bean id="txManager" class="org.springframework."> <property name="sessionFactory" 
+		ref="sessionFactory" /> </bean> <tx:advice id="txAdvice" transaction-manager="txManager"> 
+		<tx:attributes> <tx:method name="insert*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="update*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="save*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="add*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="publish*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="synchronize*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="calculate*" propagation="REQUIRED" rollback-for="Exception" 
+		/> <tx:method name="*" read-only="true" /> </tx:attributes> </tx:advice> 
+		<aop:aspectj-autoproxy /> <aop:config proxy-target-class="true"> <aop:advisor 
+		id="serviceManagerTx" advice-ref="txAdvice" pointcut="execution(* com..*Service*.*(..)) 
+		" /> <aop:advisor id="daoManagerTx" advice-ref="txAdvice" pointcut="execution(* 
+		com..*Dao*.*(..)) " /> <aop:advisor id="jobManagerTx" advice-ref="txAdvice" 
+		pointcut="execution(* com..job..Job_*.*(..)) " /> </aop:config> -->
+	<!-- END 事务配置 -->
 </beans>

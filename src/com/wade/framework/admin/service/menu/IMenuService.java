@@ -39,7 +39,7 @@ public interface IMenuService {
      * @param menu 菜单对象
      * @return 菜单对象
      */
-    MenuEntity queryObjectById(Long id);
+    MenuEntity queryObjectByCode(String code);
     
     /**
      * <p>Description: 查询菜单记录列表</p>

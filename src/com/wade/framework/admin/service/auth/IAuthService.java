@@ -3,8 +3,6 @@ package com.wade.framework.admin.service.auth;
 import java.util.List;
 
 import com.wade.framework.admin.entity.AuthEntity;
-import com.wade.framework.base.PageInfo;
-import com.wade.framework.base.PaginationResult;
 
 /**
  * <p>ClassName: IAuthService</p>
@@ -14,25 +12,18 @@ import com.wade.framework.base.PaginationResult;
  */
 public interface IAuthService {
     /**
-     * <p>Description: 插入授权</p>
+     * <p>Description: 插入岗位授权</p>
      * @param auth 授权对象
      * @return
      */
-    int insert(AuthEntity auth);
+    int insertPostAuth(List<AuthEntity> auth, Long postId, Long userId);
     
     /**
-     * <p>Description: 更新授权</p>
+     * <p>Description: 插入角色授权</p>
      * @param auth 授权对象
      * @return
      */
-    int update(AuthEntity auth);
-    
-    /**
-     * <p>Description: 删除授权</p>
-     * @param auth 授权对象
-     * @return
-     */
-    int delete(AuthEntity auth);
+    int insertRoleAuth(List<AuthEntity> auth, Long roleId, Long userId);
     
     /**
      * <p>Description: 根据授权id查询授权记录</p>
@@ -49,10 +40,11 @@ public interface IAuthService {
     List<AuthEntity> queryList(Object param);
     
     /**
-     * <p>Description: 分页查询授权记录列表</p>
-     * @param param 授权对象
-     * @param pageinfo 分页对象
-     * @return 分页记录
+     * 功能描述: <br>
+     *    删除授权
+     *
+     * @param type
+     * @param authId
      */
-    PaginationResult<AuthEntity> queryListByPage(AuthEntity param, PageInfo pageinfo);
+    void deleteAuth(Integer type, Long authId);
 }

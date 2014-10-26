@@ -50,7 +50,7 @@
 	    		 -->
 	    		<tr>
 	    			<td align="right">机构注册日期:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="orgRegDate" name="orgRegDate"></input></td>
+	    			<td><input class="Wdate" type="text" id="orgRegDate" name="orgRegDate" onClick="WdatePicker()"></input></td>
 	    		</tr>
 	    		<!-- 
 	    		<tr>

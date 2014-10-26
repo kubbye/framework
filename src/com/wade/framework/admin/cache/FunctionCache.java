@@ -51,16 +51,16 @@ public class FunctionCache implements ICache {
      * @param func
      */
     private void setSubCache(FuncEntity func){
-        Cache subCache = getCache(func.getMenuId());
+        Cache subCache = getCache(func.getMenuCode());
         List<Cache> subList = null;
         if(null == subCache){
             subList = new ArrayList<Cache>();
             subList.add(new Cache(func.getId(), func));
-            addCache(new Cache(func.getMenuId(), subList));
+            addCache(new Cache(func.getMenuCode(), subList));
         } else {
             subList = (List<Cache>)subCache.getValue();
             subList.add(new Cache(func.getId(), func));
-            refreshCache(new Cache(func.getMenuId(), subList));
+            refreshCache(new Cache(func.getMenuCode(), subList));
         }
     }
     @Override

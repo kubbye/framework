@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wade.framework.admin.dao.role.IRoleDao;
-import com.wade.framework.admin.entity.AuthEntity;
 import com.wade.framework.admin.entity.RoleEntity;
 import com.wade.framework.admin.entity.UserEntity;
 import com.wade.framework.admin.service.auth.IAuthService;
 import com.wade.framework.admin.service.role.IRoleService;
-import com.wade.framework.base.Constants;
 import com.wade.framework.base.PageInfo;
 import com.wade.framework.base.PaginationResult;
 import com.wade.framework.base.entity.TreeEntity;
@@ -49,10 +47,7 @@ public class RoleServiceImpl<V> implements IRoleService {
         //删除角色绑定的用户
         roleDao.delete("role.deleteUserRoleByRole", role.getRoleId());
         //删除角色绑定的权限
-        AuthEntity auth = new AuthEntity();
-        auth.setAuthType(Constants.AUTHORITY_ROLE);
-        auth.setAuthId(role.getRoleId());
-        authService.delete(auth);
+        //authService.deleteAuth(Constants.AUTHORITY_ROLE, role.getRoleId());
         //删除角色
         return roleDao.delete("role.deleteRole", role);
     }

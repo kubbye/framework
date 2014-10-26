@@ -7,7 +7,7 @@
 		<result property="funcName" column="FUNC_NAME"></result>
 		<result property="funcCode" column="FUNC_CODE"></result>
 		<result property="url" column="URL"></result>
-		<result property="menuId" column="MENU_ID"></result>
+		<result property="menuCode" column="MENU_CODE"></result>
 		<result property="createUser" column="CREATE_BY"></result>
 		<result property="updateUser" column="UPDATE_BY"></result>
 		<result property="createTime" column="CREATE_TIME"></result>

@@ -3,15 +3,14 @@
 <mapper namespace="menu">
 	<!-- 菜单resultMap -->
 	<resultMap id="menuResultMap" type="com.wade.framework.admin.entity.MenuEntity">
-		<result property="id" column="ID"></result>
-		<result property="parentId" column="PARENT_ID"></result>
+		<result property="code" column="CODE"></result>
+		<result property="parentCode" column="PARENT_CODE"></result>
 		<result property="iconCls" column="ICON_CLS"></result>
 		<result property="picUrl" column="PIC_URL"></result>
 		<result property="menuPath" column="MENU_PATH"></result>
 		<result property="mlevel" column="MLEVEL"></result>
 		<result property="mname" column="MNAME"></result>
 		<result property="url" column="URL"></result>
-		<result property="deCode" column="DE_CODE"></result>
 		<result property="menuSort" column="MENU_SORT"></result>
 		<result property="menuType" column="MENU_TYPE"></result>
 		<result property="avaliable" column="AVALIABLE"></result>
@@ -25,6 +24,7 @@
 	<insert id="insertMenu" parameterType="com.wade.framework.admin.entity.MenuEntity" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO ts_menu 
 			( 
+				CODE,
 			  	PARENT_ID,
 			  	ICON_CLS,
 			  	PIC_URL,
@@ -32,7 +32,6 @@
 			  	MLEVEL,
 			  	MNAME,
 			  	URL,
-			  	DE_CODE,
 			  	MENU_SORT,
 			  	MENU_TYPE,
 			  	AVALIABLE,
@@ -44,14 +43,14 @@
 			)
 			VALUES
 			(
-			  	#{parentId},
+				#{code},
+			  	#{parentCode},
 			  	#{iconCls},
 			  	#{picUrl},
 			  	#{menuPath},
 			  	#{mlevel},
 			  	#{mname},
 			  	#{url},
-			  	#{deCode},
 			  	#{menuSort},
 			  	#{menuType},
 			  	#{avaliable},
@@ -65,32 +64,30 @@
 	<!-- 更新菜单记录 -->
 	<update id="updateMenu"  parameterType="com.wade.framework.admin.entity.MenuEntity">
 		update ts_menu set  
-			PARENT_ID=#{parentId},
+			PARENT_CODE=#{parentCode},
 			ICON_CLS=#{iconCls},
 			PIC_URL=#{picUrl},
 			MENU_PATH=#{menuPath},
 			MLEVEL=#{mlevel},
 			MNAME=#{mname},
 			URL=#{url},
-			DE_CODE=#{deCode},
 			MENU_SORT=#{menuSort},
 			MENU_TYPE=#{menuType},
 			AVALIABLE=#{avaliable},
 			update_by = #{updateUser},
 			update_time=#{updateTime}
-		 where ID=#{id}
+		 where CODE=#{code}
 	</update>
 	<sql id="sql_menuList">
 		SELECT 
-			ID,
-			PARENT_ID,
+			CODE,
+			PARENT_CODE,
 			ICON_CLS,
 			PIC_URL,
 			MENU_PATH,
 			MLEVEL,
 			MNAME,
 			URL,
-			DE_CODE,
 			MENU_SORT,
 			MENU_TYPE,
 			AVALIABLE,
@@ -111,15 +108,14 @@
 	<!-- 根据主键查询菜单记录 -->
 	<select id="queryMenuById" parameterType="java.lang.Long" resultMap="menuResultMap">
 		select 
-			ID,
-			PARENT_ID,
+			CODE,
+			PARENT_CODE,
 			ICON_CLS,
 			PIC_URL,
 			MENU_PATH,
 			MLEVEL,
 			MNAME,
 			URL,
-			DE_CODE,
 			MENU_SORT,
 			MENU_TYPE,
 			AVALIABLE,
@@ -132,6 +128,6 @@
 	</select>
 	<!-- 删除菜单记录 -->
 	<delete id="deleteMenu"  parameterType="com.wade.framework.admin.entity.MenuEntity">
-		update ts_menu set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
+		update ts_menu set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where CODE=#{code}
 	</delete>
 </mapper>

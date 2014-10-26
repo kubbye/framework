@@ -26,4 +26,14 @@ public class Constants {
      */
     public static final Integer AUTHORITY_ROLE = Integer.valueOf("0000000010",2);
     
+    /**
+     * 授权类型：资源类型，菜单
+     */
+    public static final String RESOURCE_TYPE_MENU = "M";
+    
+    /**
+     * 授权类型：资源类型，功能按钮
+     */
+    public static final String RESOURCE_TYPE_FUNCTION = "F";
+    
 }

@@ -1,6 +1,5 @@
 package com.wade.framework.admin.entity;
 
-import java.util.Date;
 import com.wade.framework.base.entity.BaseEntity;
 
 /**
@@ -32,9 +31,9 @@ public class FuncEntity extends BaseEntity {
     private String url;
     
     /**
-     * <p>Field menuId: menuId</p>
+     * <p>Field menuId: 菜单代码</p>
      */
-    private Long menuId;
+    private String menuCode;
     
     
     public Long getId() {
@@ -68,14 +67,15 @@ public class FuncEntity extends BaseEntity {
     public void setUrl(String url) {
         this.url = url;
     }
-    
-    public Long getMenuId() {
-        return menuId;
+
+    public String getMenuCode() {
+        return menuCode;
     }
-    
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+
+    public void setMenuCode(String menuCode) {
+        this.menuCode = menuCode;
     }
+   
     
     
 }

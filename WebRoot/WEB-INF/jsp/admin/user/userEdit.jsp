@@ -61,7 +61,17 @@
 	    		</tr>
 	    		<tr>
 	    			<td align="right">证件类型:</td>
-	    				<td><input class="easyui-validatebox textbox" type="text" id="emply_certType" name="emply.certType" data-options="validType:['maxLength[64]']"></input></td>
+	    				<td>
+	    				<select id="emply_certType" name="emply.certType" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="1">--请选择--</option>
+		    				<option value="1">居民身份证</option>
+		    				<option  value="2">士官证</option>
+		    				<option  value="3">学生证</option>
+		    				<option  value="4">驾驶证</option>
+		    				<option  value="5">护照</option>
+		    				<option  value="6">港澳通行证</option>
+		    			</select>
+	    				</td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">证件号码:</td>
@@ -141,27 +151,51 @@
 	    		</tr>
 	    		<tr>
 	    			<td align="right">生日:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="emply_birthday" name="emply.birthday"></input></td>
+	    			<td><input class="Wdate" type="text" id="emply_birthday" name="emply.birthday" onClick="WdatePicker()"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">血型:</td>
-	    				<td><input class="easyui-validatebox textbox" type="text" id="emply_bloodType" name="emply.bloodType" data-options="validType:['maxLength[64]']"></input></td>
+	    				<td>
+	    				<select id="emply_bloodType" name="emply.bloodType" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">--请选择--</option>
+		    				<option value="O">O</option>
+		    				<option  value="A">A</option>
+		    				<option  value="B">B</option>
+		    				<option  value="AB">AB</option>
+		    			</select>
+	    				</td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">学历:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="emply_eduLevel" name="emply.eduLevel" data-options="validType:['maxLength[64]']"></input></td>
+	    			<td>
+	    			<select id="emply_eduLevel" name="emply.eduLevel" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">--请选择--</option>
+		    				<option value="1">高中</option>
+		    				<option  value="2">专科</option>
+		    				<option  value="3">本科</option>
+		    				<option  value="4">研究生</option>
+		    			</select>
+		    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">上岗日期:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="emply_assumeDate" name="emply.assumeDate"></input></td>
+	    			<td><input class="Wdate" type="text" id="emply_assumeDate" name="emply.assumeDate" onClick="WdatePicker()"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">离职日期:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="emply_leaveDate" name="emply.leaveDate"></input></td>
+	    			<td><input class="Wdate" type="text" id="emply_leaveDate" name="emply.leaveDate" onClick="WdatePicker()"></input></td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">政治面貌:</td>
-	    			<td><input class="easyui-validatebox textbox" type="text" id="emply_political" name="emply.political" data-options="validType:['maxLength[32]']"></input></td>
+	    			<td>
+	    			<select id="emply_political" name="emply.political" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">--请选择--</option>
+		    				<option value="1">党员</option>
+		    				<option  value="2">团员</option>
+		    				<option  value="3">群众</option>
+		    				<option  value="4">无党派人士</option>
+		    			</select>
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">民族:</td>
@@ -177,11 +211,23 @@
 	    		</tr>
 	    		<tr>
 	    			<td align="right">专职/兼职:</td>
-	    				<td><input class="easyui-validatebox textbox" type="text" id="emply_fullJob" name="emply.fullJob" data-options="validType:['maxLength[32]']"></input></td>
+	    				<td>
+	    				<select id="emply_fullJob" name="emply.fullJob" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="1">全职</option>
+		    				<option  value="2">兼职</option>
+		    			</select>
+	    				</td>
 	    		</tr>
 	    		<tr>
 	    			<td align="right">是否有驾照:</td>
-	    				<td><input class="easyui-validatebox textbox" type="text" id="emply_driverLic" name="emply.driverLic" data-options="validType:['maxLength[32]']"></input></td>
+	    				<td>
+	    				<select id="emply_driverLic" name="emply.driverLic" class="easyui-combobox"  data-options="width:140,panelHeight:'auto'" >
+		    				<option value="">--请选择--</option>
+		    				<option value="0">无</option>
+		    				<option  value="1">有</option>
+		    			</select>
+	    				</td>
+	    				
 	    		</tr>
 	    		<tr>
 	    			<td align="right">其他:</td>
@@ -209,7 +255,7 @@
 						if(null!=$("#emply_"+key).get(0) && "INPUT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
 							$("#emply_"+key).val(item);
 						}else if(null!=$("#emply_"+key).get(0) && "SELECT"==$("#emply_"+key).get(0).tagName.toUpperCase()){
-							$("#emply_"+key).searchbox('setValue',item);
+							$("#emply_"+key).combobox('setValue',item);
 						}
 					});
 				});

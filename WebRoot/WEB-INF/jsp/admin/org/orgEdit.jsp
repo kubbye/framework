@@ -51,7 +51,7 @@
 	    		 -->
 	    		<tr>
 	    			<td align="right">机构注册日期:</td>
-	    			<td><input class="textbox" type="text" id="orgRegDate" name="orgRegDate" data-options="validType:['maxLength[120]']"></input></td>
+	    			<td><input class="Wdate" type="text" id="orgRegDate" name="orgRegDate" onClick="WdatePicker()" data-options="validType:['maxLength[120]']"></input></td>
 	    		</tr>
 	    		<!-- 
 	    		<tr>

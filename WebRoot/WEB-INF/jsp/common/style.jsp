@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugin/zTree_v3/css/demo.css" type="text/css">
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/plugin/zTree_v3/css/zTreeStyle/zTreeStyle.css" type="text/css">
 	<!-- ztree end -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/My97DatePicker/skin/WdatePicker.css"></script>
 <!-- js -->
 	<script type="text/javascript">
 	<!--
@@ -25,3 +26,4 @@
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/zTree_v3/js/jquery.ztree.core-3.5.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/zTree_v3/js/jquery.ztree.excheck-3.5.min.js"></script>
 	<!-- ztree end -->
+	<script type="text/javascript" src="${pageContext.request.contextPath}/resources/plugin/My97DatePicker/WdatePicker.js"></script>

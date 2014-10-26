@@ -1,5 +1,6 @@
 package com.wade.framework.admin.service.auth.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,8 +9,7 @@ import org.springframework.stereotype.Service;
 import com.wade.framework.admin.dao.auth.IAuthDao;
 import com.wade.framework.admin.entity.AuthEntity;
 import com.wade.framework.admin.service.auth.IAuthService;
-import com.wade.framework.base.PageInfo;
-import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.Constants;
 
 @Service("authService")
 public class AuthServiceImpl implements IAuthService {
@@ -18,20 +18,39 @@ public class AuthServiceImpl implements IAuthService {
     IAuthDao authDao;
     
     @Override
-    public int insert(AuthEntity auth) {
-    	auth.setDeleteMark("0");
-        int id=authDao.insert("auth.insertAuth", auth);
-        return id;
+    public int insertPostAuth(List<AuthEntity> authList, Long postId, Long userId) {
+        deleteAuth(Constants.AUTHORITY_POST, postId);
+        
+        //插入新的授权
+        for(AuthEntity auth : authList){
+            auth.setDeleteMark("0");
+            auth.setAuthType(Constants.AUTHORITY_POST);
+            auth.setAuthId(postId);
+            auth.setCreateTime(new Date());
+            auth.setCreateUser(userId);
+            authDao.insert("auth.insertAuth", auth);
+        }
+        return 1;
     }
 
     @Override
-    public int update(AuthEntity auth) {
-        return authDao.update("auth.updateAuth", auth);
-    }
-
-    @Override
-    public int delete(AuthEntity auth) {
-        return authDao.delete("auth.deleteAuth", auth);
+    public int insertRoleAuth(List<AuthEntity> authList, Long roleId, Long userId) {
+        AuthEntity param = new AuthEntity();
+        param.setAuthType(Constants.AUTHORITY_ROLE);
+        param.setAuthId(roleId);
+        //删除已有的授权
+        authDao.delete("auth.deleteAuths", param);
+        
+        //插入新的授权
+        for(AuthEntity auth : authList){
+            auth.setDeleteMark("0");
+            auth.setAuthType(Constants.AUTHORITY_ROLE);
+            auth.setAuthId(roleId);
+            auth.setCreateTime(new Date());
+            auth.setCreateUser(userId);
+            authDao.insert("auth.insertAuth", auth);
+        }
+        return 1;
     }
 
     @Override
@@ -45,8 +64,14 @@ public class AuthServiceImpl implements IAuthService {
     }
 
     @Override
-    public PaginationResult<AuthEntity> queryListByPage(AuthEntity param, PageInfo pageinfo) {
-       return authDao.queryListByPage("auth.queryAuthsByPage", param, pageinfo);
+    public void deleteAuth(Integer type, Long authId) {
+        AuthEntity param = new AuthEntity();
+        param.setAuthType(type);
+        param.setAuthId(authId);
+        //删除已有的授权
+        authDao.delete("auth.deleteAuths", param);
+        
     }
+    
     
 }

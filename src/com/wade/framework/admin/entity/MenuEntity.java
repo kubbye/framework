@@ -1,6 +1,5 @@
 package com.wade.framework.admin.entity;
 
-import java.util.Date;
 import com.wade.framework.base.entity.BaseEntity;
 
 /**
@@ -12,14 +11,14 @@ import com.wade.framework.base.entity.BaseEntity;
 public class MenuEntity extends BaseEntity {
     
     /**
-     * <p>Field id: 菜单ID</p>
+     * <p>Field id: 菜单代码</p>
      */
-    private Long id;
+    private String code;
     
     /**
-     * <p>Field parentId: 上级菜单ID</p>
+     * <p>Field parentId: 上级菜单代码</p>
      */
-    private Long parentId;
+    private String parentCode;
     
     /**
      * <p>Field iconCls: 图标样式</p>
@@ -52,11 +51,6 @@ public class MenuEntity extends BaseEntity {
     private String url;
     
     /**
-     * <p>Field deCode: 菜单编码</p>
-     */
-    private String deCode;
-    
-    /**
      * <p>Field menuSort: 菜单排序字段：越小越靠前</p>
      */
     private Integer menuSort;
@@ -72,22 +66,23 @@ public class MenuEntity extends BaseEntity {
     private String avaliable;
     
     
-    public Long getId() {
-        return id;
-    }
     
-    public void setId(Long id) {
-        this.id = id;
+    public String getCode() {
+        return code;
     }
-    
-    public Long getParentId() {
-        return parentId;
+
+    public void setCode(String code) {
+        this.code = code;
     }
-    
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+
+    public String getParentCode() {
+        return parentCode;
     }
-    
+
+    public void setParentCode(String parentCode) {
+        this.parentCode = parentCode;
+    }
+
     public String getIconCls() {
         return iconCls;
     }
@@ -136,13 +131,6 @@ public class MenuEntity extends BaseEntity {
         this.url = url;
     }
     
-    public String getDeCode() {
-        return deCode;
-    }
-    
-    public void setDeCode(String deCode) {
-        this.deCode = deCode;
-    }
     
     public Integer getMenuSort() {
         return menuSort;

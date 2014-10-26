@@ -88,7 +88,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("toEditMenu")
     public String toEditMenu(MenuEntity menu, Model model){
-        model.addAttribute("id",menu.getId());
+        model.addAttribute("code",menu.getCode());
         return "admin/menu/menuEdit";
     }
     
@@ -112,7 +112,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("/getMenuById")
     public void getMenuById(MenuEntity menu, HttpServletResponse response){
-        super.ajaxJson(response, menuService.queryObjectById(menu.getId()));
+        super.ajaxJson(response, menuService.queryObjectByCode(menu.getCode()));
     }
     /**
      * <p>Description: 删除菜单记录</p>
@@ -136,7 +136,7 @@ public class MenuController extends BaseController {
      */
     @RequestMapping("viewMenuDetail")
     public String viewMenuDetail(MenuEntity menu, Model model){
-        model.addAttribute("id",menu.getId());
+        model.addAttribute("id",menu.getCode());
         return "admin/menu/menuDetail";
     }
 }

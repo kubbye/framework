@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wade.framework.admin.dao.post.IPostDao;
-import com.wade.framework.admin.entity.OrgEntity;
 import com.wade.framework.admin.entity.PostEntity;
+import com.wade.framework.admin.service.auth.IAuthService;
 import com.wade.framework.admin.service.post.IPostService;
 import com.wade.framework.base.Constants;
 import com.wade.framework.base.PageInfo;
@@ -19,6 +19,9 @@ public class PostServiceImpl implements IPostService {
 
     @Autowired
     IPostDao postDao;
+    
+    @Autowired
+    IAuthService authService;
     
     @Override
     public int insert(PostEntity post) {
@@ -39,6 +42,10 @@ public class PostServiceImpl implements IPostService {
 
     @Override
     public int delete(PostEntity post) {
+        //删除岗位下绑定的用户
+        postDao.delete("post.deleteUserPostByPost", post.getId());
+        //删除岗位绑定的权限
+        //authService.deleteAuth(Constants.AUTHORITY_POST, post.getId());
         return postDao.delete("post.deletePost", post);
     }
 

@@ -15,79 +15,78 @@
 		<result property="deleteMark" column="DELETE_MARK"></result>
 	</resultMap>
 	<!-- 插入授权记录 -->
-	<insert id="insertAuth" parameterType="com.wade.framework.admin.entity.AuthEntity" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO ts_authority 
-			( 
-			  	RESOURCE_ID,
-			  	AUTH_ID,
-			  	AUTH_TYPE,
-			  	RESTYPE,
-			  	CREATE_BY,
-			  	UPDATE_BY,
-			  	CREATE_TIME,
-			  	UPDATE_TIME,
-			  	DELETE_MARK
-			)
-			VALUES
-			(
-			  	#{resourceId},
-			  	#{authId},
-			  	#{authType},
-			  	#{restype},
-			  	#{createUser},
-			  	#{updateUser},
-			  	#{createTime},
-			  	#{updateTime},
-			  	#{deleteMark}
-			) 
+	<insert id="insertAuth" parameterType="com.wade.framework.admin.entity.AuthEntity"
+		useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO ts_authority
+		(
+		RESOURCE_ID,
+		AUTH_ID,
+		AUTH_TYPE,
+		RESTYPE,
+		CREATE_BY,
+		UPDATE_BY,
+		CREATE_TIME,
+		UPDATE_TIME,
+		DELETE_MARK
+		)
+		VALUES
+		(
+		#{resourceId},
+		#{authId},
+		#{authType},
+		#{restype},
+		#{createUser},
+		#{updateUser},
+		#{createTime},
+		#{updateTime},
+		#{deleteMark}
+		)
 	</insert>
-	<!-- 更新授权记录 -->
-	<update id="updateAuth"  parameterType="com.wade.framework.admin.entity.AuthEntity">
-		update ts_authority set  
-			RESOURCE_ID=#{resourceId},
-			AUTH_ID=#{authId},
-			AUTH_TYPE=#{authType},
-			RESTYPE=#{restype},
-			update_by = #{updateUser},
-			update_time=#{updateTime}
-		 where ID=#{id}
-	</update>
+
 	<sql id="queryAuthsSql">
-		SELECT 
-			ID,
-			RESOURCE_ID,
-			AUTH_ID,
-			AUTH_TYPE,
-			RESTYPE,
-			CREATE_BY,
-			UPDATE_BY,
-			CREATE_TIME,
-			UPDATE_TIME,
-			DELETE_MARK
-		 FROM ts_authority where delete_mark=0
+		SELECT
+		ID,
+		RESOURCE_ID,
+		AUTH_ID,
+		AUTH_TYPE,
+		RESTYPE,
+		CREATE_BY,
+		UPDATE_BY,
+		CREATE_TIME,
+		UPDATE_TIME,
+		DELETE_MARK
+		FROM ts_authority where delete_mark=0
+		<if test="authType != null and authType != ''">
+			and auth_type=#{authType}
+		</if>
+		<if test="authId != null and authId != ''">
+			and auth_id=#{authId}
+		</if>
 	</sql>
 	<!-- 分页查询记录 -->
-	<select id="queryAuthsByPage" parameterType="com.wade.framework.admin.entity.AuthEntity" resultMap="authResultMap">
-		<include refid="queryAuthsSql"/>
+	<select id="queryAuthsByPage" parameterType="com.wade.framework.admin.entity.AuthEntity"
+		resultMap="authResultMap">
+		<include refid="queryAuthsSql" />
 	</select>
 	<!-- 根据主键查询授权记录 -->
-	<select id="queryAuthById" parameterType="java.lang.Long" resultMap="authResultMap">
-		select 
-			ID,
-			RESOURCE_ID,
-			AUTH_ID,
-			AUTH_TYPE,
-			RESTYPE,
-			CREATE_BY,
-			UPDATE_BY,
-			CREATE_TIME,
-			UPDATE_TIME,
-			DELETE_MARK
+	<select id="queryAuthById" parameterType="java.lang.Long"
+		resultMap="authResultMap">
+		select
+		ID,
+		RESOURCE_ID,
+		AUTH_ID,
+		AUTH_TYPE,
+		RESTYPE,
+		CREATE_BY,
+		UPDATE_BY,
+		CREATE_TIME,
+		UPDATE_TIME,
+		DELETE_MARK
 		from ts_authority where ID=#{id}
 	</select>
 	<!-- 删除授权记录 -->
-	<delete id="deleteAuth"  parameterType="com.wade.framework.admin.entity.AuthEntity">
-		delete from ts_authority 
+	<delete id="deleteAuths" parameterType="com.wade.framework.admin.entity.AuthEntity">
+		delete from ts_authority
 		where auth_type=#{authType} and auth_id=#{authId}
 	</delete>
 </mapper>

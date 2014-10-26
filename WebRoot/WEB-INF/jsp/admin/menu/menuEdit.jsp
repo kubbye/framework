@@ -12,7 +12,7 @@
 	<div class="easyui-panel" title="&nbsp;" style="width:500px">
 		<div style="padding:10px 60px 20px 60px">
 	    <form id="menuForm" method="post">
-	    	<input type="hidden" id="id" name="id">
+	    	<input type="hidden" id="code" name="code">
 	    	<table cellpadding="5">
 	    		<tr>
 	    			<td  align="right">上级菜单ID:</td>

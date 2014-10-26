@@ -134,6 +134,10 @@
 	<delete id="deletePost"  parameterType="com.wade.framework.admin.entity.PostEntity">
 		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ID=#{id}
 	</delete>
+	<!-- 删除岗位下的人员 -->
+	<delete id="deleteUserPostByPost"  parameterType="com.wade.framework.admin.entity.PostEntity">
+		DELETE FROM tr_user_post WHERE post_id=#{postId}
+	</delete>
 	<!-- 删除机构下岗位记录 -->
 	<delete id="deletePostByOrg"  parameterType="com.wade.framework.admin.entity.OrgEntity">
 		update ts_post set delete_mark=1,update_by=#{updateUser},update_time=#{updateTime} where ORG_ID=#{orgId}

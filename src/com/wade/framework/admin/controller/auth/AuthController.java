@@ -1,8 +1,11 @@
 package com.wade.framework.admin.controller.auth;
 
-import java.util.Date;
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,10 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.wade.framework.admin.entity.AuthEntity;
 import com.wade.framework.admin.service.auth.IAuthService;
-import com.google.gson.Gson;
 import com.wade.framework.base.AjaxSuccessInfo;
-import com.wade.framework.base.PageInfo;
-import com.wade.framework.base.PaginationResult;
+import com.wade.framework.base.Constants;
 import com.wade.framework.base.controller.BaseController;
 
 /**
@@ -36,60 +37,60 @@ public class AuthController extends BaseController {
      * @return
      */
     @RequestMapping("/toPostAuth")
-    public String toPostAuth(){
+    public String toPostAuth(String postId, Model model){
+        model.addAttribute("postId",postId);
         return "admin/post/menuAssign";
     }
  
-    
-    /**
-     * <p>Description: 分页查询授权记录</p>
-     * @param auth 授权对象
-     * @param response response
-     * @param pageInfo 分页对象
-     */
-    @RequestMapping("/getListData")
-    public void getListData(AuthEntity auth,HttpServletResponse response,PageInfo pageInfo){
-        PaginationResult<AuthEntity> result=authService.queryListByPage(auth, pageInfo);
-        super.ajaxJson(response, result);
-    }
     /**
      * <p>Description: 保存授权记录</p>
      * @param auth 授权对象
      * @param response
      */
-    @RequestMapping("/saveAuth")
-    public void saveAuth(AuthEntity auth,HttpServletResponse response){
-        //log.info("用户"+getSessionUser().getUserName()+"新增了授权:"+(new Gson()).toJson(auth));
-    	auth.setCreateUser(getSessionUser().getUserId());
-        auth.setCreateTime(new Date());
-        authService.insert(auth);
+    @RequestMapping("/savePostAuth")
+    public void savePostAuth(String postId, String menuIds, String funcIds, HttpServletResponse response) {
+        // log.info("用户"+getSessionUser().getUserName()+"修改了授权:"+(new Gson()).toJson(auth));
+        List<AuthEntity> authList = generateAuthList(Constants.AUTHORITY_POST, menuIds, funcIds);
+
+        authService.insertPostAuth(authList, Long.valueOf(postId), getSessionUser().getUserId());
         super.ajaxJson(response, AjaxSuccessInfo.success());
-    }
-    /**
-     * <p>Description: 跳转授权编辑页面</p>
-     * @param auth 授权对象
-     * @param model
-     * @return
-     */
-    @RequestMapping("toEditAuth")
-    public String toEditAuth(AuthEntity auth, Model model){
-        model.addAttribute("id",auth.getId());
-        return "admin/auth/authEdit";
     }
     
-   /**
-     * <p>Description: 保存授权修改记录</p>
-     * @param auth 授权对象
-     * @param response
+    /**
+     * 功能描述: <br>
+     *    生成资源授权列表
+     *
+     * @param type  授权类型
+     * @param menuIds  菜单列表
+     * @param funcIds  按钮功能列表
+     * @return
      */
-    @RequestMapping("/editAuth")
-    public void editAuth(AuthEntity auth, HttpServletResponse response){
-    	//log.info("用户"+getSessionUser().getUserName()+"修改了授权:"+(new Gson()).toJson(auth));
-    	auth.setUpdateUser(getSessionUser().getUserId());
-        auth.setUpdateTime(new Date());
-        authService.update(auth);
-        super.ajaxJson(response, AjaxSuccessInfo.success());
+    private List<AuthEntity> generateAuthList(Integer type, String menuIds, String funcIds) {
+        List<AuthEntity> authList = new ArrayList<AuthEntity>();
+        AuthEntity auth = null;
+        for (String mid : menuIds.split(",")) {
+            if (StringUtils.isEmpty(mid)) {
+                continue;
+            }
+            auth = new AuthEntity();
+            auth.setAuthType(type);
+            auth.setRestype(Constants.RESOURCE_TYPE_MENU);
+            auth.setResourceId(Long.valueOf(mid));
+            authList.add(auth);
+        }
+        for (String fid : funcIds.split(",")) {
+            if (StringUtils.isEmpty(fid)) {
+                continue;
+            }
+            auth = new AuthEntity();
+            auth.setAuthType(type);
+            auth.setRestype(Constants.RESOURCE_TYPE_FUNCTION);
+            auth.setResourceId(Long.valueOf(fid));
+            authList.add(auth);
+        }
+        return authList;
     }
+  
     /**
      * <p>Description: 得到单个授权记录</p>
      * @param auth 授权对象
@@ -99,29 +100,35 @@ public class AuthController extends BaseController {
     public void getAuthById(AuthEntity auth, HttpServletResponse response){
         super.ajaxJson(response, authService.queryObjectById(auth.getId()));
     }
+    
     /**
-     * <p>Description: 删除授权记录</p>
-     * @param auth 授权对象
+     * 功能描述: <br>
+     *    查询岗位的授权列表
+     *
+     * @param postId
      * @param response
      */
-    @RequestMapping("deleteAuth")
-    public void deleteAuth(AuthEntity auth, HttpServletResponse response){
-    	//log.info("用户"+getSessionUser().getUserName()+"删除了授权:"+(new Gson()).toJson(auth));
-    	auth.setUpdateUser(getSessionUser().getUserId());
-        auth.setUpdateTime(new Date());
-        authService.delete(auth);
-        super.ajaxJson(response, AjaxSuccessInfo.success());
+    @RequestMapping("/getPostAuthList")
+    public void queryPostAuthList(Long postId, HttpServletResponse response){
+        AuthEntity param = new AuthEntity();
+        param.setAuthId(postId);
+        param.setAuthType(Constants.AUTHORITY_POST);
+        super.ajaxJsonTree(response, authService.queryList(param));
     }
     
     /**
-     * <p>Description: 查看授权明细</p>
-     * @param auth 授权对象
-     * @param model
-     * @return
+     * 功能描述: <br>
+     *     查询资源的授权列表
+     *
+     * @param roleId
+     * @param response
      */
-    @RequestMapping("viewAuthDetail")
-    public String viewAuthDetail(AuthEntity auth, Model model){
-        model.addAttribute("id",auth.getId());
-        return "admin/auth/authDetail";
+    @RequestMapping("/queryRoleAuthList")
+    public void queryRoleAuthList(Long roleId, HttpServletResponse response){
+        AuthEntity param = new AuthEntity();
+        param.setAuthId(roleId);
+        param.setAuthType(Constants.AUTHORITY_ROLE);
+        super.ajaxJsonTree(response, authService.queryList(param));
     }
+    
 }
