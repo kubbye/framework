@@ -116,5 +116,6 @@ public class EasyUiUtil {
         FileWriter detailWriter = new FileWriter(new File(detailPath));
         detailTemplate.process(data, detailWriter);
     }
+   
 }
 

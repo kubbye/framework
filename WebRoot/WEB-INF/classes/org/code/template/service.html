@@ -13,40 +13,60 @@ import com.wade.framework.base.PaginationResult;
 
 @Service("${key}Service")
 public class ${UpperKey}ServiceImpl implements I${UpperKey}Service {
-
+	/**  ${ZhKey}sql的命名空间*/
+	private static final String SQL_NAMESPACE = "${key}.";
+	
+	/**  新增${ZhKey}的sql id*/
+	private static final String SQL_INSERT = "insert${UpperKey}";
+	
+	/**  更新${ZhKey}的sql id*/
+	private static final String SQL_UPDATE = "update${UpperKey}";
+	
+	/**  删除${ZhKey}的sql id*/
+	private static final String SQL_DELETE = "delete${UpperKey}";
+	
+	/**  根据主键查询${ZhKey}的sql id*/
+	private static final String SQL_QUERY_BY_ID = "query${UpperKey}ById";
+	
+	/**  查询${ZhKey}的sql id*/
+	private static final String SQL_QUERY_FOR_LIST = "query${UpperKey}s";
+	
+	/**  分页查询${ZhKey}的sql id*/
+	private static final String SQL_QUERY_BY_PAGE = "query${UpperKey}sByPage";
+	
     @Autowired
-    I${UpperKey}Dao ${key}Dao;
+    private I${UpperKey}Dao ${key}Dao;
     
     @Override
     public int insert(${UpperKey}Entity ${key}) {
     	${key}.setDeleteMark("0");
-        int id=${key}Dao.insert("${key}.insert${UpperKey}", ${key});
+        int id=${key}Dao.insert(SQL_NAMESPACE + SQL_INSERT, ${key});
         return id;
     }
 
     @Override
     public int update(${UpperKey}Entity ${key}) {
-        return ${key}Dao.update("${key}.update${UpperKey}", ${key});
+        return ${key}Dao.update(SQL_NAMESPACE + SQL_UPDATE, ${key});
     }
 
     @Override
     public int delete(${UpperKey}Entity ${key}) {
-        return ${key}Dao.delete("${key}.delete${UpperKey}", ${key});
+        return ${key}Dao.delete(SQL_NAMESPACE + SQL_DELETE, ${key});
     }
 
     @Override
     public ${UpperKey}Entity queryObjectById(${PrimaryKeyType} ${primaryKey}) {
-        return ${key}Dao.queryObjectById("${key}.query${UpperKey}ById", ${primaryKey});
+        return ${key}Dao.queryObjectById(SQL_NAMESPACE + SQL_QUERY_BY_ID, ${primaryKey});
     }
 
     @Override
     public List<${UpperKey}Entity> queryList(Object param) {
-        return ${key}Dao.queryList("${key}.query${UpperKey}s", param);
+        return ${key}Dao.queryList(SQL_NAMESPACE + SQL_QUERY_FOR_LIST", param);
     }
 
     @Override
     public PaginationResult<${UpperKey}Entity> queryListByPage(${UpperKey}Entity param, PageInfo pageinfo) {
-       return ${key}Dao.queryListByPage("${key}.query${UpperKey}sByPage", param, pageinfo);
+       return ${key}Dao.queryListByPage(SQL_NAMESPACE + SQL_QUERY_BY_PAGE, param, pageinfo);
     }
     
 }
