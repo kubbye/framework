@@ -10,6 +10,9 @@
  */
 package com.wade.framework.admin.shiro;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -53,8 +56,12 @@ public class JdbcAuthenticationRealm extends AuthorizingRealm {
         if (principals == null) {
             throw new AuthorizationException("用户没有登陆");
         }
+        Set<String> ps = new HashSet<String>();
+        ps.add("/admin/index.htm");
+        ps.add("/index.htm");
+        
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-        info.setStringPermissions(null);
+        info.setStringPermissions(ps);
         return info;
     }
 
