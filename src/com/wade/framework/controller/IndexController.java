@@ -12,7 +12,7 @@ import com.wade.framework.base.controller.BaseController;
 @Controller
 @RequestMapping("/admin")
 public class IndexController extends BaseController {
-
+    
 	@RequestMapping("/index")
 	public String index(Model model){
 		return "main";

@@ -20,6 +20,7 @@
 	<!-- Shiro's main business-tier object for web-enabled applications (use 
 		DefaultSecurityManager instead when there is no web environment) -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="cacheManager" ref="shiroCacheManager"></property>
 		<!-- Single realm app. If you have multiple realms, use the 'realms' property 
 			instead. -->
 		<property name="sessionMode" value="native" />
@@ -30,17 +31,18 @@
 		etc). Many other realm implementations can be used too (PropertiesRealm, 
 		LdapRealm, etc. -->
 	<bean id="jdbcRealm"
-		class="org.apache.shiro.samples.spring.realm.SaltAwareJdbcRealm">
+		class="com.wade.framework.admin.shiro.JdbcAuthenticationRealm">
 		<property name="name" value="jdbcRealm" />
-		<property name="dataSource" ref="dataSource" />
 		<property name="credentialsMatcher">
 			<!-- The 'bootstrapDataPopulator' Sha256 hashes the password (using the 
 				username as the salt) then base64 encodes it: -->
-			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
-				<property name="hashAlgorithmName" value="SHA-256" />
-				<!-- true means hex encoded, false means base64 encoded -->
-				<property name="storedCredentialsHexEncoded" value="false" />
-			</bean>
+			<bean class="com.wade.framework.admin.shiro.ShiroCredentialsMatcher"></bean>	
+			
+<!-- 			<bean class="org.apache.shiro.authc.credential.HashedCredentialsMatcher"> -->
+<!-- 				<property name="hashAlgorithmName" value="SHA-256" /> -->
+<!-- 				true means hex encoded, false means base64 encoded -->
+<!-- 				<property name="storedCredentialsHexEncoded" value="false" /> -->
+<!-- 			</bean> -->
 		</property>
 	</bean>
 
@@ -54,6 +56,7 @@
 
 	<!-- Enable Shiro Annotations for Spring-configured beans. Only run after 
 		the lifecycleBeanProcessor has run: -->
+		<!-- 
 	<bean
 		class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
 		depends-on="lifecycleBeanPostProcessor" />
@@ -61,14 +64,27 @@
 		class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
-
+ 		-->
 	<!-- Secure Spring remoting: Ensure any Spring Remoting method invocations 
 		can be associated with a Subject for security checks. -->
+		<!-- 
 	<bean id="secureRemoteInvocationExecutor"
 		class="org.apache.shiro.spring.remoting.SecureRemoteInvocationExecutor">
 		<property name="securityManager" ref="securityManager" />
 	</bean>
-
+ 		-->
+ 		
+ 	 <!-- Let's use some enterprise caching support for better performance.  You can replace this with any enterprise
+         caching framework implementation that you like (Terracotta+Ehcache, Coherence, GigaSpaces, etc -->
+    <bean id="shiroCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!-- Set a net.sf.ehcache.CacheManager instance here if you already have one.  If not, a new one
+             will be creaed with a default config: -->
+             <property name="cacheManager" ref="cacheManager"/>
+        <!-- If you don't have a pre-built net.sf.ehcache.CacheManager instance to inject, but you want
+             a specific Ehcache configuration to be used, specify that here.  If you don't, a default
+             will be used.:
+        <property name="cacheManagerConfigFile" value="classpath:some/path/to/ehcache.xml"/> -->
+    </bean>
 	<!-- Define the Shiro Filter here (as a FactoryBean) instead of directly 
 		in web.xml - web.xml uses the DelegatingFilterProxy to access this bean. 
 		This allows us to wire things with more control as well utilize nice Spring 
@@ -76,9 +92,9 @@
 		else we might need: -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<property name="loginUrl" value="/s/login" />
-		<property name="successUrl" value="/s/index" />
-		<property name="unauthorizedUrl" value="/s/unauthorized" />
+		<property name="loginUrl" value="/login.htm" />
+		<property name="successUrl" value="/admin/index.htm" />
+		<property name="unauthorizedUrl" value="/403.html" />
 		<!-- The 'filters' property is not necessary since any declared javax.servlet.Filter 
 			bean defined will be automatically acquired and available via its beanName 
 			in chain definitions, but you can perform overrides or parent/child consolidated 
@@ -87,16 +103,11 @@
 			</util:map> </property> -->
 		<property name="filterChainDefinitions">
 			<value>
-				/favicon.ico = anon
-				/logo.png = anon
-				/shiro.css = anon
-				/s/login = anon
-				# allow WebStart to pull the jars for the swing app:
-				/*.jar = anon
-				# everything else requires authentication:
+				/resources/** = anon
+				/**.ajax = anon
+				/login.htm = anon
 				/** = authc
 			</value>
 		</property>
 	</bean>
-
 </beans>
